@@ -1,0 +1,536 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #fff !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main_flx {
+  background-color: #fff;
+  display: flex;
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
+}
+
+.right_wrap {
+  width: 100%;
+  overflow: hidden;
+  margin-left: 400px;
+  padding: 20px;
+  background-color: #fff;
+  color: #1e1f20;
+}
+
+.dashboard_container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome_header {
+  margin-bottom: 24px;
+}
+
+.welcome_title {
+  font-size: 28px;
+  font-weight: 400;
+  color: #4f5c6c;
+  margin: 0;
+}
+
+.account_summary_section {
+  margin-bottom: 24px;
+}
+
+.summary_row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  background: #fafbfc;
+  border-radius: 12px;
+  padding: 25px;
+  border: 2px solid #dfe4ea;
+}
+
+.hold_card {
+  background: transparent;
+  border-radius: 12px;
+  padding: 25px;
+  border: 2px solid #dfe4ea;
+}
+
+.hold_row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.summary_card.bordL {
+  border-right: 2px solid #dfe4ea;
+}
+
+.card_header {
+  margin-bottom: 16px;
+}
+
+.card_title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4f5c6c;
+  margin: 0;
+}
+
+.card_content {
+  display: flex;
+  justify-content: start;
+  gap: 50px;
+}
+.metric_item {
+  text-align: center;
+}
+
+.metric_value {
+  font-size: 32px;
+  color: #14171c;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.radios {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.radios input {
+  font-size: 100px;
+}
+.radios p {
+  font-size: 12px;
+  color: #727d89;
+  margin: 0px;
+}
+
+.metric_value1 {
+  margin-top: 32px;
+
+  font-size: 18px;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.metric_value2 {
+  margin-top: 20px;
+
+  font-size: 20px;
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.metric_value1.equity-value {
+  color: #4a90e2;
+}
+
+.metric_value.commodity-value {
+  color: #df514c;
+}
+
+.metric_value.portfolio-value {
+  color: #0ecb81;
+}
+
+.metric_label {
+  font-size: 14px;
+  text-align: left;
+  font-weight: 400;
+  color: #717c89;
+}
+
+.metric_label1 {
+  font-size: 13px;
+  text-align: left;
+  font-weight: 400;
+  color: #717c89;
+}
+
+.nodata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nodata p {
+  font-size: 14px;
+  color: #959da7;
+}
+
+.hold-title {
+  color: #4f5c6c;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.nodata button {
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #0363ff;
+}
+
+.market_overview_card {
+  border-bottom: 2px solid #dfe4ea;
+}
+
+/*   Orders screen */
+
+/* Order Screen Styles */
+.welcome_header_with_actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header_actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.search_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search_icon {
+  position: absolute;
+  right: 0px;
+  color: #959da7;
+  font-size: 18px;
+}
+
+.search_input {
+  padding: 10px 16px 10px 40px;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 280px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.search_input:focus {
+  outline: none;
+  border-color: #0363ff;
+  box-shadow: 0 0 0 2px rgba(3, 99, 255, 0.1);
+}
+
+.search_input::placeholder {
+  color: #959da7;
+}
+
+.download_btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+  color: #4f5c6c;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.download_btn:hover {
+  background: #f8f9fa;
+  border-color: #0363ff;
+  color: #0363ff;
+}
+
+.download_icon {
+  font-size: 16px;
+}
+
+.order_navigation {
+  margin-bottom: 24px;
+}
+
+.order_tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #dfe4ea;
+}
+
+.order_tab {
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #4f5c6c;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.order_tab.active {
+  color: #0363ff;
+  border-bottom-color: #0363ff;
+}
+
+.order_tab:hover {
+  color: #0363ff;
+}
+
+.order_status_tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.status_tab {
+  border: none;
+  background-color: transparent;
+  color: #4f5c6c;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.orders_table_container {
+  background: #fafbfc;
+  border-radius: 12px;
+  border: 2px solid #dfe4ea;
+}
+
+.orders_table_wrapper {
+  overflow-x: auto;
+}
+
+.table_header_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.table_count {
+  font-size: 14px;
+  color: #4f5c6c;
+}
+
+.orders_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders_table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4f5c6c;
+  border-bottom: 1px solid #dfe4ea;
+}
+
+.orders_table td {
+  padding: 16px;
+  font-size: 14px;
+  color: #1e1f20;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.orders_table tr:last-child td {
+  border-bottom: none;
+}
+
+.orders_table tr:hover {
+  background-color: #f8f9fa;
+}
+
+.order_type.buy {
+  color: #0ecb81;
+  font-weight: 500;
+}
+
+.order_type.sell {
+  color: #df514c;
+  font-weight: 500;
+}
+
+.order_status.open {
+  color: #f0ad4e;
+  font-weight: 500;
+}
+
+.order_status.completed {
+  color: #0ecb81;
+  font-weight: 500;
+}
+
+.order_status.rejected {
+  color: #df514c;
+  font-weight: 500;
+}
+
+.no_results {
+  text-align: center;
+  padding: 40px 16px;
+}
+
+.no_results_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.no_results_content p {
+  color: #959da7;
+  font-size: 14px;
+  margin: 0;
+}
+
+.no_orders_section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.no_orders_section p {
+  margin: 16px 0 24px;
+  color: #959da7;
+  font-size: 16px;
+}
+
+.primary_btn {
+  padding: 12px 24px;
+  background: #0363ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.primary_btn:hover {
+  background: #0254d6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome_header_with_actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header_actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .search_input {
+    width: 200px;
+  }
+
+  .order_tabs {
+    flex-wrap: wrap;
+  }
+
+  .order_tab {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .order_status_tabs {
+    flex-direction: column;
+  }
+
+  .orders_table {
+    min-width: 700px;
+  }
+
+  .orders_table th,
+  .orders_table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header_actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .search_input {
+    width: 100%;
+  }
+
+  .download_btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .right_wrap {
+    margin-left: initial;
+    padding: 20px 16px;
+  }
+
+  .holdings_market_row {
+    grid-template-columns: 1fr;
+  }
+
+  .summary_row {
+    grid-template-columns: 1fr;
+  }
+
+  .card_content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .metric_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome_title {
+    font-size: 24px;
+  }
+
+  .chart_legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+}
