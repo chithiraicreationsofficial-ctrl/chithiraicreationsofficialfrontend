@@ -31,39 +31,15 @@ const AboutModal = ({ isOpen, onClose }) => {
           {/* Content */}
           <div className="modal-body">
             <div className="about-section">
-              <div className="section-header">
-                <div className="icon-wrapper">
-                  <span>🎨</span>
-                </div>
-                <h3>Our Story</h3>
-              </div>
+            
               <div className="section-content">
                 <p>
-                  Founded in 2020, Chithirai Creations emerged from a passion
-                  for celebrating Madurai's rich cultural heritage through
-                  unforgettable events and experiences. Named after the famous
-                  Chithirai Festival, we embody the spirit of celebration and
-                  community that defines our city.
+                A group of dynamic influencers came together to create Chithirai Creations, a registered events company. Their dream was to do more than just organize events; they aimed to bring joy to people's lives while raising awareness about important issues. Through spirited sports competitions and engaging activities, they created a unique atmosphere that tied participants back to the roots of Madurai's culture and heritage. Moreover, Chithirai Creations provided an exceptional platform for emerging brands in Madurai, offering them high visibility and a chance to connect with the local community. Their vision continues to inspire, fostering a positive environment where people can celebrate and grow together, all while promoting a healthier society.
                 </p>
               </div>
             </div>
 
-            <div className="about-section">
-              <div className="section-header">
-                <div className="icon-wrapper">
-                  <span>🎯</span>
-                </div>
-                <h3>Our Mission</h3>
-              </div>
-              <div className="section-content">
-                <p>
-                  To create immersive cultural experiences that connect people,
-                  celebrate traditions, and create lasting memories. We believe
-                  every event should be a masterpiece that reflects the vibrancy
-                  of Madurai's culture.
-                </p>
-              </div>
-            </div>
+       
 
             <div className="stats-grid">
               <div className="stat-card">
@@ -85,10 +61,8 @@ const AboutModal = ({ isOpen, onClose }) => {
             </div>
 
             <div className="about-section">
-              <div className="section-header">
-                <div className="icon-wrapper">
-                  <span>✨</span>
-                </div>
+              <div className="section-header d-flex justify-content-center">
+               
                 <h3>What Makes Us Special</h3>
               </div>
               <div className="features-grid">

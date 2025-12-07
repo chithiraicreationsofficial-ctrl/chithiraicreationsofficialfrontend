@@ -184,11 +184,7 @@ const EventModal = ({ isOpen, onClose }) => {
             {/* Organized By */}
             <div className="organizer-section">
               <div className="organizer-card">
-                <img
-                  src="https://res.cloudinary.com/dlcgqwmin/image/upload/v1763730196/logo_header_yaeedm.png"
-                  alt="Chithirai Creations"
-                  className="organizer-logo"
-                />
+                
                 <div>
                   <h4>Organized by Chithirai Creations</h4>
                   <p>In association with Madurai Culinary Association</p>

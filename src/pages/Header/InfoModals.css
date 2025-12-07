@@ -54,7 +54,8 @@
 /* Common Header */
 .modal-header {
   padding: 25px 30px;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  
+  background: linear-gradient(135deg, #510ac7 0%, #b124ee 100%);
   color: white;
   display: flex;
   justify-content: space-between;
@@ -145,10 +146,6 @@
   font-size: 22px;
 }
 
-.section-content {
-  padding-left: 65px;
-}
-
 .section-content p {
   color: #555;
   line-height: 1.6;
@@ -174,7 +171,7 @@
 .stat-number {
   font-size: 32px;
   font-weight: 700;
-  color: #ee5a24;
+  color: #a421e9;
   margin-bottom: 5px;
 }
 
@@ -524,6 +521,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  border-radius: 12px;
   padding: 40px;
 }
 
@@ -534,7 +532,7 @@
 
 .hero-badge {
   display: inline-block;
-  background: #ff6b6b;
+  background: #a421e9;
   color: white;
   padding: 8px 20px;
   border-radius: 50px;
@@ -612,7 +610,7 @@
 }
 
 .highlight {
-  color: #ee5a24;
+  color: #a421e9;
   font-weight: 700;
 }
 
@@ -625,7 +623,7 @@
 .quote {
   font-style: italic;
   padding-left: 20px;
-  border-left: 4px solid #ee5a24;
+  border-left: 4px solid #a421e9;
   color: #666;
   font-size: 18px;
 }
@@ -653,7 +651,7 @@
 
 .detail-icon {
   font-size: 32px;
-  color: #ff6b6b;
+  color: #a421e9;
   margin-bottom: 15px;
 }
 
@@ -773,13 +771,17 @@
 }
 
 .gallery-item {
-  aspect-ratio: 1/1;
+  /* aspect-ratio: 1/1; */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
+}
+
+.gallery-item img{
+  border-radius: 12px;
 }
 
 .image-placeholder {
@@ -866,7 +868,7 @@
   display: inline-flex;
   align-items: center;
   gap: 20px;
-  background: #f8f9fa;
+  background: #f8f9fa00;
   padding: 20px 30px;
   border-radius: 15px;
 }

@@ -138,6 +138,30 @@
     inset 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
+
+
+.primary_btn1 {background-image: linear-gradient(to right, #d91bff 0%, #800be6 51%, #d500ff 100%)}
+.primary_btn1 {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white !important;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   border: none;
+   display: block;
+ }
+
+ .primary_btn1:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+
 /* Hover Effect */
 .primary_btn:hover,
 .secondary-btn:hover {

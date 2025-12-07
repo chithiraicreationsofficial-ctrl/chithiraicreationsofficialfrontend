@@ -30,7 +30,7 @@ const Header = () => {
     name: "",
     email: "",
     phone: "",
-    ticketCount: 1,
+    ticketCount: 0,
     otp: "",
   });
 
@@ -693,7 +693,7 @@ const Header = () => {
             {/* LEFT SIDE - Event Info */}
             <div className="wallet_left d-flex flex-column justify-content-between align-items-start text-white">
               <div className="pt-5 px-5 p-0">
-                <h2>New Year Celebration 2025</h2>
+                <h2>Readyah Maamey 2026</h2>
                 <p className="mt-3">
                   Join us for an unforgettable New Year's Eve party!
                 </p>

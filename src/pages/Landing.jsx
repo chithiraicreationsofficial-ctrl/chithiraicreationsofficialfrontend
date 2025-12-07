@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import "./Landing.css";
 
-import Landing_img from "../assets/Landing_img.png";
 import InvestImage1 from "../assets/invest1.png";
 import InvestImage2 from "../assets/invest2.png";
 import InvestImage3 from "../assets/invest3.png";
@@ -16,13 +15,11 @@ import InvestImage7 from "../assets/invest7.png";
 import InvestImage8 from "../assets/invest8.png";
 import InvestImage9 from "../assets/invest9.png";
 import InvestImage10 from "../assets/invest10.png";
-import cards from "../assets/cards.png";
 import card1 from "../assets/card1.png";
 import mad from "../assets/mad.png";
 import card2 from "../assets/card2.png";
 import card3 from "../assets/card3.png";
 import card4 from "../assets/card4.png";
-import Cards from "../assets/cards.png";
 import { IoIosArrowForward } from "react-icons/io";
 
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -35,10 +32,6 @@ import { MdEvent } from "react-icons/md";
 
 import { FaGamepad } from "react-icons/fa";
 
-import { GiReceiveMoney } from "react-icons/gi";
-import { RiBarChartFill } from "react-icons/ri";
-
-import logo from "../assets/logo_header.png";
 import logoDark from "../assets/LogoDark.png";
 
 import facebook from "../assets/social/facebook.png";
@@ -52,7 +45,7 @@ import title2 from "../assets/stock/title2.png";
 import co1 from "../assets/stock/co1.png";
 import co2 from "../assets/stock/co2.png";
 import co3 from "../assets/stock/co3.png";
-import co4 from "../assets/stock/co3-1.png";
+import co4 from "../assets/stock/co4.png";
 import food from "../assets/stock/food.png";
 import travel from "../assets/stock/travel.png";
 import venue from "../assets/stock/venue.png";
@@ -78,7 +71,7 @@ export default function Landing() {
         <div className="hero-content slide-up">
           {/* <h1 className="hero-title">Readya Mamey</h1> */}
 
-          <p className="hero-tagline" data-aos="fade-down">
+          <p className="hero-tagline mt-5" data-aos="fade-down">
             A night of music <br /> moments and magics
           </p>
 
@@ -93,7 +86,7 @@ export default function Landing() {
             className="primary_btn my-5"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
-            data-aos="fade-up"
+            data-aos="fade-down"
           >
             Book Your Ticket Now{" "}
           </button>
@@ -182,7 +175,7 @@ export default function Landing() {
             </div>
           </div>
 
-          <button className="primary_btn mb-5 text-black d-block mx-auto mt-4">
+          <button className="primary_btn1 mb-5 text-black d-block mx-auto mt-4">
             Join As Sponsor
           </button>
         </div>
@@ -374,7 +367,7 @@ export default function Landing() {
 
                   <div className="b-card">
                     <MdEvent />
-                    <h6>Main Show</h6>
+                    <h6>Vibez</h6>
                   </div>
 
                   <span className="connector"></span>

@@ -2,8 +2,8 @@
   background: #14171c;
 }
 .header_wrp .header_nav {
-  background: #14171c1a;
-  height: 70px;
+  background: #14171c82;
+  height: 90px;
   position: fixed;
   top: 0;
   backdrop-filter: blur(5px);
@@ -355,7 +355,7 @@
 }
 .wallet_modal_head h5 {
   font-size: 22px;
-  color: #0363ff;
+  color: #a421e9;
   font-weight: 500;
   margin: 0px;
 }
@@ -397,7 +397,7 @@
 .floating-input {
   width: 100%;
   padding: 10px 16px;
-  border: 2px solid #cccccc;
+  border: 1px solid #cccccc;
   border-radius: 8px;
   font-size: 16px;
   background: #fff;
@@ -454,7 +454,7 @@
 .phone-input-custom {
   width: 100% !important;
   padding: 8px 16px 8px 50px !important;
-  border: 2px solid #cccccc !important;
+  border: 1px solid #cccccc !important;
   border-radius: 8px !important;
   font-size: 14px !important;
   background: #fff !important;
@@ -464,12 +464,12 @@
 }
 
 .phone-input-custom:focus {
-  border: 2px solid #0363ff !important;
+  border: 1px solid #0363ff !important;
   box-shadow: none;
 }
 
 .phone-button-custom {
-  border: 2px solid #ccc !important;
+  border: 1px solid #ccc !important;
   border-right: none !important;
   border-radius: 8px 0 0 8px !important;
   background: #f8f9fa !important;
