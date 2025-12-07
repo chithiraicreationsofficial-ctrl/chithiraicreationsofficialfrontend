@@ -302,6 +302,21 @@
   background-color: #00000e;
 }
 
+.sidebar ul{
+  list-style: none;
+  padding: 24px 0px;
+}
+
+.sidebar .navbar_items > a {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  margin: 20px 0px;
+  align-items: center;
+  height: inherit;
+}
 .wallet_left h2 {
   font-weight: 700;
   font-size: 28px;
@@ -615,6 +630,14 @@
     margin-right: 0 !important;
   }
 
+  .wallet_modal_content{
+   flex-direction: column-reverse !important;
+   overflow-y: auto !important;
+  }
+
+  .wallet_right{
+    overflow-y: visible;
+  }
   .drawer_menus {
     display: flex;
     flex-direction: column;

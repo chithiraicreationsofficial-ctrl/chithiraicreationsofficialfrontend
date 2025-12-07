@@ -632,7 +632,39 @@ const Header = () => {
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
               className="drawer_sidebar"
             >
-              {/* ... existing sidebar code ... */}
+                <div className="sidebar">
+                <Link to={"/"} className="logo_img_div">
+                  <img src={logo} alt="logo" />
+                </Link>
+
+                <ul className="">
+                  <li className="navbar_items">
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li className="navbar_items">
+                    <Link onClick={() => openModal("about")}>About</Link>
+                  </li>
+                  <li className="navbar_items">
+                    <Link onClick={() => openModal("event")}>Events</Link>
+                  </li>
+
+                  <li className="navbar_items">
+                    <Link onClick={() => openModal("contact")}>Contacts</Link>
+                  </li>
+                </ul>
+
+                <div className="header_btn_main">
+                  <button
+                    className={`primary_btn ${availableTickets === 0 ? 'btn-disabled' : ''}`}
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    onClick={resetForm}
+                    disabled={availableTickets === 0}
+                  >
+                    {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'}
+                  </button>
+                </div>
+              </div> 
             </motion.div>
             <motion.div
               initial={{ opacity: 0 }}

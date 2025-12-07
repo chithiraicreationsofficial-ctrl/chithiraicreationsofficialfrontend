@@ -533,6 +533,7 @@
   background-image: url("/src/assets/foot.png");
   background-size: cover;
   min-height: 100vh;
+  background-position: center;
   justify-content: center;
   display: flex;
   align-items: end;
@@ -755,7 +756,17 @@
 
 /* Mobile Landscape / Small Tablets */
 
+
+@media (max-width: 992px) {
+ 
+  .section4 .abs-card{
+    display: none !important;
+  }
+
+}
+
 @media (max-width: 991px) {
+ 
   .section4 .b-card-container {
     flex-direction: column;
     gap: 10px;
@@ -767,7 +778,7 @@
     position: relative !important;
     margin-bottom: 50px;
   }
-
+ 
 
   .section5 {
     height: auto !important;
@@ -788,6 +799,12 @@
   }
 }
 @media (max-width: 768px) {
+
+  .footer .par{
+    display: flex;
+    flex-direction: column !important;
+    gap: 30px;
+  }
 
   .hero-section {
     padding: 0 15px;
@@ -843,6 +860,9 @@
 
 /* Mobile Portrait */
 @media (max-width: 480px) {
+
+
+ 
   .hero-title {
     font-size: 2rem;
   }
@@ -897,6 +917,52 @@
     padding: 10px 18px;
   }
 
+  .h1 {
+    top: 0px;
+    left: 115px !important;
+  }
+
+  .h2{
+    left: 0px !important;
+
+  }
+
+  
+.h3 {
+  left: 230px !important;
+}
+
+/* Row 3 */
+.h4 {
+  left: 115px !important;
+}
+
+/* Row 4 */
+.h5 {
+  left: 0px !important;
+}
+.h6 {
+  left: 230px !important;
+}
+
+/* Row 5 */
+.h7 {
+  left: 115px !important;
+}
+
+/* Bottom row */
+.h8 {
+  left: 0px !important;
+}
+.h9 {
+  left: 230px !important;
+}
+.h10 {
+  left: 115px !important;
+}
+
+
+
   /* .relative .abs {
     bottom: 15vh;
     width: 100%;
@@ -949,7 +1015,6 @@
 /* hex zones */
 .hex {
   position: absolute;
-
   width: 150px;
   margin: 0px;
   pointer-events: auto;

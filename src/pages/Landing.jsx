@@ -446,7 +446,7 @@ export default function Landing() {
 
       <section className="footer  py-2">
         <div className="container-fluid">
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex  par justify-content-between align-items-center">
             <div className="">
               <img src={logoDark} alt="logo" width="120px" />
             </div>

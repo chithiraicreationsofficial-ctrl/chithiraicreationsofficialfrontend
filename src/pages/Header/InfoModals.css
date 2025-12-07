@@ -941,10 +941,6 @@
     grid-template-columns: 1fr;
   }
 
-  .contact-sidebar {
-    display: none;
-  }
-
   .form-row {
     grid-template-columns: 1fr;
   }
