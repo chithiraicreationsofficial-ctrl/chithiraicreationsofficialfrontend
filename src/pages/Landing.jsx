@@ -59,7 +59,7 @@ export default function Landing() {
   const [showSponsorModal, setShowSponsorModal] = useState(false);
   useEffect(() => {
     AOS.init({
-      duration: 2000, // animation duration
+      duration: 800, // animation duration
       once: false, // if true animation runs only once
     });
   }, []);
@@ -86,7 +86,7 @@ export default function Landing() {
             className="primary_btn my-5"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
-            data-aos="fade-down"
+            // data-aos="fade-down"
           >
             Book Your Ticket Now{" "}
           </button>
@@ -439,35 +439,38 @@ export default function Landing() {
 
       <section className="footer  py-2">
         <div className="container-fluid">
-          <div className="d-flex  par justify-content-between align-items-center">
-            <div className="">
+          <div className="d-flex  par justify-content-center align-items-center">
+            {/* <div className="">
               <img src={logoDark} alt="logo" width="120px" />
-            </div>
+            </div> */}
             <div className="">
               <h6>All Right Reserved © Copyright 2025</h6>
+
+
+              <div class="sticky-icon">
+   <a href="https://www.instagram.com/chithirai.creations?igsh=ZG15MnZzbXU1bWZu" class="Instagram">
+      <i class="fab fa-instagram"></i> Instagram
+   </a>
+
+   <a href="https://www.facebook.com/" class="Facebook">
+      <i class="fab fa-facebook-f"></i> Facebook
+   </a>
+
+   <a href="https://wa.me/917010240042" class="Twitter">
+      <i class="fab fa-whatsapp"></i> Whatsapp
+   </a>
+
+   <a href="https://youtube.com/@chithiraicreations?si=RyqEiTLtjW-MKKa4" class="Youtube">
+      <i class="fab fa-youtube"></i> Youtube
+   </a>
+
+   <a href="mailto:chithiraicreations@gmail.com" class="Google">
+      <i class="fab fa-google-plus-g"></i> Gmail
+   </a>
+</div>
+
             </div>{" "}
-            <div className="">
-              <div className="d-flex gap-4">
-                <Link to="">
-                  <img src={facebook} alt="Assetly logo" width="24px" />
-                </Link>
-                <Link to="https://www.instagram.com/chithirai.creations/?hl=en" target="_blank">
-                  <img src={insta} alt="Assetly logo" width="24px" />
-                </Link>
-
-                <Link to="">
-                  <img src={x} alt="Assetly logo" width="24px" />
-                </Link>
-
-                <Link to="">
-                  <img src={yt} alt="Assetly logo" width="24px" />
-                </Link>
-
-                <Link to="">
-                  <img src={tg} alt="Assetly logo" width="24px" />
-                </Link>
-              </div>
-            </div>
+           
           </div>
         </div>
       </section>
