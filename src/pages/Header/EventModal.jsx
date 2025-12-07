@@ -8,10 +8,10 @@ import {
   IoStar,
 } from "react-icons/io5";
 import "./InfoModals.css";
-import img101 from "../../assets/101.jpg";
-import img102 from "../../assets/102.jpg";
-import img103 from "../../assets/103.jpg";
-import img104 from "../../assets/104.jpg";
+import img101 from "../../assets/101.JPG";
+import img102 from "../../assets/102.JPG";
+import img103 from "../../assets/103.JPG";
+import img104 from "../../assets/104.JPG";
 
 const images = [img101, img102, img103, img104];
 
