@@ -1,7 +1,7 @@
 import Header from "./Header/Header";
 import React, { useState, useEffect } from "react";
-import {  IoLocation } from "react-icons/io5";
-
+import { IoLocation } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 import "./Landing.css";
 
@@ -127,7 +127,9 @@ export default function Landing() {
             <h5 data-aos="fade-right">Our Sponsors</h5>
           </div>
 
-          <h6 data-aos="fade-right" className="mt-5 mb-4">Title Sponsors</h6>
+          <h6 data-aos="fade-right" className="mt-5 mb-4">
+            Title Sponsors
+          </h6>
 
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
@@ -137,14 +139,18 @@ export default function Landing() {
               <img src={title2} alt="logo" width="100%" />
             </div>{" "}
           </div>
-          <h6 data-aos="fade-right" className="mt-5">Travel Partner</h6>
+          <h6 data-aos="fade-right" className="mt-5">
+            Travel Partner
+          </h6>
 
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={travel} alt="logo" width="100%" />
             </div>
           </div>
-          <h6 data-aos="fade-right" className="mt-3">Co - Sponsors</h6>
+          <h6 data-aos="fade-right" className="mt-3">
+            Co - Sponsors
+          </h6>
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={co1} alt="logo" width="100%" />
@@ -159,20 +165,24 @@ export default function Landing() {
               <img src={co4} alt="logo" width="100%" />
             </div>
           </div>
-          <h6 data-aos="fade-right" className="mt-5 mb-4">Food partner </h6>
+          <h6 data-aos="fade-right" className="mt-5 mb-4">
+            Food partner{" "}
+          </h6>
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={food} alt="logo" width="100%" />
             </div>
           </div>
-          <h6 data-aos="fade-right" className="mt-5 mb-4">Venue partner </h6>
+          <h6 data-aos="fade-right" className="mt-5 mb-4">
+            Venue partner{" "}
+          </h6>
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={venue} alt="logo" width="100%" />
             </div>
           </div>
 
-          <button className="primary_btn mb-5 text-black d-block mx-auto mt-4" >
+          <button className="primary_btn mb-5 text-black d-block mx-auto mt-4">
             Join As Sponsor
           </button>
         </div>
@@ -319,11 +329,17 @@ export default function Landing() {
               <div className="col-lg-4">
                 <div className="start-card p-5" data-aos="fade-right">
                   <h5>Venue </h5>
-                  <h6> The Party Park - Madurai <a 
-                    href="https://maps.app.goo.gl/UNSAvMFiTMameH1s9" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >(Map <IoLocation />)</a></h6>
+                  <h6>
+                    {" "}
+                    The Party Park - Madurai{" "}
+                    <a
+                      href="https://maps.app.goo.gl/UNSAvMFiTMameH1s9"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      (Map <IoLocation />)
+                    </a>
+                  </h6>
                   <h4>
                     Cinematic neon setup, party lights, and a full festive
                     atmosphere.
@@ -439,11 +455,24 @@ export default function Landing() {
             </div>{" "}
             <div className="">
               <div className="d-flex gap-4">
-                <img src={facebook} alt="Assetly logo" width="24px" />
-                <img src={insta} alt="Assetly logo" width="24px" />
-                <img src={x} alt="Assetly logo" width="24px" />
-                <img src={yt} alt="Assetly logo" width="24px" />
-                <img src={tg} alt="Assetly logo" width="24px" />
+                <Link to="">
+                  <img src={facebook} alt="Assetly logo" width="24px" />
+                </Link>
+                <Link to="https://www.instagram.com/chithirai.creations/?hl=en" target="_blank">
+                  <img src={insta} alt="Assetly logo" width="24px" />
+                </Link>
+
+                <Link to="">
+                  <img src={x} alt="Assetly logo" width="24px" />
+                </Link>
+
+                <Link to="">
+                  <img src={yt} alt="Assetly logo" width="24px" />
+                </Link>
+
+                <Link to="">
+                  <img src={tg} alt="Assetly logo" width="24px" />
+                </Link>
               </div>
             </div>
           </div>
