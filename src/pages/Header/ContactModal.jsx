@@ -44,17 +44,16 @@ const ContactModal = ({ isOpen, onClose }) => {
     {
       icon: <IoCall />,
       title: "Call Us",
-      details: ["+91 98765 43210", "+91 87654 32109"],
-      action: "tel:+919876543210",
+      details: ["+91 8148586978", "+91 6384513129"],
+      action: "tel:+91 8148586978",
     },
     {
       icon: <IoMail />,
       title: "Email Us",
       details: [
-        "info@chithiraicreations.com",
-        "support@chithiraicreations.com",
+        "chithiraicreationsofficial@gmail.com"
       ],
-      action: "mailto:info@chithiraicreations.com",
+      action: "mailto:chithiraicreationsofficial@gmail.com",
     },
     {
       icon: <IoTime />,
@@ -112,7 +111,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                   ))}
                 </div>
 
-                <div className="map-preview">
+                {/* <div className="map-preview">
                   <div className="map-placeholder">
                     <span>📍</span>
                     <p>Madurai Location</p>
@@ -120,7 +119,7 @@ const ContactModal = ({ isOpen, onClose }) => {
                       View on Map →
                     </a>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

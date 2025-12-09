@@ -17,6 +17,8 @@ import AboutModal from "./AboutModal";
 import ContactModal from "./ContactModal";
 import EventModal from "./EventModal";
 import { toast } from "react-toastify";
+import InvestImage7 from "../../assets/open.png";
+
 
 import { authAPI, ticketAPI, paymentAPI } from "../../services/apiService";
 import {
@@ -159,7 +161,6 @@ const Header = () => {
       fieldValue = digitsOnly;
     }
 
-    // For name field, prevent special characters (allow only letters and spaces)
     if (name === "name") {
       const lettersOnly = value.replace(/[^a-zA-Z\s]/g, '');
       fieldValue = lettersOnly;
@@ -229,9 +230,11 @@ const Header = () => {
       case "ticketCount":
         if (!value || value < 1) {
           error = "At least 1 ticket is required";
-        } else if (value > 10) {
+        } 
+        else if (value > 10) {
           error = "Maximum 10 tickets per booking";
-        } else if (value > availableTickets) {
+        } 
+        else if (value > availableTickets) {
           error = `Only ${availableTickets} tickets available`;
         }
         break;
@@ -739,6 +742,12 @@ const Header = () => {
                 </div>
               </div>
 
+
+
+              <img src={InvestImage7} alt="logo" width="90%" />
+
+
+{/* 
               <div className="wallet_modal_body">
                 {popup === "booking" && (
                   <form
@@ -957,7 +966,6 @@ const Header = () => {
                   </form>
                 )}
 
-                {/* OTP Verification Popup */}
                 {popup === "otp-verify" && (
                   <form onSubmit={handleVerifyOTP}>
                     <div className="text-center mb-4">
@@ -1054,7 +1062,7 @@ const Header = () => {
                     </div>
                   </form>
                 )}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

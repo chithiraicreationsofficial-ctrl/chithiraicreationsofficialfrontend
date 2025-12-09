@@ -11,35 +11,42 @@ const AboutModal = ({ isOpen, onClose }) => {
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="modal-content about-modal">
           {/* Header */}
+         
+          {/* Content */}
+          <div className="modal-body">
           <div className="modal-header">
             <div className="header-content">
-             
-
-<img
-                    src={logo}
-                    alt="Logo"
-                    width="250px"
-                    className="d-block mx-auto"
-                  />
-              
+              <img
+                src={logo}
+                alt="Logo"
+                width="250px"
+                className="d-block mx-auto"
+              />
             </div>
             <button className="close-btn" onClick={onClose}>
               <IoClose size={24} />
             </button>
           </div>
 
-          {/* Content */}
-          <div className="modal-body">
-            <div className="about-section">
-            
+            <div className="about-section p-3">
               <div className="section-content">
                 <p>
-                A group of dynamic influencers came together to create Chithirai Creations, a registered events company. Their dream was to do more than just organize events; they aimed to bring joy to people's lives while raising awareness about important issues. Through spirited sports competitions and engaging activities, they created a unique atmosphere that tied participants back to the roots of Madurai's culture and heritage. Moreover, Chithirai Creations provided an exceptional platform for emerging brands in Madurai, offering them high visibility and a chance to connect with the local community. Their vision continues to inspire, fostering a positive environment where people can celebrate and grow together, all while promoting a healthier society.
+                  A group of dynamic influencers came together to create
+                  Chithirai Creations, a registered events company. Their dream
+                  was to do more than just organize events; they aimed to bring
+                  joy to people's lives while raising awareness about important
+                  issues. Through spirited sports competitions and engaging
+                  activities, they created a unique atmosphere that tied
+                  participants back to the roots of Madurai's culture and
+                  heritage. Moreover, Chithirai Creations provided an
+                  exceptional platform for emerging brands in Madurai, offering
+                  them high visibility and a chance to connect with the local
+                  community. Their vision continues to inspire, fostering a
+                  positive environment where people can celebrate and grow
+                  together, all while promoting a healthier society.
                 </p>
               </div>
             </div>
-
-       
 
             <div className="stats-grid">
               <div className="stat-card">
@@ -62,7 +69,6 @@ const AboutModal = ({ isOpen, onClose }) => {
 
             <div className="about-section">
               <div className="section-header d-flex justify-content-center">
-               
                 <h3>What Makes Us Special</h3>
               </div>
               <div className="features-grid">
@@ -92,7 +98,6 @@ const AboutModal = ({ isOpen, onClose }) => {
 
           {/* Footer */}
           <div className="modal-footer">
-           
             <p className="copyright">
               © 2025 Chithirai Creations. All rights reserved.
             </p>

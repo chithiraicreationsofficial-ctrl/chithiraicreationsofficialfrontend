@@ -50,6 +50,7 @@
 .hero-tagline {
   font-size: 36px;
   margin-bottom: 8px;
+  margin-top: 6rem !important;
   opacity: 0.9;
   font-family: "Monoton", sans-serif;
  
@@ -815,7 +816,7 @@
   .section4 .start-card {
     margin: 10px 0px;
 
-    min-height: 100px;
+    /* min-height: 100px; */
   }
   .section4 .connector {
     width: 2px;
@@ -993,6 +994,14 @@
   } */
 }
 
+
+@media (max-width: 400px) {
+.hex{
+  width: 120px !important;
+}
+}
+
+
 /* Large Screen / 4K */
 @media (min-width: 1600px) {
   .hero-section {
@@ -1145,7 +1154,7 @@
 	color:#FFF;}
 	
 .Twitter  {
-	background-color:#50a245;
+	background-color:#25d366;
 	color:#FFF;}
 	
 .Instagram  {
@@ -1181,9 +1190,9 @@
 	background-color:#FFF;
 	color:#fa0910;}
 	
-.sticky-icon a i.fa-twitter  {
+.sticky-icon a i.fa-whatsapp  {
 	background-color:#FFF;
-	color:#53c5ff;}
+	color:#1dab52;}
 .fas fa-shopping-cart  {
 	background-color:#FFF;}	
 #myBtn {

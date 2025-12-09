@@ -11,7 +11,7 @@ import InvestImage3 from "../assets/invest3.png";
 import InvestImage4 from "../assets/invest4.png";
 import InvestImage5 from "../assets/invest5.png";
 import InvestImage6 from "../assets/invest6.png";
-import InvestImage7 from "../assets/invest7.png";
+import InvestImage7 from "../assets/open.png";
 import InvestImage8 from "../assets/invest8.png";
 import InvestImage9 from "../assets/invest9.png";
 import InvestImage10 from "../assets/invest10.png";
@@ -114,7 +114,7 @@ export default function Landing() {
       <section className="section2 ">
         <div className="container">
           <div
-            onClick={() => setShowSponsorModal(true)}
+            // onClick={() => setShowSponsorModal(true)}
             className="top d-flex justify-content-center gap-3 align-items-center"
           >
             <h5 data-aos="fade-right">Our Sponsors</h5>
@@ -175,8 +175,11 @@ export default function Landing() {
             </div>
           </div>
 
-          <button className="primary_btn1 mb-5 text-black d-block mx-auto mt-4">
+          <button className=" text-white primary_btn1 mb-5 text-black d-block mx-auto mt-4">
+            <Link className="text-white"  to="mailto:chithiraicreations@gmail.com">
             Join As Sponsor
+
+            </Link>
           </button>
         </div>
       </section>
@@ -446,31 +449,34 @@ export default function Landing() {
             <div className="">
               <h6>All Right Reserved © Copyright 2025</h6>
 
-
               <div class="sticky-icon">
-   <a href="https://www.instagram.com/chithirai.creations?igsh=ZG15MnZzbXU1bWZu" class="Instagram">
-      <i class="fab fa-instagram"></i> Instagram
-   </a>
+                <a
+                  href="https://www.instagram.com/chithirai.creations?igsh=ZG15MnZzbXU1bWZu"
+                  class="Instagram"
+                >
+                  <i class="fab fa-instagram"></i> Instagram
+                </a>
 
-   <a href="https://www.facebook.com/" class="Facebook">
+                {/* <a href="https://www.facebook.com/" class="Facebook">
       <i class="fab fa-facebook-f"></i> Facebook
-   </a>
+   </a> */}
 
-   <a href="https://wa.me/917010240042" class="Twitter">
-      <i class="fab fa-whatsapp"></i> Whatsapp
-   </a>
+                <a href="https://wa.me/917010240042" class="Twitter">
+                  <i class="fab fa-whatsapp"></i> Whatsapp
+                </a>
 
-   <a href="https://youtube.com/@chithiraicreations?si=RyqEiTLtjW-MKKa4" class="Youtube">
-      <i class="fab fa-youtube"></i> Youtube
-   </a>
+                <a
+                  href="https://youtube.com/@chithiraicreations?si=RyqEiTLtjW-MKKa4"
+                  class="Youtube"
+                >
+                  <i class="fab fa-youtube"></i> Youtube
+                </a>
 
-   <a href="mailto:chithiraicreations@gmail.com" class="Google">
-      <i class="fab fa-google-plus-g"></i> Gmail
-   </a>
-</div>
-
+                <a href="mailto:chithiraicreations@gmail.com" class="Google">
+                  <i class="fab fa-google-plus-g"></i> Gmail
+                </a>
+              </div>
             </div>{" "}
-           
           </div>
         </div>
       </section>

@@ -95,7 +95,14 @@ const EventModal = ({ isOpen, onClose }) => {
         className="modal-container event-modal-container"
         onClick={(e) => e.stopPropagation()}
       >
+        
         <div className="modal-content event-modal">
+
+          <div className="d-flex justify-content-end">
+          <button className="close-btn" onClick={onClose}>
+              <IoClose size={24} />
+            </button>
+          </div>
           {/* Hero Section */}
           <div className="event-hero">
             <div className="hero-content">
@@ -104,17 +111,12 @@ const EventModal = ({ isOpen, onClose }) => {
               <p className="hero-subtitle">
                 Celebrate the spirit of every cooking queen in Madurai
               </p>
-              {/* <div className="hero-cta">
-                <button className="cta-primary">Register Now</button>
-                <button className="cta-secondary" onClick={onClose}>
-                  Learn More
-                </button>
-              </div> */}
+             
             </div>
             <div className="hero-overlay"></div>
           </div>
 
-          <div className="modal-body event-body">
+          <div className="modal-body event-body p-3">
             {/* Event Description */}
             <div className="event-description">
               <div className="description-content mt-3">

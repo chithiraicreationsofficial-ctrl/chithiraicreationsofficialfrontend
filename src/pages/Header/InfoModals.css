@@ -986,4 +986,8 @@
     flex-direction: column;
     gap: 15px;
   }
+
+  .event-hero{
+    padding: 10px;
+  }
 }
