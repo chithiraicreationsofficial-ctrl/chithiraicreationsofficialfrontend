@@ -50,15 +50,15 @@ const AboutModal = ({ isOpen, onClose }) => {
 
             <div className="stats-grid">
               <div className="stat-card">
-                <div className="stat-number">50+</div>
+                <div className="stat-number">2+</div>
                 <div className="stat-label">Events Organized</div>
               </div>
               <div className="stat-card">
-                <div className="stat-number">10k+</div>
+                <div className="stat-number">1000+</div>
                 <div className="stat-label">Happy Attendees</div>
               </div>
               <div className="stat-card">
-                <div className="stat-number">5</div>
+                <div className="stat-number">1</div>
                 <div className="stat-label">Years of Excellence</div>
               </div>
               <div className="stat-card">
@@ -108,3 +108,4 @@ const AboutModal = ({ isOpen, onClose }) => {
   );
 };
 export default AboutModal; // Add this line
+
