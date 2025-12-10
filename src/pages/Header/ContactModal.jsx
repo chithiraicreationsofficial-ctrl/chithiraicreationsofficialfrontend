@@ -36,11 +36,7 @@ const ContactModal = ({ isOpen, onClose }) => {
   };
 
   const contactInfo = [
-    {
-      icon: <IoLocation />,
-      title: "Visit Us",
-      details: ["123 Temple Street Madurai - 625001", "Tamil Nadu"],
-    },
+    
     {
       icon: <IoCall />,
       title: "Call Us",
@@ -55,11 +51,7 @@ const ContactModal = ({ isOpen, onClose }) => {
       ],
       action: "mailto:chithiraicreationsofficial@gmail.com",
     },
-    {
-      icon: <IoTime />,
-      title: "Working Hours",
-      details: ["Mon - Sat: 10:00 AM - 7:00 PM", "Sunday: 11:00 AM - 5:00 PM"],
-    },
+
   ];
 
   return (
@@ -72,7 +64,8 @@ const ContactModal = ({ isOpen, onClose }) => {
           {/* Header */}
           <div className="modal-header contact-header">
             <div className="header-content">
-            <div className="sidebar-header m-0">
+            <div
+              className="sidebar-header m-0">
                   <img
                     src={logo}
                     alt="Logo"
@@ -129,3 +122,4 @@ const ContactModal = ({ isOpen, onClose }) => {
   );
 };
 export default ContactModal;
+
