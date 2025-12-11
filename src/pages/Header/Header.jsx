@@ -1725,9 +1725,7 @@ const Header = () => {
                   >
                     {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'}
                   </button>
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger discount-badge">
-                    ₹300 OFF on 2+ tickets!
-                  </span>
+                 
                 </div>
               </div>
 
@@ -1785,9 +1783,7 @@ const Header = () => {
                   >
                     {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'}
                   </button>
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger discount-badge">
-                    ₹300 OFF on 2+ tickets!
-                  </span>
+                 
                 </div>
               </div> 
             </motion.div>
