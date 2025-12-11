@@ -43,6 +43,9 @@ import yt from "../assets/social/yt.png";
 import title1 from "../assets/stock/title1.png";
 import title2 from "../assets/stock/title2.png";
 import co1 from "../assets/stock/co1.png";
+import ai from "../assets/stock/ai.png";
+import photo from "../assets/stock/photo.png";
+import power from "../assets/stock/power.png";
 import co2 from "../assets/stock/co2.png";
 import co3 from "../assets/stock/co3.png";
 import co4 from "../assets/stock/co4.png";
@@ -132,6 +135,16 @@ export default function Landing() {
               <img src={title2} alt="logo" width="100%" />
             </div>{" "}
           </div>
+
+           <h6 data-aos="fade-right" className="mt-5">
+            Powered By
+          </h6>
+
+          <div className="row justify-content-center">
+            <div className="col-lg-3 col-md-4 col-6">
+              <img src={power} alt="logo" width="100%" />
+            </div>
+          </div>
           <h6 data-aos="fade-right" className="mt-5">
             Travel Partner
           </h6>
@@ -172,6 +185,26 @@ export default function Landing() {
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={venue} alt="logo" width="100%" />
+            </div>
+          </div>
+
+
+            <h6 data-aos="fade-right" className="mt-5 mb-4">
+            AI partner{" "}
+          </h6>
+          <div className="row justify-content-center">
+            <div className="col-lg-3 col-md-4 col-6">
+              <img src={ai} alt="logo" width="100%" />
+            </div>
+          </div>
+
+          
+            <h6 data-aos="fade-right" className="mt-5 mb-4">
+            Photography partner{" "}
+          </h6>
+          <div className="row justify-content-center">
+            <div className="col-lg-3 col-md-4 col-6">
+              <img src={photo} alt="logo" width="100%" />
             </div>
           </div>
 
@@ -488,3 +521,4 @@ export default function Landing() {
     </>
   );
 }
+
