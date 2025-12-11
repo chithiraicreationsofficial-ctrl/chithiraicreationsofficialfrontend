@@ -335,14 +335,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Loading and Error States */
-.loading,
-.error {
-  text-align: center;
-  padding: 40px;
-  font-size: 18px;
-  color: #64748b;
-}
 
 .error {
   color: #ef4444;

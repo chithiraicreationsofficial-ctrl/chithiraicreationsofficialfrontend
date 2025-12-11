@@ -689,3 +689,79 @@
     width: 84%;
   }
 }
+
+/* Discount styles */
+.discount-badge {
+  font-size: 0.6rem;
+  white-space: nowrap;
+  padding: 0.25em 0.6em;
+}
+
+.text-decoration-line-through {
+  text-decoration: line-through;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+/* Verify button styles */
+.verify-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.verify-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.verify-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.verify-btn.verified {
+  background-color: #28a745;
+}
+
+/* Ticket hint styles */
+.ticket-hint {
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  color: #6c757d;
+}
+
+/* Amount summary styles */
+.amount-summary {
+  border: 1px solid #dee2e6;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .discount-badge {
+    font-size: 0.5rem;
+    padding: 0.2em 0.4em;
+  }
+  
+  .wallet_modal_content {
+    flex-direction: column !important;
+  }
+  
+  .wallet_left, .wallet_right {
+    width: 100% !important;
+  }
+}
