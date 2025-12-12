@@ -14,7 +14,7 @@ export const loadRazorpay = () => {
 
 export const initializeRazorpay = (order, userDetails, onSuccess, onFailure) => {
     const options = {
-        key: "rzp_test_RiDrTcK7D32wp3",
+        key: "rzp_live_RqMHmqwqUFi5p3",
         amount: order.amount,
         currency: order.currency,
         name: 'New Year Celebration 2025',
@@ -58,4 +58,5 @@ export const initializeRazorpay = (order, userDetails, onSuccess, onFailure) => 
 
     const rzp = new window.Razorpay(options);
     rzp.open();
+
 };
