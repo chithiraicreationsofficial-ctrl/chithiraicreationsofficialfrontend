@@ -711,10 +711,7 @@
 
 /* Verify button styles */
 .verify-btn {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+
   background-color: #007bff;
   color: white;
   border: none;
@@ -764,4 +761,5 @@
   .wallet_left, .wallet_right {
     width: 100% !important;
   }
+
 }
