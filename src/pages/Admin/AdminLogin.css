@@ -185,10 +185,7 @@
   transition: transform 0.2s;
 }
 
-.login-btn:hover:not(:disabled),
-.verify-btn:hover:not(:disabled) {
-  transform: translateY(-2px);
-}
+
 
 .login-btn:disabled,
 .verify-btn:disabled {
@@ -261,3 +258,4 @@
   color: #666;
   font-size: 14px;
 }
+
