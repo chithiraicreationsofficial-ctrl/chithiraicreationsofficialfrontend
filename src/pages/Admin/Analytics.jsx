@@ -99,7 +99,7 @@ const Analytics = () => {
 
             {/* Key Metrics */}
             <div className="metrics-grid">
-                <div className="metric-card primary">
+            <div className="metric-card primary">
                     <div className="metric-icon">💰</div>
                     <div className="metric-info">
                         <h3>₹{stats.statistics.totalRevenue}</h3>
@@ -122,6 +122,16 @@ const Analytics = () => {
                             ></div>
                         </div>
                         <span>{stats.statistics.bookedTickets} / {stats.statistics.totalTickets}</span>
+                    </div>
+                </div>
+
+
+                <div className="metric-card primary">
+                    <div className="metric-icon">💰</div>
+                    <div className="metric-info">
+                        <h3>{stats.statistics.ChildrenTicketCount}</h3>
+                        <p>Total Childrens ticket</p>
+                        <span className="metric-trend positive">₹ {stats.statistics.ChildrenTicketCount * 999} </span>
                     </div>
                 </div>
 

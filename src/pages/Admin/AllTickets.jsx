@@ -2,8 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { adminAPI } from '../../services/apiService';
 import { toast } from "react-toastify";
 
+import { useRef } from "react";
+import { QRCodeCanvas } from "qrcode.react";
+import { FiDownload } from "react-icons/fi";
 
 const AllTickets = () => {
+
+
+    const qrRef = useRef(null);
+
+    const downloadQR = (name) => {
+        const canvas = qrRef.current.querySelector("canvas");
+        const pngUrl = canvas
+          .toDataURL("image/png")
+          .replace("image/png", "image/octet-stream");
+    
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = `${name}.png`;
+        downloadLink.click();
+      };
+
     const [tickets, setTickets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
@@ -70,13 +89,14 @@ const AllTickets = () => {
     };
 
     const exportToCSV = () => {
-        const headers = ['Ticket ID', 'Name', 'Email', 'Phone', 'Tickets', 'Amount', 'Status', 'Booked At', 'Verified At'];
+        const headers = ['Ticket ID', 'Name', 'Email', 'Phone', 'Tickets','Childrens', 'Amount', 'Status', 'Booked At', 'Verified At'];
         const csvData = tickets.map(ticket => [
             ticket.ticketId,
             ticket.name,
             ticket.email,
             ticket.phone,
-            ticket.ticketCount,
+            ticket.adultTicketCount,
+            ticket.childrenTicketCount,
             ticket.totalAmount,
             ticket.status,
             new Date(ticket.createdAt).toLocaleString(),
@@ -111,6 +131,9 @@ const AllTickets = () => {
     if (loading) {
         return <div className="loading">Loading tickets...</div>;
     }
+
+    
+    
 
     return (
         <div className="all-tickets">
@@ -168,28 +191,62 @@ const AllTickets = () => {
                     <thead>
                         <tr>
                             <th>Ticket ID</th>
-                            <th>Name</th>
+                            {/* <th>Name</th> */}
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Tickets</th>
+                            <th> Childrens</th>
                             <th>Amount</th>
                             <th>Status</th>
                             <th>Booked At</th>
-                            <th>Actions</th>
+                            <th>Qr</th>
                         </tr>
                     </thead>
                     <tbody>
                         {tickets.map((ticket) => (
                             <tr key={ticket._id}>
                                 <td className="ticket-id">{ticket.ticketId}</td>
-                                <td>{ticket.name}</td>
-                                <td>{ticket.email}</td>
+                                {/* <td>{ticket.name}</td> */}
+                                <td>{ticket.email ?? ticket.aadharNumber}</td>
                                 <td>{ticket.phone}</td>
-                                <td>{ticket.ticketCount}</td>
+                                <td>{ticket.adultTicketCount}</td>
+                                <td>{ticket.childrenTicketCount}</td>
                                 <td>₹{ticket.totalAmount}</td>
                                 <td>{getStatusBadge(ticket.status)}</td>
                                 <td>{new Date(ticket.createdAt).toLocaleString()}</td>
-                                <td className="actions">
+                                <td>
+                                <div style={{ textAlign: "center" }}>
+      {/* QR Code */}
+      <div ref={qrRef}>
+        <QRCodeCanvas
+        value={`https://www.chithiraicreations.com/readyamamaey?ticketId=${ticket.ticketId}`}
+          size={10}
+          bgColor="#ffffff"
+          fgColor="#000000"
+          level="H"
+        />
+      </div>
+
+      {/* Download Icon */}
+      <button
+        onClick={() => {
+            downloadQR(ticket.ticketId)
+        }}
+        style={{
+          marginTop: "12px",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "22px",
+        }}
+        title="Download QR"
+      >
+        <FiDownload />
+      </button>
+    </div>
+                                </td>
+
+                                {/* <td className="actions">
                                     {ticket.status === 'booked' && (
                                         <>
                                             <button
@@ -211,7 +268,7 @@ const AllTickets = () => {
                                             {ticket.status === 'attended' ? '✅ Verified' : '❌ No Show'}
                                         </span>
                                     )}
-                                </td>
+                                </td> */}
                             </tr>
                         ))}
                     </tbody>

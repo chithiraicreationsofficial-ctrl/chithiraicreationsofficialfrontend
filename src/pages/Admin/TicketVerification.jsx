@@ -120,7 +120,7 @@ const TicketVerification = () => {
                                     <p><strong>Ticket ID:</strong> {ticket.ticketId}</p>
                                     <p><strong>Email:</strong> {ticket.email}</p>
                                     <p><strong>Phone:</strong> {ticket.phone}</p>
-                                    <p><strong>Tickets:</strong> {ticket.ticketCount}</p>
+                                    <p><strong>Tickets:</strong> {ticket.adultTicketCount + ticket.childrenTicketCount}</p>
                                     <p><strong>Booked:</strong> {new Date(ticket.createdAt).toLocaleString()}</p>
 
                                     {ticket.verifiedAt && (

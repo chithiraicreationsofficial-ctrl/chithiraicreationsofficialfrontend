@@ -3,6 +3,8 @@
 import axios from "axios";
 
 const API_BASE_URL = "https://chithirai-creation-back.onrender.com/api";
+// const API_BASE_URL = "http://localhost:8000/api";
+
 
 // Create axios instance
 const api = axios.create({
@@ -66,8 +68,9 @@ export const authAPI = {
 // Ticket APIs
 export const ticketAPI = {
   checkAvailability: () => api.get("/tickets/availability"),
-  createOrder: (ticketCount) =>
-    api.post("/tickets/create-order", { ticketCount }),
+  createOrder: (ticketCount, totalAmount, extraData = {}) =>
+    api.post("/tickets/create-order", {   ticketCount,
+      ...extraData }),
   getUserTickets: () => api.get("/tickets/my-tickets"),
   getTicketById: (ticketId) => api.get(`/tickets/ticket/${ticketId}`),
 };

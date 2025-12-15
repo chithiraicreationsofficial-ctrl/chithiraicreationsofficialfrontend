@@ -24,13 +24,12 @@ const TicketVerification = () => {
       const userRole = localStorage.getItem("adminToken");
 
       console.log("userRole", userRole);
-      if (userRole != null) {
+      if (userRole == null) {
         console.log("userRole", userRole);
-        setIsAdmin(true);
+        setIsAdmin(false);
       } else {
         console.log("userRole2", userRole);
-
-        setIsAdmin(false);
+        setIsAdmin(true);
       }
     };
 
@@ -54,8 +53,6 @@ const TicketVerification = () => {
     }
   }, [timeLeft, ticketData, isAdmin]);
 
-  // New Year Countdown effect
-  // New Year Countdown effect
   useEffect(() => {
     const calculateNewYearCountdown = () => {
       const now = new Date();
@@ -230,20 +227,7 @@ const TicketVerification = () => {
         <h1>Readya Mamey</h1>
         <p>Madurai New Year Celebration 2025</p>
 
-        {/* New Year Countdown Banner */}
-        {/* New Year Countdown Banner */}
-        {/* <div className="new-year-countdown-banner">
-                    <div className="countdown-title">🎉 Countdown to New Year 2025 🎉</div>
-                    <div className="new-year-timer">
-                        {newYearCountdown.display}
-                    </div>
-                    <div className="countdown-labels">
-                        <span>Days</span>
-                        <span>Hours</span>
-                        <span>Minutes</span>
-                        <span>Seconds</span>
-                    </div>
-                </div> */}
+    
       </div>
 
       {/* Welcome Section */}
@@ -276,7 +260,14 @@ const TicketVerification = () => {
           </div>
           <div className="detail-item">
             <div className="detail-label">Tickets</div>
-            <div className="detail-value">{ticketData.ticketCount}</div>
+            <div className="detail-value">{ticketData.adultTicketCount + ticketData.childrenTicketCount}</div>
+          </div>
+          <div className="detail-item">
+            <div className="detail-label">Adult Tickets</div>
+            <div className="detail-value">{ticketData.adultTicketCount }</div>
+          </div>  <div className="detail-item">
+            <div className="detail-label">Childrens Tickets</div>
+            <div className="detail-value">{ticketData.childrenTicketCount}</div>
           </div>
           <div className="detail-item">
             <div className="detail-label">Booked On</div>

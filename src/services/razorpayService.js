@@ -15,13 +15,14 @@ export const loadRazorpay = () => {
 export const initializeRazorpay = (order, userDetails, onSuccess, onFailure) => {
     const options = {
         key: "rzp_live_RqMHmqwqUFi5p3",
+        // key: "rzp_test_RiDrTcK7D32wp3",
+
         amount: order.amount,
         currency: order.currency,
         name: 'New Year Celebration 2025',
         description: 'Ticket Booking',
         order_id: order.orderId,
         handler: async function (response) {
-
 
 
             console.log(response)
