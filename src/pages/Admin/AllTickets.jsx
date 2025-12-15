@@ -220,7 +220,7 @@ const AllTickets = () => {
       <div ref={qrRef}>
         <QRCodeCanvas
         value={`https://www.chithiraicreations.com/readyamamaey?ticketId=${ticket.ticketId}`}
-          size={10}
+          size={250}
           bgColor="#ffffff"
           fgColor="#000000"
           level="H"
