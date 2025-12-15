@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { useRef } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 import { FiDownload } from "react-icons/fi";
+import html2pdf from "html2pdf.js";
+import QRCode from "qrcode";
+
 
 const AllTickets = () => {
 
@@ -132,6 +135,56 @@ const AllTickets = () => {
         return <div className="loading">Loading tickets...</div>;
     }
 
+
+    const downloadPDF = async (ticket) => {
+        // Generate QR as base64
+        const qrDataUrl = await QRCode.toDataURL(
+          `https://www.chithiraicreations.com/readyamamaey?ticketId=${ticket.ticketId}`
+        );
+      
+        // Create hidden HTML
+        const element = document.createElement("div");
+        element.innerHTML = `
+          <div style="font-family: Arial; padding: 20px;">
+            <div style="text-align:center;">
+              <img src="https://res.cloudinary.com/dlcgqwmin/image/upload/v1763730196/logo_header_yaeedm.png" width="120"/>
+              <h2>Readya Mamey</h2>
+              <p>Madurai New Year Celebration 2025</p>
+            </div>
+      
+            <hr />
+      
+            <h3>🎉 Ticket Details</h3>
+            <p><strong>Ticket ID:</strong> ${ticket.ticketId}</p>
+            <p><strong>Email:</strong> ${ticket.email}</p>
+            <p><strong>Phone:</strong> ${ticket.phone}</p>
+            <p><strong>Adult Tickets:</strong> ${ticket.adultTicketCount}</p>
+            <p><strong>Children Tickets:</strong> ${ticket.childrenTicketCount}</p>
+            <p><strong>Total Amount:</strong> ₹${ticket.totalAmount}</p>
+            <p><strong>Status:</strong> ${ticket.status}</p>
+            <p><strong>Booked At:</strong> ${new Date(ticket.createdAt).toLocaleString()}</p>
+      
+            <div style="text-align:center; margin-top:20px;">
+              <img src="${qrDataUrl}" width="180" />
+              <p>Scan for verification</p>
+            </div>
+      
+            <hr />
+            <p style="text-align:center;">© 2025 Chithirai Creations</p>
+          </div>
+        `;
+      
+        const options = {
+          margin: 10,
+          filename: `Ticket-${ticket.ticketId}.pdf`,
+          image: { type: "jpeg", quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        };
+      
+        html2pdf().set(options).from(element).save();
+      };
+      
     
     
 
@@ -214,37 +267,21 @@ const AllTickets = () => {
                                 <td>₹{ticket.totalAmount}</td>
                                 <td>{getStatusBadge(ticket.status)}</td>
                                 <td>{new Date(ticket.createdAt).toLocaleString()}</td>
-                                <td>
-                                <div style={{ textAlign: "center" }}>
-      {/* QR Code */}
-      <div ref={qrRef}>
-        <QRCodeCanvas
-        value={`https://www.chithiraicreations.com/readyamamaey?ticketId=${ticket.ticketId}`}
-          size={250}
-          bgColor="#ffffff"
-          fgColor="#000000"
-          level="H"
-        />
-      </div>
+                                <td style={{ textAlign: "center" }}>
+  <button
+    onClick={() => downloadPDF(ticket)}
+    style={{
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+      fontSize: "20px",
+    }}
+    title="Download Ticket PDF"
+  >
+    <FiDownload />
+  </button>
+</td>
 
-      {/* Download Icon */}
-      <button
-        onClick={() => {
-            downloadQR(ticket.ticketId)
-        }}
-        style={{
-          marginTop: "12px",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          fontSize: "22px",
-        }}
-        title="Download QR"
-      >
-        <FiDownload />
-      </button>
-    </div>
-                                </td>
 
                                 {/* <td className="actions">
                                     {ticket.status === 'booked' && (
