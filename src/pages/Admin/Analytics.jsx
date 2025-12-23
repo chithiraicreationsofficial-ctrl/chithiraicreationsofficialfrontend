@@ -104,7 +104,8 @@ const Analytics = () => {
                     <div className="metric-info">
                         <h3>₹{stats.statistics.totalRevenue}</h3>
                         <p>Total Revenue</p>
-                        <span className="metric-trend positive">+12% from target</span>
+                        <span className="metric-trend positive">Online booking: ₹ {stats.statistics.totalRevenue - stats.adminStats.revenueGenerated}</span> <br/>
+                        <span className="metric-trend positive">Offline booking: ₹ {stats.adminStats.revenueGenerated}</span>
                     </div>
                 </div>
 

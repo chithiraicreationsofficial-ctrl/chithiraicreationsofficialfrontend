@@ -160,7 +160,7 @@ const AllTickets = () => {
             <p><strong>Phone:</strong> ${ticket.phone}</p>
             <p><strong>Adult Tickets:</strong> ${ticket.adultTicketCount}</p>
             <p><strong>Children Tickets:</strong> ${ticket.childrenTicketCount}</p>
-            <p><strong>Total Amount:</strong> ₹${ticket.totalAmount}</p>
+            <p><strong>Total Amount:</strong> ${ticket.adultTicketCount == ticket.totalAmount ? "Free Pass" : "₹" + ticket.totalAmount}</p>
             <p><strong>Status:</strong> ${ticket.status}</p>
             <p><strong>Booked At:</strong> ${new Date(ticket.createdAt).toLocaleString()}</p>
       
@@ -243,8 +243,8 @@ const AllTickets = () => {
                 <table className="tickets-table">
                     <thead>
                         <tr>
-                            <th>Ticket ID</th>
-                            {/* <th>Name</th> */}
+                            <th>Entry Type</th>
+                            <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Tickets</th>
@@ -258,8 +258,8 @@ const AllTickets = () => {
                     <tbody>
                         {tickets.map((ticket) => (
                             <tr key={ticket._id}>
-                                <td className="ticket-id">{ticket.ticketId}</td>
-                                {/* <td>{ticket.name}</td> */}
+                                <td >{ticket.createdByEmail ? "Manual" : "Online"}</td>
+                                <td>{ticket.name}</td>
                                 <td>{ticket.email ?? ticket.aadharNumber}</td>
                                 <td>{ticket.phone}</td>
                                 <td>{ticket.adultTicketCount}</td>
