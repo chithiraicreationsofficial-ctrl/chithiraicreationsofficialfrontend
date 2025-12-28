@@ -122,10 +122,10 @@ const Analytics = () => {
                                 }}
                             ></div>
                         </div>
-                        <span>{stats.statistics.bookedTickets - stats.statistics.freePassCount} / {stats.statistics.totalTickets}</span>
+                        <span>{stats.statistics.bookedTickets - stats.statistics.freePassCount} / {stats.statistics.totalTickets}</span> <br/>
                         
                         <span className="metric-trend positive">Total Tickets: {stats.statistics.bookedTickets}</span> <br/>
-                        <span className="metric-trend positive">Free Pass: ₹ {stats.statistics.freePassCount}</span>
+                        <span className="metric-trend positive">Free Pass: {stats.statistics.freePassCount}</span>
                     </div>
                 </div>
 
@@ -326,3 +326,4 @@ const Analytics = () => {
 
 
 export default Analytics;
+
