@@ -40,7 +40,7 @@ const ContactModal = ({ isOpen, onClose }) => {
     {
       icon: <IoCall />,
       title: "Call Us",
-      details: ["+91 8148586978", "+91 6384513129"],
+      details: ["+91 8148586978", "+91 7010240042"],
       action: "tel:+91 8148586978",
     },
     {
@@ -122,4 +122,5 @@ const ContactModal = ({ isOpen, onClose }) => {
   );
 };
 export default ContactModal;
+
 
