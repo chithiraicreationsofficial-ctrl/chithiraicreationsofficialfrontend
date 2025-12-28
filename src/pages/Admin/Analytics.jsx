@@ -112,17 +112,20 @@ const Analytics = () => {
                 <div className="metric-card success">
                     <div className="metric-icon">🎫</div>
                     <div className="metric-info">
-                        <h3>{stats.statistics.bookedTickets}</h3>
+                        <h3>{stats.statistics.bookedTickets - stats.statistics.freePassCount}</h3>
                         <p>Tickets Sold</p>
                         <div className="progress-bar">
                             <div
                                 className="progress-fill"
                                 style={{
-                                    width: `${calculateProgress(stats.statistics.bookedTickets, stats.statistics.totalTickets)}%`
+                                    width: `${calculateProgress(stats.statistics.bookedTickets - stats.statistics.freePassCount, stats.statistics.totalTickets)}%`
                                 }}
                             ></div>
                         </div>
-                        <span>{stats.statistics.bookedTickets} / {stats.statistics.totalTickets}</span>
+                        <span>{stats.statistics.bookedTickets - stats.statistics.freePassCount} / {stats.statistics.totalTickets}</span>
+                        
+                        <span className="metric-trend positive">Total Tickets: {stats.statistics.bookedTickets}</span> <br/>
+                        <span className="metric-trend positive">Free Pass: ₹ {stats.statistics.freePassCount}</span>
                     </div>
                 </div>
 
@@ -320,5 +323,6 @@ const Analytics = () => {
         </div>
     );
 };
+
 
 export default Analytics;
