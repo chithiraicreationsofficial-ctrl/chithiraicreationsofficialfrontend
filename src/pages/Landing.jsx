@@ -89,9 +89,11 @@ export default function Landing() {
             className="primary_btn my-5"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
+            disabled
             // data-aos="fade-down"
           >
-            Book Your Ticket Now{" "}
+            {/* Book Your Ticket Now{" "} */}
+            Booking Closed
           </button>
         </div>
       </div>
@@ -256,8 +258,7 @@ export default function Landing() {
 
               <div
                 data-aos="fade-right"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                disabled
                 className=" starts d-flex gap-3 align-items-center"
               >
                 <h5>
@@ -460,10 +461,12 @@ export default function Landing() {
 
               <div
                 className="btns"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                // data-bs-toggle="modal"
+                // data-bs-target="#exampleModal"
+                disabled
               >
-                Book Ticket
+                {/* Book Ticket */}
+                Booking Closed
                 <FaArrowRightLong />
               </div>
               {/* <img src={Cards} alt="logo" width="100%" /> */}

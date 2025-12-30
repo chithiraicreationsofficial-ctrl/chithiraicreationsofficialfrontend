@@ -674,9 +674,11 @@ const Header = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     onClick={resetForm}
-                    disabled={availableTickets === 0}
+                    disabled
                   >
-                    {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'}
+                    {/* {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'} */}
+                    Sold Out
+
                   </button>
                  
                 </div>
