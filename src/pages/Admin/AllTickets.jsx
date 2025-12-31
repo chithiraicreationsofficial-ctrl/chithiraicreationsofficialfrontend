@@ -33,7 +33,7 @@ const AllTickets = () => {
     const [statusFilter, setStatusFilter] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
 
-    const itemsPerPage = 20;
+    const itemsPerPage = 200;
 
     useEffect(() => {
         fetchTickets();
@@ -341,5 +341,6 @@ const AllTickets = () => {
         </div>
     );
 };
+
 
 export default AllTickets;
