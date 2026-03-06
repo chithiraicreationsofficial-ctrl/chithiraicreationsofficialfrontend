@@ -49,6 +49,8 @@ import power from "../assets/stock/power.png";
 import co2 from "../assets/stock/co2.png";
 import co3 from "../assets/stock/co3.png";
 import co4 from "../assets/stock/co4.png";
+import cric from "../assets/cric.png";
+import outline from "../assets/outline.png";
 import food from "../assets/stock/food.png";
 import travel from "../assets/stock/travel.png";
 import venue from "../assets/stock/venue.png";
@@ -75,26 +77,25 @@ export default function Landing() {
           {/* <h1 className="hero-title">Readya Mamey</h1> */}
 
           <p className="hero-tagline mt-5" data-aos="fade-down">
-            A night of music <br /> moments and magics
+           MADURAI'S BIGGEST TURF CRICKET TOURNAMENT
           </p>
 
-          <p className="hero-subtext" data-aos="fade-down">
+          {/* <p className="hero-subtext" data-aos="fade-down">
             We're hosting a fantastic New year's <br /> Evening celebration on
             December 31st!
-          </p>
+          </p> */}
 
-          <img src={title} alt="logo" data-aos="flip-left" width="100%" />
+          <img src={title} alt="logo" data-aos="flip-left" width="60%" className="mb-5 pb-5" />
 
-          <button
+          {/* <button
             className="primary_btn my-5"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
             disabled
             // data-aos="fade-down"
           >
-            {/* Book Your Ticket Now{" "} */}
             Booking Closed
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -147,7 +148,7 @@ export default function Landing() {
               <img src={power} alt="logo" width="100%" />
             </div>
           </div>
-          <h6 data-aos="fade-right" className="mt-5">
+          {/* <h6 data-aos="fade-right" className="mt-5">
             Travel Partner
           </h6>
 
@@ -155,8 +156,8 @@ export default function Landing() {
             <div className="col-lg-3 col-md-4 col-6">
               <img src={travel} alt="logo" width="100%" />
             </div>
-          </div>
-          <h6 data-aos="fade-right" className="mt-3">
+          </div> */}
+          {/* <h6 data-aos="fade-right" className="mt-3">
             Co - Sponsors
           </h6>
           <div className="row justify-content-center">
@@ -172,23 +173,23 @@ export default function Landing() {
             <div className="col-lg-3 col-md-4 col-6">
               <img src={co4} alt="logo" width="100%" />
             </div>
-          </div>
-          <h6 data-aos="fade-right" className="mt-5 mb-4">
+          </div> */}
+          {/* <h6 data-aos="fade-right" className="mt-5 mb-4">
             Food partner{" "}
           </h6>
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={food} alt="logo" width="100%" />
             </div>
-          </div>
-          <h6 data-aos="fade-right" className="mt-5 mb-4">
+          </div> */}
+          {/* <h6 data-aos="fade-right" className="mt-5 mb-4">
             Venue partner{" "}
           </h6>
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={venue} alt="logo" width="100%" />
             </div>
-          </div>
+          </div> */}
 
 
             <h6 data-aos="fade-right" className="mt-5 mb-4">
@@ -210,104 +211,83 @@ export default function Landing() {
             </div>
           </div>
 
-          <button className=" text-white primary_btn1 mb-5 text-black d-block mx-auto mt-4">
+          {/* <button className=" text-white primary_btn1 mb-5 text-black d-block mx-auto mt-4">
             <Link className="text-white"  to="mailto:chithiraicreations@gmail.com">
             Join As Sponsor
 
             </Link>
-          </button>
+          </button> */}
+
+          <img src={cric} alt="logo" width="40%" className="d-block m-auto" />
+
         </div>
       </section>
 
       <section className="section3 py-5 ">
         <div className="Main container">
           <div className="row">
-            <div className="col-lg-7 d-flex flex-column justify-content-center">
+            <div className="col-lg-12 d-flex flex-column justify-content-center">
               <h3 data-aos="fade-right">
-                Readya Mamey –
-                <span className="span"> 2026 New Year Celebration Event</span>
+              Blackcaps Turf Cricket – Tournament Season 2
               </h3>
-              <p data-aos="fade-right">
-                Unleash the vibe. Own the night. Welcome the New Year in style!
-              </p>
 
-              <p data-aos="fade-right">
-                2026 is almost here, and it's time to begin the celebration with
-                maximum energy! Readya Mamey brings you the ultimate New Year
-                bash — a platform for youngsters, creators, dancers, performers,
-                and every fun-loving soul ready to shine.
-              </p>
 
-              <div className="dflex" data-aos="fade-right">
-                <div className="stock-btn">exclusive prizes</div>
-                <div className="stock-btn">Stage performances</div>
-                <div className="stock-btn">talent showcases</div>
-                <div className="stock-btn">Gifts & spotlight moment</div>
-                <div className="stock-btn">2026 Welcome Fireworks Style</div>
+              <h5>
+              Madurai’s Biggest Turf Cricket Showdown
+              </h5>
+
+              <div class="hero-content" data-aos="fade-right">
+  <p class="tagline" data-aos="fade-right">Unleash your game. Own the turf. Dominate the season.</p>
+
+  <p class="highlight" data-aos="fade-right">Season 2 is here — and the battle just got bigger.</p>
+
+  <p class="description" data-aos="fade-right">
+    The ultimate competitive platform for passionate cricketers,
+    rising teams, power hitters, sharp bowlers, and fearless captains.
+  </p>
+
+  <p class="bold-line" data-aos="fade-right">
+    This isn’t just a tournament.
+  </p>
+
+  <p class="bold-line strong" data-aos="fade-right">
+    This is where reputations are built.
+  </p>
+</div>
+
+           
+              <div className="dflex justify-content-center" data-aos="fade-right">
+                <div className="stock-btn">Massive Cash Prizes</div>
+                <div className="stock-btn">Championship Trophy & Medals</div>
+                <div className="stock-btn">High-Intensity Turf Matches</div>
+                <div className="stock-btn">Floodlight Night Battles</div>
+                <div className="stock-btn">Live Scoring & Match Updates
+                </div>
+
+                <div className="stock-btn">Individual Awards & Recognition</div>
               </div>
 
               <p data-aos="fade-right">
-                Every laugh, every move, every cheer — this night belongs to
-                you.
+              Every run, every wicket, every boundary —
+              this turf belongs to the fearless.
               </p>
 
-              <p data-aos="fade-right">
-                Join us and kickstart your New Year with pure high-energy
-                celebration.
-              </p>
+              <h5>
+              Step onto the field - Lead your squad - Write your victory story.
+              </h5>
+
+            
 
               <div
                 data-aos="fade-right"
                 disabled
-                className=" starts d-flex gap-3 align-items-center"
+                className=" starts d-flex gap-3 align-items-center justify-content-center"
               >
                 <h5>
-                  Let’s glow, let’s vibe, let’s party — Readya Mamey! 🎉💥
+                Let’s play hard. Let’s compete strong. Let’s lift the trophy —
+                Blackcaps Turf Cricket – Season 2! 🏏🔥
                 </h5>
                 <FaArrowRightLong />
-              </div>
-            </div>
-            <div className="col-lg-5 hex-wrapper">
-              {/* <img
-                                src={InvestImage}
-                                alt="logo"
-                                width="80%"
-                                className="d-block mx-auto"
-                            /> */}
-
-              <div class="hex h1" data-aos="fade-right">
-                {" "}
-                <img src={InvestImage1} class="hex-base" />
-              </div>
-              <div class="hex h2" data-aos="fade-right">
-                <img src={InvestImage2} class="hex-base" />{" "}
-              </div>
-              <div class="hex h3" data-aos="fade-right">
-                <img src={InvestImage3} class="hex-base" />{" "}
-              </div>
-              <div class="hex h4" data-aos="fade-right">
-                {" "}
-                <img src={InvestImage4} class="hex-base" />{" "}
-              </div>
-              <div class="hex h5" data-aos="fade-right">
-                <img src={InvestImage5} class="hex-base" />{" "}
-              </div>
-              <div class="hex h6" data-aos="fade-right">
-                <img src={InvestImage6} class="hex-base" />{" "}
-              </div>
-              <div class="hex h7" data-aos="fade-right">
-                <img src={InvestImage6} class="hex-base" />{" "}
-              </div>
-              <div class="hex h8" data-aos="fade-right">
-                {" "}
-                <img src={InvestImage8} class="hex-base" />{" "}
-              </div>
-              <div class="hex h9" data-aos="fade-right">
-                <img src={InvestImage9} class="hex-base" />{" "}
-              </div>
-              <div class="hex h10" data-aos="fade-right">
-                {" "}
-                <img src={InvestImage10} class="hex-base" />{" "}
               </div>
             </div>
           </div>
@@ -316,17 +296,19 @@ export default function Landing() {
 
       <section className="section4 ">
         <div className="container ">
-          <h3 className="span" data-aos="fade-right">
-            Event Details
+
+        <img src={outline} alt="logo" width="70%" className="d-block m-auto mb-5" />
+
+          <h3 className="span mt-5" data-aos="fade-right">
+          🏏 Tournament Details
           </h3>
           <h3 data-aos="fade-right">
-            Readya Mamey – 2026 New Year Celebration
+          Blackcaps Turf Cricket – Tournament Season 2
           </h3>
 
           <div data-aos="fade-right" className="d-flex justify-content-center">
             <p data-aos="fade-right">
-              Join us for a vibrant celebration filled with performances,
-              lights, fun contests, and unforgettable memories.
+            Step into Madurai’s biggest turf cricket battleground filled with power hitting, sharp bowling spells, thrilling finishes, and glory that lasts beyond the final over.
             </p>
           </div>
 
@@ -334,11 +316,10 @@ export default function Landing() {
             <div className="row">
               <div className="col-lg-4">
                 <div className="start-card p-5" data-aos="fade-right">
-                  <h5>Event Date</h5>
-                  <h6>31 December 2025 </h6>
+                  <h5>Tournament Date</h5>
+                  <h6>March 15 – March 20, 2026 </h6>
                   <h4>
-                    Celebrate the arrival of 2026 with an Readya Mamey
-                    Celebration night!
+                  League + Knockout Format
                   </h4>
                   <img src={mad} alt="card1" width="80px" className="temp" />
                 </div>
@@ -346,11 +327,11 @@ export default function Landing() {
 
               <div className="col-lg-4">
                 <div className="start-card p-5" data-aos="fade-right">
-                  <h5>Event Time</h5>
-                  <h6>Starts at 7:00 PM – 1:00 AM</h6>
+                  <h5>Match Timings</h5>
+                  <h6>Starts at 5:00 PM – 11:00 PM
+                  </h6>
                   <h4>
-                    Enjoy music, performances, games, and the grand New Year
-                    countdown.
+                  Under Floodlights
                   </h4>
                   <img src={mad} alt="card1" width="80px" className="temp" />
                 </div>
@@ -361,7 +342,7 @@ export default function Landing() {
                   <h5>Venue </h5>
                   <h6>
                     {" "}
-                    The Party Park - Madurai{" "}
+                    Premium Turf Arena – Madurai{" "}
                     <a
                       href="https://maps.app.goo.gl/UNSAvMFiTMameH1s9"
                       target="_blank"
@@ -371,14 +352,13 @@ export default function Landing() {
                     </a>
                   </h6>
                   <h4>
-                    Cinematic neon setup, party lights, and a full festive
-                    atmosphere.
+                  Professional Playing Surface
                   </h4>
                   <img src={mad} alt="card1" width="80px" className="temp" />
                 </div>
               </div>
             </div>
-            <div className="innercard">
+            {/* <div className="innercard">
               <div className="abs-card">
                 <div className="b-card-container" data-aos="fade-left">
                   <div className="b-card">
@@ -415,7 +395,7 @@ export default function Landing() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -423,14 +403,12 @@ export default function Landing() {
       <section className="section5 ">
         <div className="pricing  p-5 container">
           <h3 data-aos="fade-right">
-            Madurai’s <span className="span">Biggest</span> New Year Celebration
-            is Here!
+          Madurai’s  <span className="span">Biggest</span> Turf Cricket Tournament is Here!
+           
           </h3>
           <div className="d-flex justify-content-center">
             <p data-aos="fade-right">
-              Celebrate the New Year in full energy with music, lights,
-              unlimited food, neon effects, and a grand crackers show —
-              everything included in a single all-access pass!
+            Experience high-intensity turf battles, electrifying night matches, professional officiating, and championship-level competition — all packed into one thrilling tournament.
             </p>
           </div>
 
@@ -455,21 +433,11 @@ export default function Landing() {
         <div className="bg">
           <div className="inside py-5 " data-aos="fade-down">
             <div>
-              <h3>Readya Mamey 2026</h3>
+              <h3>Blackcaps Turf Cricket – Season 2</h3>
 
-              <p>Madurai’s Biggest New Year Celebration is Here!</p>
+              <p>Madurai’s Biggest Turf Cricket Tournament is Here!</p>
 
-              <div
-                className="btns"
-                // data-bs-toggle="modal"
-                // data-bs-target="#exampleModal"
-                disabled
-              >
-                {/* Book Ticket */}
-                Booking Closed
-                <FaArrowRightLong />
-              </div>
-              {/* <img src={Cards} alt="logo" width="100%" /> */}
+             
               <div></div>
             </div>
           </div>
