@@ -235,6 +235,17 @@
 
 
 }
+
+
+.section2 .supportpart div {
+  text-align: center;
+  margin: 30px 0px;
+  color: #4f5c6c;
+  font-size: 20px;
+  text-align: center;
+  font-family: "Asimovian", sans-serif;
+
+}
 .section2 .top:hover h5,
 .section2 .top:hover svg {
   color: #00ff88;

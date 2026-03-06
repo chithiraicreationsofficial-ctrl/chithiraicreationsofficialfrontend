@@ -126,90 +126,177 @@ export default function Landing() {
             <h5 data-aos="fade-right">Our Sponsors</h5>
           </div>
 
+
           <h6 data-aos="fade-right" className="mt-5 mb-4">
-            Title Sponsors
-          </h6>
-
-          <div className="row justify-content-center">
-            <div className="col-lg-3 col-md-4 col-6">
-              <img src={title1} alt="logo" width="100%" />
-            </div>
-            <div className="col-lg-3 col-md-4 col-6">
-              <img src={title2} alt="logo" width="100%" />
-            </div>{" "}
-          </div>
-
-           <h6 data-aos="fade-right" className="mt-5">
-            Powered By
+          Title Sponsors
           </h6>
 
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={power} alt="logo" width="100%" />
             </div>
+           
           </div>
-          {/* <h6 data-aos="fade-right" className="mt-5">
-            Travel Partner
+
+          <h6 data-aos="fade-right" className="mt-5 mb-4">
+          Co - Sponsors
           </h6>
 
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
-              <img src={travel} alt="logo" width="100%" />
+              <img src={title1} alt="logo" width="100%" />
             </div>
-          </div> */}
-          {/* <h6 data-aos="fade-right" className="mt-3">
-            Co - Sponsors
+
+            <div className="col-lg-3 col-md-4 col-6">
+              <img src={title2} alt="logo" width="100%" />
+            </div>
+           
+          </div>
+
+          <h6 data-aos="fade-right" className="mt-5 mb-4">
+          Associate - Sponsors
           </h6>
-          <div className="row justify-content-center">
-            <div className="col-lg-3 col-md-4 col-6">
-              <img src={co1} alt="logo" width="100%" />
-            </div>
-            <div className="col-lg-3 col-md-4 col-6">
-              <img src={co2} alt="logo" width="100%" />
-            </div>{" "}
-            <div className="col-lg-3 col-md-4 col-6">
-              <img src={co3} alt="logo" width="100%" />
-            </div>{" "}
-            <div className="col-lg-3 col-md-4 col-6">
-              <img src={co4} alt="logo" width="100%" />
-            </div>
-          </div> */}
-          {/* <h6 data-aos="fade-right" className="mt-5 mb-4">
-            Food partner{" "}
-          </h6>
+
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
               <img src={food} alt="logo" width="100%" />
             </div>
-          </div> */}
-          {/* <h6 data-aos="fade-right" className="mt-5 mb-4">
-            Venue partner{" "}
+            <div className="col-lg-3 col-md-4 col-6">
+              <img src={travel} alt="logo" width="100%" />
+            </div>  <div className="col-lg-3 col-md-4 col-6">
+              <img src={co2} alt="logo" width="100%" />
+            </div>
+           
+          </div>
+
+
+          {/* <h6 data-aos="fade-right" className="mt-5">
+            Decoration Partner
           </h6>
+
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
-              <img src={venue} alt="logo" width="100%" />
+              <img src={co1} alt="logo" width="100%" />
+            </div>
+          </div> */}
+
+        
+          {/* <h6 data-aos="fade-right" className="mt-5">
+            Gifting Partner
+          </h6>
+
+          <div className="row justify-content-center">
+            <div className="col-lg-3 col-md-4 col-6">
+              <img src={co2} alt="logo" width="100%" />
             </div>
           </div> */}
 
 
-            <h6 data-aos="fade-right" className="mt-5 mb-4">
-            AI partner{" "}
+          <h6 data-aos="fade-right" className="mt-5">
+            Media Partner
           </h6>
+
           <div className="row justify-content-center">
             <div className="col-lg-3 col-md-4 col-6">
-              <img src={ai} alt="logo" width="100%" />
+              <img src={co3} alt="logo" width="100%" />
             </div>
           </div>
+
+
+          <h6 data-aos="fade-right" className="mt-5">
+            Venue Partner
+          </h6>
+
+          <div className="row justify-content-center">
+            <div className="col-lg-3 col-md-4 col-6">
+              <img src={co4} alt="logo" width="100%" />
+            </div>
+          </div>
+
+
+          <h6 data-aos="fade-right" className="mt-5">
+            Supporting Partner
+          </h6>
+
+          <div className="row justify-content-center supportpart mb-5">
+            <div className="col-lg-3 col-md-4 col-6">
+            laetatio events madurai 
+            </div>
+            <div className="col-lg-3 col-md-4 col-6">
+            V photography 
+
+            </div>
+
+
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Meenakshi home appliances 
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Kitchen craft
+            </div>
+
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Billu Show
+            </div>
+
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Agmark madurakaran
+            </div>
+
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Penny Foods
+            </div>
+
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Ungalin Oruvan udhaya
+            </div>
+
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Voice of Madurai 
+            </div>
+
+
+            <div className="col-lg-3 col-md-4 col-6">
+            The madurai foodie 
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Rizu vlogs
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Arjun Vibes 
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-6">
+            ithanda madurai 
+            </div>
+
+            <div className="col-lg-3 col-md-4 col-6">
+            Info trek 
+            </div>
+
+            
+            <div className="col-lg-3 col-md-4 col-6">
+            Madurai alaparaiyans
+            </div>
+
+
+          </div>
+
 
           
-            <h6 data-aos="fade-right" className="mt-5 mb-4">
-            Photography partner{" "}
-          </h6>
-          <div className="row justify-content-center">
-            <div className="col-lg-3 col-md-4 col-6">
-              <img src={photo} alt="logo" width="100%" />
-            </div>
-          </div>
+   
+
+         
+          
 
           {/* <button className=" text-white primary_btn1 mb-5 text-black d-block mx-auto mt-4">
             <Link className="text-white"  to="mailto:chithiraicreations@gmail.com">
