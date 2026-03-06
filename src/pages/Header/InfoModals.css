@@ -55,8 +55,7 @@
 .modal-header {
   padding: 25px 30px;
   
-  background: #144925;
-background: linear-gradient(90deg, rgba(20, 73, 37, 1) 0%, rgba(131, 200, 68, 1) 100%);
+  background: linear-gradient(135deg, #510ac7 0%, #b124ee 100%);
   color: white;
   display: flex;
   justify-content: space-between;
@@ -282,9 +281,7 @@ background: linear-gradient(90deg, rgba(20, 73, 37, 1) 0%, rgba(131, 200, 68, 1)
 }
 
 .contact-sidebar {
-  /* background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%); */
-  background: #144925;
-background: linear-gradient(270deg, rgba(20, 73, 37, 1) 0%, rgba(2, 21, 16, 1) 100%);
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
   color: white;
   padding: 30px;
 }

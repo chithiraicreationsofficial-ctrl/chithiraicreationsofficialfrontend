@@ -663,24 +663,22 @@ const Header = () => {
                   <li className="navbar_items">
                     <Link onClick={() => openModal("event")}>Events</Link>
                   </li>
-                  {/* <li className="navbar_items">
+                  <li className="navbar_items">
                     <Link onClick={() => openModal("contact")}>Contacts</Link>
-                  </li> */}
+                  </li>
                 </ul>
 
                 <div className="header_btn_main position-relative">
                   <button
-                    // className={`primary_btn ${availableTickets === 0 ? 'btn-disabled' : ''}`}
-                    className={`primary_btn `}
-                    // data-bs-toggle="modal"
-                    // data-bs-target="#exampleModal"
-                    // onClick={resetForm}
-                    onClick={() => openModal("contact")}
-                    // disabled
+                    className={`primary_btn ${availableTickets === 0 ? 'btn-disabled' : ''}`}
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    onClick={resetForm}
+                    disabled
                   >
                     {/* {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'} */}
-                    {/* Sold Out */}
-                    Contacts
+                    Sold Out
+
                   </button>
                  
                 </div>

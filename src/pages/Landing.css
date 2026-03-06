@@ -19,7 +19,7 @@
   border-radius: 0 0 32px 32px;
   position: relative;
   text-align: center;
-  background-image: url("/src/assets/banner1.png");
+  background-image: url("/src/assets/banner1.jpg");
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
@@ -50,12 +50,9 @@
 .hero-tagline {
   font-size: 36px;
   margin-bottom: 8px;
-  margin-top: 3rem !important;
+  margin-top: 6rem !important;
   opacity: 0.9;
-  /* font-family: "Monoton", sans-serif; */
-  font-family: "Gravitas One", serif;
-
-  font-weight: 400;
+  font-family: "Monoton", sans-serif;
  
 }
 
@@ -204,7 +201,7 @@
 
 .secondary-btn {
   background-color: #171e29;
-  border: 1px solid #00ff88;
+  border: 1px solid #0363ff;
   color: #fff;
 }
 
@@ -237,7 +234,7 @@
 }
 .section2 .top:hover h5,
 .section2 .top:hover svg {
-  color: #00ff88;
+  color: #0363ff;
   transition: color 0.3s ease; /* smooth effect */
 }
 
@@ -252,9 +249,9 @@
 }
 
 .section3 {
-  background-image: url("/src/assets/banner3.jpg");
+  background-image: url("/src/assets/banner2.png");
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: bottom;
   background-size: cover;
   position: relative;
   border-radius: 32px 32px 0px 0px;
@@ -269,12 +266,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(
+  background: linear-gradient(
     to bottom,
     rgba(10, 0, 50, 0.9),
     rgba(0, 0, 0, 0.5),
     rgba(0, 0, 20, 0.7)
-  ); */
+  );
   z-index: 1;
 }
 .section3 .Main {
@@ -288,80 +285,27 @@
 
 .section3 h3 {
   color: #fff;
-  font-weight: 400;
-  font-size: 34px;
-  text-align: center;
-  font-family: "Gravitas One", serif;
-  margin-bottom: 30px;
-}
-
-.section3 h5 {
-  color: #fff;
-  font-weight: 400;
-  font-size: 28px;
-  text-align: center;
-  font-family: "Asimovian", serif;
-  margin-bottom: 30px;
+  font-weight: 600;
+  font-size: 40px;
+  margin-bottom: 20px;
 }
 
 .section3 p {
-  color: #fff;
-  text-align: center;
+  color: #c2c2c2;
   font-size: 16px;
   margin-bottom: 16px;
 }
-
-.hero-content {
-  max-width: 900px;
-  margin: auto;
-  text-align: center;
-  color: #fff;
-}
-
-.tagline {
-  font-size: 20px;
-  letter-spacing: 1px;
-  opacity: 0.9;
-  margin-bottom: 12px;
-}
-
-.highlight {
-  font-size: 24px;
-  font-weight: 600;
-  color: #00ff88;
-  margin-bottom: 18px;
-}
-
-.description {
-  font-size: 18px;
-  line-height: 1.7;
-  opacity: 0.85;
-  margin-bottom: 25px;
-}
-
-.bold-line {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.bold-line.strong {
-  font-size: 26px;
-  font-weight: 700;
-  color: #ffd700;
-}
-
 
 .section3 .stock-btn {
   background-color: #fff;
   border-radius: 50px;
   padding: 10px 24px;
-  color: #00ff88;
+  color: #0363ff;
   font-size: 16px;
 
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #345a4933;
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -379,14 +323,14 @@
 
 .section3 .starts h5,
 .section3 .starts svg {
-  color: #00ff88;
+  color: #0363ff;
   margin: 0px;
   font-size: 16px;
 }
 
 .section4 {
   padding: 80px 0px;
-  background-color: #021510;
+  background-color: #00000e;
 }
 
 .section4 h3 {
@@ -430,16 +374,12 @@
 
 /* IMAGE default state */
 .temp {
-
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%) !important;
-  bottom: -50px;
- 
   z-index: 0;
   opacity: 0.2;
   width: 310px;
-
+  left: -50px;
+  bottom: -50px;
   transition: all 0.8s ease; /* smooth animation */
   transform: translateY(0px);
 }
@@ -450,7 +390,7 @@
 }
 
 .section4 .start-card h5 {
-  color:  #00ff8875;
+  color:  #0363ff75;
   font-size: 24px;
   text-align: center;
   margin-bottom: 10px;
@@ -458,7 +398,7 @@
 
 
 .section4 .start-card:hover h5 {
-  color: #00ff88;
+  color: #0363ff;
 }
 
 .section4 .start-card h6 {
@@ -521,11 +461,11 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 .section4 .b-card:hover {
-  border: 1px solid #00ff88;
+  border: 1px solid #0363ff;
 }
 
 .section4 .b-card:hover svg {
-  color: #00ff88;
+  color: #0363ff;
 }
 .b-card svg {
   color: #4f5c6c;
@@ -604,7 +544,7 @@
 
 .section5,
 .section7 {
-  background-color: #021510;
+  background-color: #00000e;
 }
 
 
@@ -634,7 +574,7 @@
 .section4 .connector {
   width: 40px;
   height: 2px;
-  background-color: #00ff88;
+  background-color: #0363ff;
   display: inline-block;
 }
 
@@ -724,7 +664,7 @@
 }
 
 .Links:hover {
-  color: #00ff88;
+  color: #0363ff;
   transform: scale(1.05);
 }
 
@@ -736,7 +676,7 @@
 }
 
 .footer {
-  background-color: #021510;
+  background-color: #00000e;
 }
 
 .footer p {
@@ -1090,7 +1030,7 @@
 }
 
 .span {
-  color: #00ff88 !important;
+  color: #0363ff !important;
 }
 
 .hex-wrapper {
