@@ -339,16 +339,24 @@ export default function Landing() {
                   <div className="winner-rank-item rank-gold">
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
-                      <h4>WINNER</h4>
-                      <p>Grand Cash Prize + Trophy &amp; SVS Brand Hamper</p>
+                      <h4>1st PRIZE WINNER</h4>
+                      <p>Grand Cash Prize + Prestigious Gold Trophy</p>
                     </div>
                   </div>
 
                   <div className="winner-rank-item rank-silver">
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
-                      <h4>RUNNER-UP</h4>
-                      <p>Cash Prize + Runner-Up Trophy &amp; SVS Gifts</p>
+                      <h4>2nd PRIZE RUNNER-UP</h4>
+                      <p>Cash Prize + Runner-Up Silver Trophy</p>
+                    </div>
+                  </div>
+
+                  <div className="winner-rank-item rank-bronze">
+                    <div className="rank-badge">🥉 3rd</div>
+                    <div className="rank-details">
+                      <h4>3rd PRIZE WINNER</h4>
+                      <p>Cash Prize + Bronze Trophy &amp; Certificate</p>
                     </div>
                   </div>
                 </div>
@@ -369,16 +377,24 @@ export default function Landing() {
                   <div className="winner-rank-item rank-gold">
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
-                      <h4>WINNER</h4>
-                      <p>Grand Cash Prize + Trophy &amp; SVS Brand Hamper</p>
+                      <h4>1st PRIZE WINNER</h4>
+                      <p>Grand Cash Prize + Prestigious Gold Trophy</p>
                     </div>
                   </div>
 
                   <div className="winner-rank-item rank-silver">
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
-                      <h4>RUNNER-UP</h4>
-                      <p>Cash Prize + Runner-Up Trophy &amp; SVS Gifts</p>
+                      <h4>2nd PRIZE RUNNER-UP</h4>
+                      <p>Cash Prize + Runner-Up Silver Trophy</p>
+                    </div>
+                  </div>
+
+                  <div className="winner-rank-item rank-bronze">
+                    <div className="rank-badge">🥉 3rd</div>
+                    <div className="rank-details">
+                      <h4>3rd PRIZE WINNER</h4>
+                      <p>Cash Prize + Bronze Trophy &amp; Certificate</p>
                     </div>
                   </div>
                 </div>
@@ -566,14 +582,19 @@ export default function Landing() {
             <div className="col-lg-6" data-aos="fade-left">
               <div className="discover-card events-discover-card">
                 <div className="discover-content">
-                  <span className="discover-mini-tag">PAST HIGHLIGHTS</span>
-                  <h3>Maduraiyin Samayal Rani</h3>
+                  <span className="discover-mini-tag">OUR SIGNATURE PRODUCTIONS</span>
+                  <h3>Past Event Highlights</h3>
                   <p>
-                    Celebrate the spirit of every cooking queen in Madurai. Discover event highlights,
-                    esteemed judges, photos, and exclusive memories.
+                    Celebrating Madurai's greatest memories: <strong>Maduraiyin Samayal Rani</strong>, <strong>Chithirai Thiruvizha Contest</strong>, <strong>Ready Ah Mamay New Party</strong>, and <strong>Blackcaps Cricket Tournament Season 2</strong>!
                   </p>
+                  <div className="past-events-inline-chips mb-3">
+                    <span className="event-chip">👑 Samayal Rani</span>
+                    <span className="event-chip">🪔 Thiruvizha Contest</span>
+                    <span className="event-chip">🎉 Ready Ah Mamay</span>
+                    <span className="event-chip">🏏 Blackcaps Season 2</span>
+                  </div>
                   <Link to="/events" className="btn-discover-link">
-                    View Event Showcase <FaArrowRight />
+                    Explore All Past Events <FaArrowRight />
                   </Link>
                 </div>
               </div>

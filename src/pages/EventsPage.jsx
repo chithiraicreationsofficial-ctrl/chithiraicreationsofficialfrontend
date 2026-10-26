@@ -316,6 +316,73 @@ export default function EventsPage() {
             </div>
           </div>
         </section>
+
+        {/* Signature Past Events Collection */}
+        <section className="past-events-collection-section py-5">
+          <div className="container">
+            <div className="text-center mb-5">
+              <div className="exclusive-badge" data-aos="fade-down">
+                🏆 Event Milestones
+              </div>
+              <h2 className="section-title" data-aos="fade-up">
+                More Past <span className="gold-shimmer-text">Signature Events</span>
+              </h2>
+              <p className="lead-text text-center text-white-50" data-aos="fade-up" data-aos-delay="100">
+                A legacy of bringing Madurai's vibrant culture, sports championships, and celebrations to life.
+              </p>
+            </div>
+
+            <div className="row g-4 justify-content-center">
+              {/* Event 1: Chithirai Thiruvizha Contest */}
+              <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div className="past-event-feature-card">
+                  <div className="past-event-badge">CULTURAL CELEBRATION</div>
+                  <div className="past-event-icon">🪔</div>
+                  <h3>Chithirai Thiruvizha Contest</h3>
+                  <p>
+                    A grand cultural extravaganza celebrating Madurai's iconic Chithirai festival with traditional attire, heritage contests, and community games.
+                  </p>
+                  <div className="past-event-tags">
+                    <span>Madurai Heritage</span>
+                    <span>Cultural Fest</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Event 2: Ready Ah Mamay New Year Party */}
+              <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div className="past-event-feature-card">
+                  <div className="past-event-badge">ENTERTAINMENT &amp; DJ</div>
+                  <div className="past-event-icon">🎉</div>
+                  <h3>Ready Ah Mamay New Party</h3>
+                  <p>
+                    Madurai's most talked-about celebration night! Featuring live DJ performances, high-energy dance floors, mocktails, and family entertainment.
+                  </p>
+                  <div className="past-event-tags">
+                    <span>Live DJ Night</span>
+                    <span>Family Gala</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Event 3: Blackcaps Cricket Tournament Season 2 */}
+              <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div className="past-event-feature-card">
+                  <div className="past-event-badge">SPORTS CHAMPIONSHIP</div>
+                  <div className="past-event-icon">🏏</div>
+                  <h3>Blackcaps Cricket Tournament Season 2</h3>
+                  <p>
+                    An adrenaline-pumping turf &amp; field cricket championship bringing together the best amateur teams across South Tamil Nadu with massive trophies and cash rewards.
+                  </p>
+                  <div className="past-event-tags">
+                    <span>Season 2 Trophy</span>
+                    <span>Turf Cricket</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Lightbox for Gallery Photo */}

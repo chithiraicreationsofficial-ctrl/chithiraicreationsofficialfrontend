@@ -69,15 +69,7 @@ export default function EventRegistrationForm({ onClose }) {
     ingredients: "",
   });
 
-  const [conditions, setConditions] = useState({
-    minAge: false,
-    influencerRule: false,
-    originalHomemade: false,
-    audioRules: false,
-    svsRules: false,
-    collabAndBenefits: false,
-  });
-
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
@@ -88,18 +80,7 @@ export default function EventRegistrationForm({ onClose }) {
     setErrorMsg("");
   };
 
-  const handleConditionToggle = (key) => {
-    setConditions((prev) => ({ ...prev, [key]: !prev[key] }));
-    setErrorMsg("");
-  };
-
-  const allConditionsAccepted =
-    conditions.minAge &&
-    conditions.influencerRule &&
-    conditions.originalHomemade &&
-    conditions.audioRules &&
-    conditions.svsRules &&
-    conditions.collabAndBenefits;
+  const allConditionsAccepted = termsAccepted;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -205,14 +186,7 @@ export default function EventRegistrationForm({ onClose }) {
       category: "Reel Category",
       ingredients: "",
     });
-    setConditions({
-      minAge: false,
-      influencerRule: false,
-      originalHomemade: false,
-      audioRules: false,
-      svsRules: false,
-      collabAndBenefits: false,
-    });
+    setTermsAccepted(false);
   };
 
   return (
@@ -514,91 +488,59 @@ export default function EventRegistrationForm({ onClose }) {
               </div>
 
               {/* ========================================================
-                  MANDATORY CONDITIONS & ELIGIBILITY CHECKLIST
+                  MANDATORY CONDITIONS & SINGLE CHECKBOX ACCEPTANCE
                  ======================================================== */}
               <div className="contest-conditions-checklist mt-4">
                 <div className="conditions-header-pill">
                   <FaShieldHalved /> Contest Rules, Eligibility &amp; Conditions
                 </div>
 
-                <div className="conditions-list-group mt-3">
-                  {/* Rule 1: Age */}
-                  <label className="condition-checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={conditions.minAge}
-                      onChange={() => handleConditionToggle("minAge")}
-                    />
-                    <span className="condition-custom-box"></span>
-                    <span className="condition-text">
-                      <strong>Minimum Age Requirement:</strong> 4 years+ (Everyone above 4 years can participate; no gender restriction).
-                    </span>
-                  </label>
+                <div className="contest-rules-summary-box mt-3">
+                  <ul className="rules-summary-points">
+                    <li>
+                      <span className="point-bullet">✓</span>
+                      <span><strong>Minimum Age:</strong> 4 years+ (No upper age limit, all genders welcome).</span>
+                    </li>
+                    <li className="point-alert">
+                      <span className="point-bullet">⚠️</span>
+                      <span><strong>Fair Play Rule:</strong> Cooking influencers and accounts with <strong>more than 2,000 followers are NOT eligible</strong>.</span>
+                    </li>
+                    <li>
+                      <span className="point-bullet">✓</span>
+                      <span><strong>100% Own Content (Strictly No AI):</strong> Your own authentic video or photos must be used. No AI photos/videos or content downloaded from other platforms.</span>
+                    </li>
+                    <li>
+                      <span className="point-bullet">✓</span>
+                      <span><strong>Reels Audio Rules:</strong> In reels, the cooking person only must explain in their own voiceover. Standalone song/BGM only is not allowed. Song/BGM allowed only as background score behind voiceover. No AI voiceovers.</span>
+                    </li>
+                    <li>
+                      <span className="point-bullet">✓</span>
+                      <span><strong>Ingredients &amp; SVS Integration:</strong> Cooking process and ingredients must be detailed in description (for photos). In photos, place SVS product near the dish. In reels, capture SVS product or speak SVS slogan in voiceover.</span>
+                    </li>
+                    <li>
+                      <span className="point-bullet">✓</span>
+                      <span><strong>Collab &amp; Benefits:</strong> Collab with <strong>@chithirai.creations</strong> &amp; tag <strong>@svsfoods</strong> (<a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>). Entry fee: ₹249 (Limited seats). Top 50 participants with higher marks get an SVS Hamper worth ₹300 each!</span>
+                    </li>
+                  </ul>
 
-                  {/* Rule 2: Cooking Influencers */}
-                  <label className="condition-checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={conditions.influencerRule}
-                      onChange={() => handleConditionToggle("influencerRule")}
-                    />
-                    <span className="condition-custom-box"></span>
-                    <span className="condition-text">
-                      <strong>Fair Play Rule:</strong> Cooking influencers are strictly <strong>NOT eligible</strong>. Participants with <strong>more than 2,000 followers are also NOT eligible</strong>.
-                    </span>
-                  </label>
-
-                  {/* Rule 3: Originality & No AI */}
-                  <label className="condition-checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={conditions.originalHomemade}
-                      onChange={() => handleConditionToggle("originalHomemade")}
-                    />
-                    <span className="condition-custom-box"></span>
-                    <span className="condition-text">
-                      <strong>Own Authentic Content (Strictly No AI):</strong> Your own authentic video or photos must be used. Using AI photos/videos or content downloaded from YouTube, Pinterest, Google or any other platforms is strictly prohibited.
-                    </span>
-                  </label>
-
-                  {/* Rule 4: Audio / Reels Voiceover */}
-                  <label className="condition-checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={conditions.audioRules}
-                      onChange={() => handleConditionToggle("audioRules")}
-                    />
-                    <span className="condition-custom-box"></span>
-                    <span className="condition-text">
-                      <strong>Reels Voiceover &amp; Audio:</strong> In reels, the cooking person only must speak/explain in their own voice. Standalone song or BGM only is not allowed. Song/BGM can be used only as background score behind the voiceover. Strictly NO AI voiceover or third-party automated voices.
-                    </span>
-                  </label>
-
-                  {/* Rule 5: Cooking Process, Ingredients & SVS Product */}
-                  <label className="condition-checkbox-label">
-                    <input
-                      type="checkbox"
-                      checked={conditions.svsRules}
-                      onChange={() => handleConditionToggle("svsRules")}
-                    />
-                    <span className="condition-custom-box"></span>
-                    <span className="condition-text">
-                      <strong>Ingredients &amp; SVS Integration:</strong> Cooking process and ingredients must be detailed in description (for photos). In photos, capture/place SVS product near the dish and mention SVS in caption. In reels, capture SVS product or speak the SVS slogan in voiceover.
-                    </span>
-                  </label>
-
-                  {/* Rule 6: Collab, Entry Fee & Top 50 Hampers */}
-                  <label className="condition-checkbox-label master-terms-label">
-                    <input
-                      type="checkbox"
-                      checked={conditions.collabAndBenefits}
-                      onChange={() => handleConditionToggle("collabAndBenefits")}
-                    />
-                    <span className="condition-custom-box"></span>
-                    <span className="condition-text">
-                      <strong>Entry Fee &amp; Collab:</strong> Entry fee is <strong>just ₹249 (Limited seats only)</strong>. I agree to collab with <strong>@chithirai.creations</strong> and tag <strong>@svsfoods</strong> (<a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>). Top 50 participants who get higher marks receive an <strong>SVS Gift Hamper worth ₹300 each (for 50 people)</strong>! Total prizes worth ₹1,00,000!
-                    </span>
-                  </label>
+                  {/* ONE SINGLE CHECKBOX */}
+                  <div className="single-checkbox-confirmation pt-3 mt-2">
+                    <label className="condition-checkbox-label master-terms-label">
+                      <input
+                        type="checkbox"
+                        id="master-terms-checkbox"
+                        checked={termsAccepted}
+                        onChange={(e) => {
+                          setTermsAccepted(e.target.checked);
+                          setErrorMsg("");
+                        }}
+                      />
+                      <span className="condition-custom-box"></span>
+                      <span className="condition-text master-agree-text">
+                        <strong>I have read, understood, and accept all the contest rules, conditions, and eligibility criteria stated above.</strong>
+                      </span>
+                    </label>
+                  </div>
                 </div>
               </div>
 

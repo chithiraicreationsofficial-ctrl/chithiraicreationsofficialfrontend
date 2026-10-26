@@ -99,19 +99,19 @@ export default function AboutPage() {
             <div className="stats-grid">
               <div className="stat-card" data-aos="fade-up" data-aos-delay="100">
                 <div className="stat-icon-wrap">🏆</div>
-                <div className="stat-number">2+</div>
+                <div className="stat-number">5+</div>
                 <div className="stat-label">Events Organized</div>
               </div>
 
               <div className="stat-card" data-aos="fade-up" data-aos-delay="200">
                 <div className="stat-icon-wrap">🌟</div>
-                <div className="stat-number">1000+</div>
+                <div className="stat-number">5000+</div>
                 <div className="stat-label">Happy Attendees</div>
               </div>
 
               <div className="stat-card" data-aos="fade-up" data-aos-delay="300">
                 <div className="stat-icon-wrap">⏳</div>
-                <div className="stat-number">1</div>
+                <div className="stat-number">1+</div>
                 <div className="stat-label">Years of Excellence</div>
               </div>
 

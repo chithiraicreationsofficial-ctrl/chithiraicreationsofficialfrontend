@@ -676,6 +676,11 @@
   background: rgba(35, 45, 60, 0.35);
 }
 
+.winner-rank-item.rank-bronze {
+  border-color: #cd7f32;
+  background: rgba(55, 30, 18, 0.35);
+}
+
 .rank-badge {
   font-size: 1.2rem;
   font-weight: 800;
@@ -1338,4 +1343,21 @@
   border-radius: 12px;
   padding: 10px 14px;
 }
+
+.past-events-inline-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.event-chip {
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #ffd700;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
 
