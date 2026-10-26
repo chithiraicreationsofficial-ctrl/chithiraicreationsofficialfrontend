@@ -1,0 +1,580 @@
+/* EventsPage.css */
+.events-page-wrapper {
+  background: radial-gradient(circle at 50% 10%, #1c0828 0%, #0c0414 60%, #05010a 100%);
+  color: #ffffff;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+.events-canvas-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.events-main-container {
+  position: relative;
+  z-index: 2;
+  padding-top: 100px;
+}
+
+/* LIVE EVENT BANNER (Digital Diwali Palagaram Villa) */
+.live-event-banner-section {
+  padding: 30px 20px 20px;
+}
+
+.diwali-live-card {
+  background: linear-gradient(135deg, rgba(60, 15, 75, 0.85) 0%, rgba(25, 8, 35, 0.95) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.45);
+  border-radius: 28px;
+  padding: 36px 42px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 183, 77, 0.15);
+  backdrop-filter: blur(14px);
+}
+
+.live-badge-glow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(229, 57, 53, 0.25);
+  border: 1px solid #ff5252;
+  color: #ff8a80;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 18px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff5252;
+  box-shadow: 0 0 8px #ff1744;
+  animation: blinkLive 1.5s infinite;
+}
+
+@keyframes blinkLive {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.diwali-live-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 35px;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .diwali-live-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.presented-sub {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.dot-sep {
+  color: #ffd700;
+}
+
+.sponsor-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffe082;
+  font-weight: 600;
+}
+
+.banner-svs-mini {
+  height: 28px;
+  width: auto;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
+}
+
+.diwali-live-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.diwali-live-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 22px;
+}
+
+.live-dates-pill {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+  color: #ffd700;
+  margin-bottom: 24px;
+}
+
+.live-dates-pill span {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+.btn-explore-diwali {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: #120320;
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1rem;
+  box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.btn-explore-diwali:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+  color: #000;
+}
+
+.diwali-live-poster-wrap {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 215, 0, 0.35);
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.diwali-banner-poster {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.poster-overlay-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #e53935;
+  color: #fff;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Event Hero Section */
+.event-hero-section {
+  padding: 50px 20px 30px;
+}
+
+.exclusive-badge {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  color: #ffd700;
+  padding: 6px 20px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
+}
+
+.event-main-title {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.event-hero-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Description Card */
+.event-story-section {
+  padding: 40px 20px;
+}
+
+.event-description-card {
+  background: rgba(25, 10, 36, 0.7);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  border-radius: 28px;
+  padding: 45px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  .event-description-card {
+    padding: 28px 20px;
+  }
+}
+
+.desc-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.lead-text {
+  font-size: 1.08rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 24px;
+}
+
+.quote-box {
+  background: rgba(255, 215, 0, 0.08);
+  border-left: 4px solid #ffd700;
+  border-radius: 0 16px 16px 0;
+  padding: 18px 24px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.quote-icon {
+  font-size: 1.4rem;
+  color: #ffd700;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.quote-box .quote {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #ffe082;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.events-page-wrapper .event-details-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important;
+}
+
+@media (max-width: 991px) {
+  .events-page-wrapper .event-details-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .events-page-wrapper .event-details-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.events-page-wrapper .detail-card {
+  background: rgba(36, 12, 50, 0.88) !important;
+  border: 1px solid rgba(255, 215, 0, 0.3) !important;
+  border-radius: 18px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.detail-card:hover {
+  transform: translateY(-5px);
+  border-color: #ffd700;
+  box-shadow: 0 12px 30px rgba(255, 193, 7, 0.2);
+}
+
+.detail-icon-wrap {
+  font-size: 2rem;
+  color: #ffd700;
+  margin-bottom: 12px;
+}
+
+.detail-card h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.detail-item {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 2px 0;
+  font-size: 0.95rem;
+}
+
+/* Highlights Grid */
+.event-highlights-section {
+  padding: 50px 20px;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.events-page-wrapper .highlight-card {
+  background: rgba(28, 10, 42, 0.92) !important;
+  border: 1px solid rgba(255, 215, 0, 0.35) !important;
+  border-radius: 20px;
+  padding: 30px 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+.events-page-wrapper .highlight-card:hover {
+  transform: translateY(-6px);
+  background: rgba(42, 14, 62, 0.96) !important;
+  border-color: #ffd700 !important;
+  box-shadow: 0 16px 40px rgba(255, 193, 7, 0.25) !important;
+}
+
+.highlight-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.events-page-wrapper .highlight-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffd700 !important;
+  margin-bottom: 10px;
+}
+
+.events-page-wrapper .highlight-card p {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Categories Grid */
+.event-categories-section {
+  padding: 40px 20px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.category-badge-card {
+  background: linear-gradient(135deg, rgba(50, 16, 70, 0.6), rgba(28, 8, 40, 0.8));
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 16px;
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.3s ease;
+}
+
+.category-badge-card:hover {
+  transform: translateY(-4px);
+  border-color: #ffd700;
+  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.25);
+}
+
+.cat-icon {
+  font-size: 1.4rem;
+  color: #ff9800;
+}
+
+.category-badge-card span {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #ffffff;
+}
+
+/* Gallery Section */
+.event-gallery-section {
+  padding: 50px 20px 80px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 22px;
+}
+
+.gallery-item-wrap {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 215, 0, 0.25);
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+}
+
+.gallery-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item-wrap:hover .gallery-photo {
+  transform: scale(1.08);
+}
+
+.gallery-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 5, 28, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #ffd700;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.gallery-item-wrap:hover .gallery-hover-overlay {
+  opacity: 1;
+}
+
+/* Lightbox Modal */
+.gallery-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+}
+
+.lightbox-img {
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+}
+
+.close-lightbox-btn {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.close-lightbox-btn:hover {
+  background: #e53935;
+}
+
+.events-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+.diwali-live-badge-card {
+  background: linear-gradient(145deg, rgba(50, 15, 65, 0.9), rgba(20, 6, 28, 0.95));
+  border: 2px solid #ffd700;
+  border-radius: 24px;
+  padding: 34px 24px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.25);
+}
+
+.live-trophy-badge {
+  font-size: 3.2rem;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 10px #ffd700);
+}
+
+.live-prize-big {
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #ffd700;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.live-prize-sub {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: #ffcdd2;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.live-sweets-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+}
+
+.live-contest-motto {
+  color: #ffe082;
+  font-size: 0.95rem;
+  font-style: italic;
+  margin: 0;
+}

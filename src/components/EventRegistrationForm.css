@@ -1,0 +1,421 @@
+/* EventRegistrationForm.css */
+
+.event-registration-section {
+  position: relative;
+  z-index: 1;
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.registration-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 215, 0, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  padding: 6px 20px;
+  border-radius: 50px;
+  color: #ffd700;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  backdrop-filter: blur(8px);
+}
+
+.registration-main-heading {
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.registration-lead-text {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.registration-card-wrapper {
+  background: linear-gradient(145deg, rgba(34, 11, 48, 0.92) 0%, rgba(16, 5, 24, 0.96) 100%);
+  border: 2px solid rgba(255, 215, 0, 0.4);
+  border-radius: 30px;
+  padding: 44px 38px;
+  max-width: 900px;
+  margin: 0 auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 193, 7, 0.2);
+  backdrop-filter: blur(16px);
+}
+
+@media (max-width: 768px) {
+  .registration-card-wrapper {
+    padding: 28px 20px;
+  }
+}
+
+.form-festive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.form-badge-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffd700;
+  letter-spacing: 1px;
+}
+
+.form-state-badge {
+  background: rgba(255, 140, 0, 0.15);
+  border: 1px solid #ff9100;
+  color: #ffb74d;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 50px;
+}
+
+.form-error-alert {
+  background: rgba(229, 57, 53, 0.2);
+  border: 1px solid #ff5252;
+  color: #ff8a80;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-label-custom {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffe082;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.req-star {
+  color: #ff5252;
+}
+
+.form-control-custom {
+  width: 100%;
+  background: rgba(14, 4, 20, 0.75) !important;
+  border: 1px solid rgba(255, 215, 0, 0.3) !important;
+  color: #ffffff !important;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 0.98rem;
+  font-family: 'Poppins', sans-serif !important;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-control-custom:focus {
+  border-color: #ffd700 !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.35) !important;
+  background: rgba(20, 6, 28, 0.9) !important;
+}
+
+.form-control-custom option {
+  background: #14051e !important;
+  color: #ffffff !important;
+}
+
+.form-control-custom.readonly-field {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #ffd700 !important;
+  font-weight: 700;
+  cursor: default;
+}
+
+.input-with-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-prefix-icon {
+  position: absolute;
+  left: 14px;
+  color: #e1306c;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.form-control-custom.with-icon {
+  padding-left: 44px;
+}
+
+.field-hint-text {
+  display: block;
+  font-size: 0.78rem;
+  color: #ffb74d;
+  margin-top: 6px;
+}
+
+.textarea-custom {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Checklist Section */
+.contest-conditions-checklist {
+  background: rgba(16, 4, 22, 0.85);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  padding: 24px 22px;
+}
+
+.conditions-header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffd700;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.conditions-list-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.condition-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  margin: 0;
+  user-select: none;
+}
+
+.condition-checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.condition-custom-box {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  margin-top: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.condition-checkbox-label input[type="checkbox"]:checked + .condition-custom-box {
+  background: #ffd700;
+  border-color: #ffd700;
+}
+
+.condition-checkbox-label input[type="checkbox"]:checked + .condition-custom-box::after {
+  content: "✔";
+  color: #12041c;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.condition-text {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.55;
+}
+
+.master-terms-label {
+  border-top: 1px dashed rgba(255, 215, 0, 0.25);
+  padding-top: 14px;
+}
+
+.btn-submit-registration {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+  color: #12041c;
+  font-weight: 800;
+  font-size: 1.15rem;
+  padding: 16px 42px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 140, 0, 0.45);
+  transition: all 0.35s ease;
+  width: 100%;
+  max-width: 480px;
+}
+
+.btn-submit-registration.btn-active:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 38px rgba(255, 215, 0, 0.6);
+  color: #000;
+}
+
+.btn-disabled-state {
+  opacity: 0.65;
+  cursor: not-allowed;
+  filter: grayscale(20%);
+}
+
+.submit-subtext {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Success Box */
+.registration-success-box {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.success-icon-trophy {
+  font-size: 4rem;
+  color: #ffd700;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+  margin-bottom: 16px;
+  animation: pulseTrophy 2s infinite alternate;
+}
+
+@keyframes pulseTrophy {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+.success-heading {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.success-sub {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.7;
+}
+
+.registration-id-card {
+  background: rgba(255, 215, 0, 0.12);
+  border: 2px dashed #ffd700;
+  border-radius: 16px;
+  padding: 18px 24px;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.reg-id-label {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #ffcdd2;
+  font-weight: 700;
+}
+
+.reg-id-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffd700;
+  letter-spacing: 2px;
+}
+
+.next-steps-guide {
+  background: rgba(14, 4, 20, 0.85);
+  border-radius: 16px;
+  padding: 22px 28px;
+  border: 1px solid rgba(255, 215, 0, 0.25);
+}
+
+.next-steps-guide h4 {
+  font-size: 1.15rem;
+  color: #ffd700;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.next-steps-guide ol {
+  padding-left: 20px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.success-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-insta-collab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  padding: 12px 26px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
+}
+
+.btn-register-another {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.form-modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  color: #ffd700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.form-modal-close-btn:hover {
+  background: #ff1744;
+  color: #ffffff;
+  border-color: #ff1744;
+  transform: rotate(90deg) scale(1.1);
+}
+

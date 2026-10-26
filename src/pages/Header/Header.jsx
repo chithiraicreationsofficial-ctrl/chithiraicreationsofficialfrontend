@@ -4,7 +4,13 @@ import "./Header.css";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
-import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import {
+  FaArrowUpRightFromSquare,
+  FaInstagram,
+  FaWhatsapp,
+  FaYoutube,
+  FaEnvelope,
+} from "react-icons/fa6";
 import logo from "../../assets/logo_header.png";
 import { FiMenu } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
@@ -658,31 +664,54 @@ const Header = () => {
                     <Link to="/">Home</Link>
                   </li>
                   <li className="navbar_items">
-                    <Link onClick={() => openModal("about")}>About</Link>
+                    <Link to="/about">About</Link>
                   </li>
                   <li className="navbar_items">
-                    <Link onClick={() => openModal("event")}>Events</Link>
+                    <Link to="/events">Events</Link>
                   </li>
-                  {/* <li className="navbar_items">
-                    <Link onClick={() => openModal("contact")}>Contacts</Link>
-                  </li> */}
                 </ul>
 
                 <div className="header_btn_main position-relative">
-                  <button
-                    // className={`primary_btn ${availableTickets === 0 ? 'btn-disabled' : ''}`}
-                    className={`primary_btn `}
-                    // data-bs-toggle="modal"
-                    // data-bs-target="#exampleModal"
-                    // onClick={resetForm}
-                    onClick={() => openModal("contact")}
-                    // disabled
-                  >
-                    {/* {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'} */}
-                    {/* Sold Out */}
-                    Contacts
-                  </button>
-                 
+                  <div className="header_social_icons_group">
+                    <a
+                      href="https://www.instagram.com/chithirai.creations?igsh=ZG15MnZzbXU1bWZu"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="header_social_icon_btn insta_btn"
+                      title="Follow us on Instagram"
+                      aria-label="Instagram"
+                    >
+                      <FaInstagram />
+                    </a>
+                    <a
+                      href="https://wa.me/917010240042"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="header_social_icon_btn whatsapp_btn"
+                      title="Chat on WhatsApp"
+                      aria-label="WhatsApp"
+                    >
+                      <FaWhatsapp />
+                    </a>
+                    <a
+                      href="mailto:chithiraicreations@gmail.com"
+                      className="header_social_icon_btn email_btn"
+                      title="Send us an Email"
+                      aria-label="Email"
+                    >
+                      <FaEnvelope />
+                    </a>
+                    <a
+                      href="https://youtube.com/@chithiraicreations?si=RyqEiTLtjW-MKKa4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="header_social_icon_btn yt_btn"
+                      title="Watch on YouTube"
+                      aria-label="YouTube"
+                    >
+                      <FaYoutube />
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -717,30 +746,60 @@ const Header = () => {
 
                 <ul className="">
                   <li className="navbar_items">
-                    <Link to="/">Home</Link>
+                    <Link to="/" onClick={() => setSideBar(false)}>Home</Link>
                   </li>
                   <li className="navbar_items">
-                    <Link onClick={() => openModal("about")}>About</Link>
+                    <Link to="/about" onClick={() => setSideBar(false)}>About</Link>
                   </li>
                   <li className="navbar_items">
-                    <Link onClick={() => openModal("event")}>Events</Link>
+                    <Link to="/events" onClick={() => setSideBar(false)}>Events</Link>
                   </li>
                   <li className="navbar_items">
-                    <Link onClick={() => openModal("contact")}>Contacts</Link>
+                    <Link onClick={() => { setSideBar(false); openModal("contact"); }}>Contacts</Link>
                   </li>
                 </ul>
 
-                <div className="header_btn_main position-relative">
-                  <button
-                    className={`primary_btn ${availableTickets === 0 ? 'btn-disabled' : ''}`}
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                    onClick={resetForm}
-                    disabled={availableTickets === 0}
-                  >
-                    {availableTickets === 0 ? 'Sold Out' : 'Book Ticket'}
-                  </button>
-                 
+                <div className="header_btn_main position-relative mt-4">
+                  <div className="header_social_icons_group">
+                    <a
+                      href="https://www.instagram.com/chithirai.creations?igsh=ZG15MnZzbXU1bWZu"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="header_social_icon_btn insta_btn"
+                      title="Follow us on Instagram"
+                      aria-label="Instagram"
+                    >
+                      <FaInstagram />
+                    </a>
+                    <a
+                      href="https://wa.me/917010240042"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="header_social_icon_btn whatsapp_btn"
+                      title="Chat on WhatsApp"
+                      aria-label="WhatsApp"
+                    >
+                      <FaWhatsapp />
+                    </a>
+                    <a
+                      href="mailto:chithiraicreations@gmail.com"
+                      className="header_social_icon_btn email_btn"
+                      title="Send us an Email"
+                      aria-label="Email"
+                    >
+                      <FaEnvelope />
+                    </a>
+                    <a
+                      href="https://youtube.com/@chithiraicreations?si=RyqEiTLtjW-MKKa4"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="header_social_icon_btn yt_btn"
+                      title="Watch on YouTube"
+                      aria-label="YouTube"
+                    >
+                      <FaYoutube />
+                    </a>
+                  </div>
                 </div>
               </div> 
             </motion.div>

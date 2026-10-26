@@ -1,6 +1,8 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Landing from "./pages/Landing";
+import AboutPage from "./pages/AboutPage";
+import EventsPage from "./pages/EventsPage";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminLayout from "./pages/Admin/AdminLayout";
 import AdminRoute from "./pages/Admin/AdminRoute";
@@ -26,6 +28,8 @@ function App() {
         <Toaster position="top-right" reverseOrder={false} />
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/events" element={<EventsPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="readyamamaey" element={<Manualverify />} />
 

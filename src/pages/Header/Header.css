@@ -763,3 +763,68 @@
   }
 
 }
+
+/* ========================================================
+   HEADER TOP-RIGHT COMPACT SOCIAL ICONS (INSTAGRAM, WA, EMAIL, YT)
+   ======================================================== */
+.header_social_icons_group {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+}
+
+.header_social_icon_btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: #ffd700;
+  font-size: 17px;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  position: relative;
+}
+
+.header_social_icon_btn:hover {
+  transform: translateY(-2px) scale(1.1);
+}
+
+.header_social_icon_btn.insta_btn:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: #ffffff;
+  border-color: #ffd700;
+  box-shadow: 0 6px 16px rgba(214, 36, 159, 0.55);
+}
+
+.header_social_icon_btn.whatsapp_btn:hover {
+  background: #25D366;
+  color: #ffffff;
+  border-color: #25D366;
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.55);
+}
+
+.header_social_icon_btn.email_btn:hover {
+  background: #EA4335;
+  color: #ffffff;
+  border-color: #EA4335;
+  box-shadow: 0 6px 16px rgba(234, 67, 53, 0.55);
+}
+
+.header_social_icon_btn.yt_btn:hover {
+  background: #FF0000;
+  color: #ffffff;
+  border-color: #FF0000;
+  box-shadow: 0 6px 16px rgba(255, 0, 0, 0.55);
+}
+
+@media (max-width: 992px) {
+  .nav_menus_wrp .header_social_icons_group {
+    display: none !important;
+  }
+}

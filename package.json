@@ -29,7 +29,8 @@
     "react-phone-input-2": "^2.15.1",
     "react-router-dom": "^7.9.5",
     "react-toastify": "^11.0.5",
-    "react-usestateref": "^1.0.9"
+    "react-usestateref": "^1.0.9",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
