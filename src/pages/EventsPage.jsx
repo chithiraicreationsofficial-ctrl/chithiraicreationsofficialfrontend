@@ -137,13 +137,13 @@ export default function EventsPage() {
 
                   <p className="diwali-live-desc">
                     Showcase your Diwali sweets, celebrate rich culinary tradition & win exciting prizes
-                    worth <strong>₹60,000!</strong> Upload your photo or reel and collab with us!
+                    worth <strong>₹1,00,000 (1 Lakh!)</strong> Upload your photo or reel and collab with us!
                   </p>
 
                   <div className="live-dates-pill">
                     <span>📅 Start: <strong>28 Oct 2026</strong></span>
                     <span>⏰ Last Date: <strong>09 Nov 2026</strong></span>
-                    <span>🏆 Prizes: <strong>₹60,000</strong></span>
+                    <span>🏆 Prizes: <strong>₹1,00,000</strong></span>
                   </div>
 
                   <div className="live-card-actions">
@@ -155,7 +155,7 @@ export default function EventsPage() {
 
                 <div className="diwali-live-badge-card">
                   <div className="live-trophy-badge">🏆</div>
-                  <div className="live-prize-big">₹60,000</div>
+                  <div className="live-prize-big">₹1,00,000</div>
                   <div className="live-prize-sub">Total Prizes Worth</div>
                   <div className="live-sweets-icons-row">
                     <span>🥮</span>

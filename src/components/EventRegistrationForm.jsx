@@ -63,6 +63,7 @@ export default function EventRegistrationForm({ onClose }) {
     district: "Madurai",
     instagramProfile: "",
     phone: "",
+    email: "",
     sweetName: "",
     category: "Reel Category",
     ingredients: "",
@@ -70,10 +71,11 @@ export default function EventRegistrationForm({ onClose }) {
 
   const [conditions, setConditions] = useState({
     minAge: false,
-    followersLimit: false,
+    influencerRule: false,
     originalHomemade: false,
-    collabRequired: false,
-    masterTerms: false,
+    audioRules: false,
+    svsRules: false,
+    collabAndBenefits: false,
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -93,10 +95,11 @@ export default function EventRegistrationForm({ onClose }) {
 
   const allConditionsAccepted =
     conditions.minAge &&
-    conditions.followersLimit &&
+    conditions.influencerRule &&
     conditions.originalHomemade &&
-    conditions.collabRequired &&
-    conditions.masterTerms;
+    conditions.audioRules &&
+    conditions.svsRules &&
+    conditions.collabAndBenefits;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -108,7 +111,7 @@ export default function EventRegistrationForm({ onClose }) {
     }
 
     if (!formData.age || Number(formData.age) < 4) {
-      setErrorMsg("Minimum age required to participate is 4 years.");
+      setErrorMsg("Minimum age required to participate is 4 years+.");
       return;
     }
 
@@ -123,13 +126,18 @@ export default function EventRegistrationForm({ onClose }) {
       return;
     }
 
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+      setErrorMsg("Please enter a valid email address.");
+      return;
+    }
+
     if (!formData.sweetName.trim()) {
       setErrorMsg("Please specify the sweet or palagaram you will showcase.");
       return;
     }
 
     if (!allConditionsAccepted) {
-      setErrorMsg("Please read and accept all contest conditions to proceed.");
+      setErrorMsg("Please read and accept all contest rules and conditions to proceed.");
       return;
     }
 
@@ -140,6 +148,7 @@ export default function EventRegistrationForm({ onClose }) {
       const res = await axios.post("http://localhost:8000/api/diwali/register", {
         ...formData,
         phone: cleanPhone,
+        email: formData.email.trim().toLowerCase(),
         conditionsAccepted: true,
       });
 
@@ -191,16 +200,18 @@ export default function EventRegistrationForm({ onClose }) {
       district: "Madurai",
       instagramProfile: "",
       phone: "",
+      email: "",
       sweetName: "",
       category: "Reel Category",
       ingredients: "",
     });
     setConditions({
       minAge: false,
-      followersLimit: false,
+      influencerRule: false,
       originalHomemade: false,
-      collabRequired: false,
-      masterTerms: false,
+      audioRules: false,
+      svsRules: false,
+      collabAndBenefits: false,
     });
   };
 
@@ -209,13 +220,13 @@ export default function EventRegistrationForm({ onClose }) {
       <div className="container">
         <div className="text-center mb-5" data-aos="fade-up">
           <div className="registration-pill">
-            <IoSparkles /> Official Contest Entry
+            <IoSparkles /> Official Contest Entry • Limited Seats
           </div>
           <h2 className="registration-main-heading">
             Event <span className="gold-shimmer-text">Registration</span>
           </h2>
           <p className="registration-lead-text">
-            Digital Diwali Palagaram Villa • Prizes Worth ₹60,000! Complete your registration below and join the grand festivity.
+            Digital Diwali Palagaram Villa • Total Prizes Worth ₹1,00,000 (1 Lakh!) • Entry Just ₹249 • Top 50 High Scorers Win ₹300 SVS Hampers!
           </p>
         </div>
 
@@ -282,6 +293,14 @@ export default function EventRegistrationForm({ onClose }) {
                   <span className="form-badge-title">DIGITAL DIWALI PALAGARAM VILLA 2026</span>
                 </div>
                 <span className="form-state-badge">State: Tamil Nadu</span>
+              </div>
+
+              {/* Entry Fee & Limited Seats Highlight Bar */}
+              <div className="registration-fee-alert-bar mb-3">
+                <span className="fee-badge-item">🎟️ Entry Fee: <strong>Just ₹249</strong></span>
+                <span className="seats-badge-item">⚡ <strong>Limited Seats Only!</strong></span>
+                <span className="prizes-badge-item">🏆 <strong>Prizes: ₹1,00,000 (1 Lakh)</strong></span>
+                <span className="hamper-badge-item">🎁 Top 50 Get <strong>₹300 SVS Hampers</strong></span>
               </div>
 
               {errorMsg && (
@@ -425,7 +444,24 @@ export default function EventRegistrationForm({ onClose }) {
                   />
                 </div>
 
-                {/* 8. Sweet / Palagaram Name */}
+                {/* 8. Email Address */}
+                <div className="col-md-6">
+                  <label htmlFor="reg-email" className="form-label-custom">
+                    Email Address <span className="req-star">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="reg-email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="name@example.com"
+                    className="form-control-custom"
+                    required
+                  />
+                </div>
+
+                {/* 9. Sweet / Palagaram Name */}
                 <div className="col-md-6">
                   <label htmlFor="reg-sweet" className="form-label-custom">
                     Sweet / Palagaram Name <span className="req-star">*</span>
@@ -442,7 +478,7 @@ export default function EventRegistrationForm({ onClose }) {
                   />
                 </div>
 
-                {/* 9. Category Dropdown */}
+                {/* 10. Category Dropdown */}
                 <div className="col-md-6">
                   <label htmlFor="reg-category" className="form-label-custom">
                     Contest Category <span className="req-star">*</span>
@@ -460,10 +496,10 @@ export default function EventRegistrationForm({ onClose }) {
                   </select>
                 </div>
 
-                {/* 10. Ingredients Used */}
+                {/* 11. Ingredients & Cooking Process */}
                 <div className="col-12">
                   <label htmlFor="reg-ingredients" className="form-label-custom">
-                    Ingredients Used (Optional / As per poster guidelines)
+                    Ingredients &amp; Brief Process Used
                   </label>
                   <textarea
                     id="reg-ingredients"
@@ -471,7 +507,7 @@ export default function EventRegistrationForm({ onClose }) {
                     value={formData.ingredients}
                     onChange={handleChange}
                     rows="3"
-                    placeholder="List the key ingredients used (e.g. Gram flour, Ghee, Sugar, Saffron, Nuts...)"
+                    placeholder="List the key ingredients and brief preparation method..."
                     className="form-control-custom textarea-custom"
                   ></textarea>
                 </div>
@@ -486,6 +522,7 @@ export default function EventRegistrationForm({ onClose }) {
                 </div>
 
                 <div className="conditions-list-group mt-3">
+                  {/* Rule 1: Age */}
                   <label className="condition-checkbox-label">
                     <input
                       type="checkbox"
@@ -494,22 +531,24 @@ export default function EventRegistrationForm({ onClose }) {
                     />
                     <span className="condition-custom-box"></span>
                     <span className="condition-text">
-                      <strong>Age Eligibility:</strong> I confirm I am 4 years or older. There is no upper age limit or gender restriction.
+                      <strong>Minimum Age Requirement:</strong> 4 years+ (Everyone above 4 years can participate; no gender restriction).
                     </span>
                   </label>
 
+                  {/* Rule 2: Cooking Influencers */}
                   <label className="condition-checkbox-label">
                     <input
                       type="checkbox"
-                      checked={conditions.followersLimit}
-                      onChange={() => handleConditionToggle("followersLimit")}
+                      checked={conditions.influencerRule}
+                      onChange={() => handleConditionToggle("influencerRule")}
                     />
                     <span className="condition-custom-box"></span>
                     <span className="condition-text">
-                      <strong>Fair Play Follower Rule:</strong> I confirm my Instagram account has <strong>2,000 or fewer followers</strong> (participants with &gt; 2,000 followers are not eligible).
+                      <strong>Fair Play Rule:</strong> Cooking influencers are strictly <strong>NOT eligible</strong>. Participants with <strong>more than 2,000 followers are also NOT eligible</strong>.
                     </span>
                   </label>
 
+                  {/* Rule 3: Originality & No AI */}
                   <label className="condition-checkbox-label">
                     <input
                       type="checkbox"
@@ -518,31 +557,46 @@ export default function EventRegistrationForm({ onClose }) {
                     />
                     <span className="condition-custom-box"></span>
                     <span className="condition-text">
-                      <strong>Authenticity:</strong> Content must be my own original preparation and recorded using a mobile phone only.
+                      <strong>Own Authentic Content (Strictly No AI):</strong> Your own authentic video or photos must be used. Using AI photos/videos or content downloaded from YouTube, Pinterest, Google or any other platforms is strictly prohibited.
                     </span>
                   </label>
 
+                  {/* Rule 4: Audio / Reels Voiceover */}
                   <label className="condition-checkbox-label">
                     <input
                       type="checkbox"
-                      checked={conditions.collabRequired}
-                      onChange={() => handleConditionToggle("collabRequired")}
+                      checked={conditions.audioRules}
+                      onChange={() => handleConditionToggle("audioRules")}
                     />
                     <span className="condition-custom-box"></span>
                     <span className="condition-text">
-                      <strong>Instagram Collab:</strong> I agree to upload my entry between <strong>28 Oct and 09 Nov 2026</strong> and collaborate with <strong>@chithirai.creations</strong> on Instagram.
+                      <strong>Reels Voiceover &amp; Audio:</strong> In reels, the cooking person only must speak/explain in their own voice. Standalone song or BGM only is not allowed. Song/BGM can be used only as background score behind the voiceover. Strictly NO AI voiceover or third-party automated voices.
                     </span>
                   </label>
 
-                  <label className="condition-checkbox-label master-terms-label">
+                  {/* Rule 5: Cooking Process, Ingredients & SVS Product */}
+                  <label className="condition-checkbox-label">
                     <input
                       type="checkbox"
-                      checked={conditions.masterTerms}
-                      onChange={() => handleConditionToggle("masterTerms")}
+                      checked={conditions.svsRules}
+                      onChange={() => handleConditionToggle("svsRules")}
                     />
                     <span className="condition-custom-box"></span>
                     <span className="condition-text">
-                      <strong>Acceptance:</strong> I accept all official contest conditions, judging criteria (Uniqueness, Creativity, Presentation, Concept, Visual Appeal), and decisions.
+                      <strong>Ingredients &amp; SVS Integration:</strong> Cooking process and ingredients must be detailed in description (for photos). In photos, capture/place SVS product near the dish and mention SVS in caption. In reels, capture SVS product or speak the SVS slogan in voiceover.
+                    </span>
+                  </label>
+
+                  {/* Rule 6: Collab, Entry Fee & Top 50 Hampers */}
+                  <label className="condition-checkbox-label master-terms-label">
+                    <input
+                      type="checkbox"
+                      checked={conditions.collabAndBenefits}
+                      onChange={() => handleConditionToggle("collabAndBenefits")}
+                    />
+                    <span className="condition-custom-box"></span>
+                    <span className="condition-text">
+                      <strong>Entry Fee &amp; Collab:</strong> Entry fee is <strong>just ₹249 (Limited seats only)</strong>. I agree to collab with <strong>@chithirai.creations</strong> and tag <strong>@svsfoods</strong> (<a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>). Top 50 participants who get higher marks receive an <strong>SVS Gift Hamper worth ₹300 each (for 50 people)</strong>! Total prizes worth ₹1,00,000!
                     </span>
                   </label>
                 </div>
@@ -561,12 +615,12 @@ export default function EventRegistrationForm({ onClose }) {
                     <span>Submitting Entry...</span>
                   ) : (
                     <>
-                      <FaTrophy /> Submit Registration &amp; Join Contest
+                      <FaTrophy /> Submit Registration (₹249 • Limited Seats)
                     </>
                   )}
                 </button>
                 <div className="submit-subtext mt-2">
-                  Total Prizes Worth ₹60,000 • Powered by SVS Title Partner • Chithirai Creations
+                  Total Prizes Worth ₹1,00,000 (1 Lakh!) • Entry Fee: Just ₹249 • Top 50 Get ₹300 SVS Hampers • SVS Title Sponsor
                 </div>
               </div>
             </form>

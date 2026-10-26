@@ -125,12 +125,12 @@ export default function Landing() {
             <FaTrophy className="prize-trophy-icon" />
             <div className="prize-text-group">
               <span className="prize-label">TOTAL PRIZES WORTH</span>
-              <span className="prize-amount">₹60,000!</span>
+              <span className="prize-amount">₹1,00,000! (1 LAKH)</span>
             </div>
             <MdCelebration className="prize-popper-icon" />
           </div>
 
-          {/* Key Dates & Format Quick Bar (No mention of venue/result day) */}
+          {/* Key Dates, Format & Entry Fee Quick Bar */}
           <div className="hero-quick-meta-grid" data-aos="fade-up" data-aos-delay="350">
             <div className="meta-pill">
               <IoCalendarOutline className="meta-icon" />
@@ -148,11 +148,19 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="meta-pill">
-              <IoSparkles className="meta-icon text-warning" />
+            <div className="meta-pill highlight-entry-fee">
+              <span className="meta-emoji">🎟️</span>
               <div className="meta-content">
-                <span className="meta-lbl">CONTEST FORMAT</span>
-                <span className="meta-val">ONLINE (REELS &amp; PHOTOS)</span>
+                <span className="meta-lbl">ENTRY FEE</span>
+                <span className="meta-val">JUST ₹249 (LIMITED)</span>
+              </div>
+            </div>
+
+            <div className="meta-pill highlight-hamper">
+              <span className="meta-emoji">🎁</span>
+              <div className="meta-content">
+                <span className="meta-lbl">TOP 50 REWARD</span>
+                <span className="meta-val">₹300 SVS HAMPERS</span>
               </div>
             </div>
           </div>
@@ -163,7 +171,7 @@ export default function Landing() {
               onClick={() => setShowRegisterModal(true)}
               className="btn-diwali-primary"
             >
-              <FaPenToSquare /> Register for Contest
+              <FaPenToSquare /> Register (₹249 • Limited Seats)
             </button>
 
             <a href="#how-to-participate" className="btn-diwali-secondary">
@@ -221,7 +229,7 @@ export default function Landing() {
                   <span className="photo-festive-tag">🎉 DIWALI CELEBRATION MOMENTS</span>
                   <h3 className="photo-banner-heading">Digital Diwali Palagaram Villa 2026</h3>
                   <p className="photo-banner-sub">
-                    Showcase your traditional sweets, upload your reels &amp; photos, and win prizes worth ₹60,000!
+                    Showcase your traditional sweets, upload your reels &amp; photos, and win prizes worth ₹1,00,000 (1 Lakh)!
                   </p>
                 </div>
                 <button
@@ -237,29 +245,29 @@ export default function Landing() {
       </section>
 
       {/* ========================================================
-          HOW TO PARTICIPATE (5 STEPS)
+          HOW TO PARTICIPATE (4 CONNECTED STEPS)
          ======================================================== */}
       <section className="how-to-participate-section py-5" id="how-to-participate">
         <div className="container">
           <div className="text-center mb-5" data-aos="fade-up">
             <div className="section-mini-pill">
-              <FaUtensils /> Easy 5-Step Process
+              <FaUtensils /> Easy 4-Step Process
             </div>
             <h2 className="section-main-heading">
               How To <span className="gold-shimmer-text">Participate?</span>
             </h2>
             <p className="section-lead-text">
-              Follow these simple steps from the comfort of your kitchen to participate and win!
+              Follow these 4 simple steps from your kitchen to celebrate Diwali and win grand prizes worth ₹1,00,000!
             </p>
           </div>
 
-          <div className="steps-process-row">
+          <div className="steps-process-row four-steps-grid">
             {/* Step 1 */}
             <div className="step-process-card" data-aos="fade-up" data-aos-delay="100">
               <div className="step-num-bubble">01</div>
               <div className="step-icon-wrap">👨‍🍳</div>
               <h3>Make Your Sweet</h3>
-              <p>Prepare your signature Diwali Sweet or Palagaram with passion and authentic taste.</p>
+              <p>Prepare your signature traditional Diwali Sweet or Palagaram with passion and authentic taste.</p>
             </div>
 
             <div className="step-connector-arrow">➔</div>
@@ -269,44 +277,40 @@ export default function Landing() {
               <div className="step-num-bubble">02</div>
               <div className="step-icon-wrap">📱</div>
               <h3>Record / Click</h3>
-              <p>Record a video or click photos of your dish. <em>(Mobile phone only)</em></p>
+              <p>Record a video or click photos of your dish featuring the cooking person. <em>(Mobile phone only)</em></p>
             </div>
 
             <div className="step-connector-arrow">➔</div>
 
-            {/* Step 3 */}
-            <div className="step-process-card" data-aos="fade-up" data-aos-delay="300">
+            {/* Step 3 (Connected with Ingredients & Process) */}
+            <div className="step-process-card highlight-step" data-aos="fade-up" data-aos-delay="300">
               <div className="step-num-bubble">03</div>
               <div className="step-icon-wrap">🎬</div>
-              <h3>Upload Content</h3>
-              <p>Upload your video as an Instagram Reel or upload as a Photo post.</p>
+              <h3>Upload &amp; List Details</h3>
+              <p>Upload as an Instagram Reel or Photo post. Clearly detail all ingredients used and the cooking process in your description.</p>
             </div>
 
             <div className="step-connector-arrow">➔</div>
 
-            {/* Step 4 */}
-            <div className="step-process-card highlight-step" data-aos="fade-up" data-aos-delay="400">
+            {/* Step 4 (SVS Spotlight & Collab) */}
+            <div className="step-process-card svs-step-card" data-aos="fade-up" data-aos-delay="400">
               <div className="step-num-bubble">04</div>
               <div className="step-icon-wrap">🤝</div>
-              <h3>Collab With Us</h3>
-              <p>Collab with <strong>@chithirai.creations</strong> Instagram account on your post.</p>
-            </div>
-
-            <div className="step-connector-arrow">➔</div>
-
-            {/* Step 5 */}
-            <div className="step-process-card" data-aos="fade-up" data-aos-delay="500">
-              <div className="step-num-bubble">05</div>
-              <div className="step-icon-wrap">🍯</div>
-              <h3>List Ingredients</h3>
-              <p>Mention all ingredients used in your caption and celebrate tradition!</p>
+              <h3>Feature SVS &amp; Collab!</h3>
+              <p>
+                <strong>Photo:</strong> Place SVS product near the sweet &amp; mention in caption.
+                <br />
+                <strong>Reel:</strong> Capture SVS product or speak the SVS slogan in voiceover!
+                <br />
+                Collab with <strong>@chithirai.creations</strong> &amp; tag <strong>@svsfoods</strong>!
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ========================================================
-          PRIZES & CATEGORIES SECTION
+          PRIZES & CATEGORIES SECTION (REEL & PHOTO + TOP 50 HAMPERS)
          ======================================================== */}
       <section className="diwali-prizes-section py-5" id="prizes">
         <div className="container">
@@ -318,13 +322,13 @@ export default function Landing() {
               Contest Categories &amp; <span className="gold-shimmer-text">Prizes</span>
             </h2>
             <p className="section-lead-text">
-              Total Prizes Worth ₹60,000 + Exciting Gifts from SVS Title Sponsor!
+              Total Prizes Worth ₹1,00,000 (1 Lakh!) + Exclusive ₹300 SVS Gift Hampers for 50 People!
             </p>
           </div>
 
           <div className="row g-4 justify-content-center">
             {/* Reel Category */}
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="100">
               <div className="prize-podium-card reel-category-card">
                 <div className="category-header">
                   <FaVideo className="cat-type-icon" />
@@ -336,7 +340,7 @@ export default function Landing() {
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
                       <h4>WINNER</h4>
-                      <p>Grand Cash Prize + Trophy &amp; Brand Hamper</p>
+                      <p>Grand Cash Prize + Trophy &amp; SVS Brand Hamper</p>
                     </div>
                   </div>
 
@@ -344,17 +348,17 @@ export default function Landing() {
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
                       <h4>RUNNER-UP</h4>
-                      <p>Cash Prize + Runner-Up Trophy &amp; Gifts</p>
+                      <p>Cash Prize + Runner-Up Trophy &amp; SVS Gifts</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="category-footer-tag">Judged on Video &amp; Preparation</div>
+                <div className="category-footer-tag">Judged on Video Quality, Voiceover &amp; Preparation</div>
               </div>
             </div>
 
             {/* Photo Category */}
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div className="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="200">
               <div className="prize-podium-card photo-category-card">
                 <div className="category-header">
                   <FaCamera className="cat-type-icon" />
@@ -366,7 +370,7 @@ export default function Landing() {
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
                       <h4>WINNER</h4>
-                      <p>Grand Cash Prize + Trophy &amp; Brand Hamper</p>
+                      <p>Grand Cash Prize + Trophy &amp; SVS Brand Hamper</p>
                     </div>
                   </div>
 
@@ -374,35 +378,30 @@ export default function Landing() {
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
                       <h4>RUNNER-UP</h4>
-                      <p>Cash Prize + Runner-Up Trophy &amp; Gifts</p>
+                      <p>Cash Prize + Runner-Up Trophy &amp; SVS Gifts</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="category-footer-tag">Judged on Presentation &amp; Styling</div>
+                <div className="category-footer-tag">Judged on Presentation, Recipe Description &amp; Styling</div>
               </div>
             </div>
+          </div>
 
-            {/* Special Prize */}
-            <div className="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-              <div className="prize-podium-card special-category-card">
-                <div className="category-header">
-                  <FaGift className="cat-type-icon text-warning" />
-                  <h3>SPECIAL PRIZE</h3>
-                </div>
-
-                <div className="special-prize-body text-center py-4">
-                  <div className="special-gift-icon">🎁</div>
-                  <h4>Outstanding Entry Award</h4>
-                  <p>
-                    A special curated prize will also be awarded for a uniquely outstanding recipe,
-                    cultural storytelling, or innovative flavor!
-                  </p>
-                </div>
-
-                <div className="category-footer-tag special-tag">Curated Jury Recognition</div>
-              </div>
-            </div>
+          {/* Top 50 Participants Benefit Feature Card */}
+          <div className="top-50-hamper-banner mt-5" data-aos="zoom-in">
+            <div className="hamper-badge">🎁 SPECIAL PARTICIPANT BENEFIT</div>
+            <h3 className="hamper-heading">Top 50 High Scorers Get ₹300 SVS Gift Hamper Packs!</h3>
+            <p className="hamper-desc">
+              50 participants who get higher marks from our jury will receive an exclusive
+              <strong> SVS Festive Gift Hamper Pack worth ₹300 each (for 50 people)</strong>! Everyone has an extraordinary chance to win!
+            </p>
+            <button
+              onClick={() => setShowRegisterModal(true)}
+              className="btn-hamper-register"
+            >
+              <FaPenToSquare /> Register Now (Just ₹249 • Limited Seats Only)
+            </button>
           </div>
         </div>
       </section>
@@ -418,33 +417,41 @@ export default function Landing() {
               <div className="rules-card">
                 <div className="rules-card-header">
                   <MdShield className="rules-header-icon" />
-                  <h3>ELIGIBILITY &amp; CONDITIONS</h3>
+                  <h3>ELIGIBILITY &amp; CONTEST RULES</h3>
                 </div>
 
                 <ul className="conditions-list">
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>No gender restriction:</strong> Everyone can participate</span>
-                  </li>
-                  <li>
-                    <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>No upper age limit:</strong> Minimum age requirement is 4 years+</span>
+                    <span><strong>Minimum age requirement:</strong> 4 years+ (No upper age limit, all genders welcome)</span>
                   </li>
                   <li className="rule-alert-item">
                     <span className="alert-bullet">⚠️</span>
-                    <span><strong>Fair Play Rule:</strong> Participants with more than <strong>2,000 followers are NOT eligible</strong></span>
+                    <span><strong>Fair Play Rule:</strong> Cooking influencers are strictly <strong>NOT eligible</strong>. Accounts with more than <strong>2,000 followers are also NOT eligible</strong>.</span>
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span>Content must be your own original preparation</span>
+                    <span><strong>100% Own Content (Strictly No AI):</strong> Your own authentic video or photos must be used. Using AI photos/videos or downloading from YouTube, Pinterest, Google, etc. is strictly prohibited.</span>
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span>Entry must be uploaded within the contest period (28 Oct – 09 Nov 2026)</span>
+                    <span><strong>Reels Audio Rules:</strong> In reels, the cooking person only must explain in voiceover. Standalone songs/BGM only is <strong>NOT allowed</strong>. BGM/song can only be used as background score behind voiceover. <strong>No AI voiceovers allowed</strong>.</span>
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span>Collab with Chithirai Creations (@chithirai.creations) is mandatory</span>
+                    <span><strong>Photo Entries:</strong> Cooking process and all ingredients must be detailed in the description. SVS product must be placed/captured near the sweet dish.</span>
+                  </li>
+                  <li>
+                    <IoCheckmarkCircle className="check-icon" />
+                    <span><strong>SVS Slogan &amp; Collab:</strong> In photo, mention SVS in caption. In reels, capture SVS product or speak the SVS slogan in voiceover. Collab with <strong>@chithirai.creations</strong> &amp; tag <a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>.</span>
+                  </li>
+                  <li className="rule-fee-item">
+                    <span className="alert-bullet">🎟️</span>
+                    <span><strong>Entry Fee:</strong> Just <strong>₹249</strong> • <strong>Limited Seats Only!</strong></span>
+                  </li>
+                  <li className="rule-gift-item">
+                    <span className="alert-bullet">🎁</span>
+                    <span><strong>Top 50 Reward:</strong> Top 50 participants who get higher marks receive an <strong>SVS Gift Hamper worth ₹300 each (for 50 people)</strong>! Total prizes worth ₹1,00,000!</span>
                   </li>
                 </ul>
               </div>
