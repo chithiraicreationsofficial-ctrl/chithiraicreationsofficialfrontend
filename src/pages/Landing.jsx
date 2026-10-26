@@ -665,13 +665,6 @@ export default function Landing() {
             className="registration-modal-dialog"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              className="registration-modal-close-top"
-              onClick={() => setShowRegisterModal(false)}
-              aria-label="Close Registration Dialog"
-            >
-              <IoClose />
-            </button>
             <EventRegistrationForm onClose={() => setShowRegisterModal(false)} />
           </div>
         </div>
