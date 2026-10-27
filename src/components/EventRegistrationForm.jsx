@@ -443,8 +443,8 @@ export default function EventRegistrationForm({ onClose }) {
                 className="form-control-custom"
                 required
               >
-                <option value="Reel Category">🎥 Reel Category (1st, 2nd & 3rd Prizes)</option>
-                <option value="Photo Category">📸 Photo Category (1st, 2nd & 3rd Prizes)</option>
+                <option value="Reel Category">🎥 Reel Category (Winner, First Runner-up, Second Runner-up)</option>
+                <option value="Photo Category">📸 Photo Category (Winner, First Runner-up, Second Runner-up)</option>
               </select>
             </div>
 
@@ -477,27 +477,35 @@ export default function EventRegistrationForm({ onClose }) {
               <ul className="rules-summary-points">
                 <li>
                   <span className="point-bullet">✓</span>
-                  <span><strong>Minimum Age:</strong> 4 years+ (No upper age limit, all genders welcome).</span>
+                  <span><strong>How to Participate:</strong> Make ONE unique Diwali sweet or snack yourself.</span>
+                </li>
+                <li>
+                  <span className="point-bullet">✓</span>
+                  <span><strong>Reel (90s) &amp; 5 Photos Order:</strong> Record a Reel (90 sec, you in it) and click 5 Photos, all taken by you on a mobile, in this order: <em>Ingredients → Making → SVS product in use → Dish → Final dish with you</em>.</span>
+                </li>
+                <li>
+                  <span className="point-bullet">✓</span>
+                  <span><strong>Ingredients &amp; Procedure:</strong> Photo: write all ingredients and the cooking procedure in the description. Reel: explain all ingredients and full procedure in video, in your own voice, at every step. (No standalone songs/BGM only, no AI voices).</span>
+                </li>
+                <li>
+                  <span className="point-bullet">✓</span>
+                  <span><strong>MAIN POINT: SVS Product (Choose 1):</strong> Option 1: Use SVS product in your photo or video. OR Option 2: Mention SVS slogan in description (Photo) or speak in video (Reel).</span>
+                </li>
+                <li>
+                  <span className="point-bullet">🤝</span>
+                  <span><strong>Collab is a MUST:</strong> Collab with BOTH accounts: <strong>@chithirai.creations</strong> &amp; <a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>.</span>
+                </li>
+                <li>
+                  <span className="point-bullet">✓</span>
+                  <span><strong>Eligibility:</strong> Minimum age: 4 years+ (no upper age limit, all genders welcome). Submit ONE unique dish only. 100% own content (no AI, no downloads from YouTube, Pinterest, Google). Reel must be exactly 90s with you in the whole reel.</span>
                 </li>
                 <li className="point-alert">
-                  <span className="point-bullet">⚠️</span>
-                  <span><strong>Fair Play Rule:</strong> Cooking influencers and accounts with <strong>more than 2,000 followers are NOT eligible</strong>.</span>
+                  <span className="point-bullet">❌</span>
+                  <span><strong>Fair Play Rule:</strong> Cooking influencers are strictly <strong>NOT eligible</strong>. Accounts with <strong>more than 2,000 followers are also NOT eligible</strong>.</span>
                 </li>
                 <li>
-                  <span className="point-bullet">✓</span>
-                  <span><strong>100% Own Content (Strictly No AI):</strong> Your own authentic video or photos must be used. No AI photos/videos or content downloaded from other platforms.</span>
-                </li>
-                <li>
-                  <span className="point-bullet">✓</span>
-                  <span><strong>Reels Audio Rules:</strong> In reels, the cooking person only must explain in their own voiceover. Standalone song/BGM only is not allowed. Song/BGM allowed only as background score behind voiceover. No AI voiceovers.</span>
-                </li>
-                <li>
-                  <span className="point-bullet">✓</span>
-                  <span><strong>Ingredients &amp; SVS Integration:</strong> Cooking process and ingredients must be detailed in description (for photos). In photos, place SVS product near the dish. In reels, capture SVS product or speak SVS slogan in voiceover.</span>
-                </li>
-                <li>
-                  <span className="point-bullet">✓</span>
-                  <span><strong>Collab &amp; Benefits:</strong> Collab with <strong>@chithirai.creations</strong> &amp; tag <strong>@svsfoods</strong> (<a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>). Entry fee: ₹249 (Limited seats). Top 50 participants with higher marks get an SVS Hamper worth ₹300 each!</span>
+                  <span className="point-bullet">📅</span>
+                  <span><strong>Contest Dates &amp; Prizes:</strong> Upload between <strong>28 Oct and 09 Nov 2026</strong>. Entry fee: <strong>₹249 (limited seats)</strong>. Top 50 high scorers get a <strong>₹300 SVS Festive Gift Hamper Pack!</strong> Total prizes worth ₹1,00,000!</span>
                 </li>
               </ul>
 

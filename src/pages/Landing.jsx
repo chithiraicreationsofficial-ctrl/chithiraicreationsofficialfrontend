@@ -266,8 +266,8 @@ export default function Landing() {
             <div className="step-process-card" data-aos="fade-up" data-aos-delay="100">
               <div className="step-num-bubble">01</div>
               <div className="step-icon-wrap">👨‍🍳</div>
-              <h3>Make Your Sweet</h3>
-              <p>Prepare your signature traditional Diwali Sweet or Palagaram with passion and authentic taste.</p>
+              <h3>1. Make Your Dish</h3>
+              <p>Make <strong>ONE unique Diwali sweet or snack</strong> yourself.</p>
             </div>
 
             <div className="step-connector-arrow">➔</div>
@@ -276,34 +276,46 @@ export default function Landing() {
             <div className="step-process-card" data-aos="fade-up" data-aos-delay="200">
               <div className="step-num-bubble">02</div>
               <div className="step-icon-wrap">📱</div>
-              <h3>Record / Click</h3>
-              <p>Record a video or click photos of your dish featuring the cooking person. <em>(Mobile phone only)</em></p>
+              <h3>2. Reel &amp; 5 Photos</h3>
+              <p>
+                Record a <strong>Reel (90 sec, you in it)</strong> and click <strong>5 Photos</strong>, all taken by you on a mobile, in this order:
+              </p>
+              <div className="step-order-badge-chain">
+                <span>Ingredients</span> ➔ <span>Making</span> ➔ <span>SVS Product in Use</span> ➔ <span>Dish</span> ➔ <span>Final Dish with You</span>
+              </div>
             </div>
 
             <div className="step-connector-arrow">➔</div>
 
-            {/* Step 3 (Connected with Ingredients & Process) */}
+            {/* Step 3 */}
             <div className="step-process-card highlight-step" data-aos="fade-up" data-aos-delay="300">
               <div className="step-num-bubble">03</div>
-              <div className="step-icon-wrap">🎬</div>
-              <h3>Upload &amp; List Details</h3>
-              <p>Upload as an Instagram Reel or Photo post. Clearly detail all ingredients used and the cooking process in your description.</p>
+              <div className="step-icon-wrap">📝</div>
+              <h3>3. Upload &amp; List Out</h3>
+              <p>
+                • <strong>Photo:</strong> Write all ingredients and the cooking procedure in the description.
+                <br />
+                • <strong>Reel:</strong> Explain all ingredients and the full procedure in the video, in your own voice, at every step.
+              </p>
             </div>
 
             <div className="step-connector-arrow">➔</div>
 
-            {/* Step 4 (SVS Spotlight & Collab) */}
+            {/* Step 4 */}
             <div className="step-process-card svs-step-card" data-aos="fade-up" data-aos-delay="400">
               <div className="step-num-bubble">04</div>
               <div className="step-icon-wrap">🤝</div>
-              <h3>Feature SVS &amp; Collab!</h3>
+              <h3>4. SVS Product &amp; Collab</h3>
               <p>
-                <strong>Photo:</strong> Place SVS product near the sweet &amp; mention in caption.
+                <strong>MAIN POINT: SVS product</strong> (Choose any ONE option):
                 <br />
-                <strong>Reel:</strong> Capture SVS product or speak the SVS slogan in voiceover!
+                • <strong>Option 1:</strong> Use the SVS product in your photo or video.
                 <br />
-                Collab with <strong>@chithirai.creations</strong> &amp; tag <strong>@svsfoods</strong>!
+                • <strong>Option 2:</strong> Mention the SVS slogan in the description (Photo) or speak it in the video (Reel).
               </p>
+              <div className="collab-must-note">
+                🤝 <strong>COLLAB IS A MUST</strong> with BOTH accounts: <strong>@chithirai.creations</strong> &amp; <strong>@svsfoods</strong>
+              </div>
             </div>
           </div>
         </div>
@@ -339,7 +351,7 @@ export default function Landing() {
                   <div className="winner-rank-item rank-gold">
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
-                      <h4>1st PRIZE WINNER</h4>
+                      <h4>Winner</h4>
                       <p>Grand Cash Prize + Prestigious Gold Trophy</p>
                     </div>
                   </div>
@@ -347,7 +359,7 @@ export default function Landing() {
                   <div className="winner-rank-item rank-silver">
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
-                      <h4>2nd PRIZE RUNNER-UP</h4>
+                      <h4>First Runner-up</h4>
                       <p>Cash Prize + Runner-Up Silver Trophy</p>
                     </div>
                   </div>
@@ -355,13 +367,11 @@ export default function Landing() {
                   <div className="winner-rank-item rank-bronze">
                     <div className="rank-badge">🥉 3rd</div>
                     <div className="rank-details">
-                      <h4>3rd PRIZE WINNER</h4>
+                      <h4>Second Runner-up</h4>
                       <p>Cash Prize + Bronze Trophy &amp; Certificate</p>
                     </div>
                   </div>
                 </div>
-
-                <div className="category-footer-tag">Judged on Video Quality, Voiceover &amp; Preparation</div>
               </div>
             </div>
 
@@ -377,7 +387,7 @@ export default function Landing() {
                   <div className="winner-rank-item rank-gold">
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
-                      <h4>1st PRIZE WINNER</h4>
+                      <h4>Winner</h4>
                       <p>Grand Cash Prize + Prestigious Gold Trophy</p>
                     </div>
                   </div>
@@ -385,7 +395,7 @@ export default function Landing() {
                   <div className="winner-rank-item rank-silver">
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
-                      <h4>2nd PRIZE RUNNER-UP</h4>
+                      <h4>First Runner-up</h4>
                       <p>Cash Prize + Runner-Up Silver Trophy</p>
                     </div>
                   </div>
@@ -393,13 +403,11 @@ export default function Landing() {
                   <div className="winner-rank-item rank-bronze">
                     <div className="rank-badge">🥉 3rd</div>
                     <div className="rank-details">
-                      <h4>3rd PRIZE WINNER</h4>
+                      <h4>Second Runner-up</h4>
                       <p>Cash Prize + Bronze Trophy &amp; Certificate</p>
                     </div>
                   </div>
                 </div>
-
-                <div className="category-footer-tag">Judged on Presentation, Recipe Description &amp; Styling</div>
               </div>
             </div>
           </div>
@@ -433,41 +441,49 @@ export default function Landing() {
               <div className="rules-card">
                 <div className="rules-card-header">
                   <MdShield className="rules-header-icon" />
-                  <h3>ELIGIBILITY &amp; CONTEST RULES</h3>
+                  <h3>ELIGIBILITY AND GENERAL RULES</h3>
                 </div>
 
                 <ul className="conditions-list">
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>Minimum age requirement:</strong> 4 years+ (No upper age limit, all genders welcome)</span>
+                    <span><strong>Minimum age:</strong> 4 years+ (no upper age limit, all genders welcome)</span>
+                  </li>
+                  <li>
+                    <IoCheckmarkCircle className="check-icon" />
+                    <span><strong>One Dish Only:</strong> Submit ONE unique Diwali sweet or snack dish only.</span>
+                  </li>
+                  <li>
+                    <IoCheckmarkCircle className="check-icon" />
+                    <span><strong>Contest Dates:</strong> Upload between <strong>28 Oct and 09 Nov 2026</strong>.</span>
+                  </li>
+                  <li>
+                    <IoCheckmarkCircle className="check-icon" />
+                    <span><strong>100% Own Content:</strong> Your own video and photos only. No AI-generated media, and no downloads from YouTube, Pinterest, Google, etc.</span>
+                  </li>
+                  <li>
+                    <IoCheckmarkCircle className="check-icon" />
+                    <span><strong>Reel Duration &amp; Clips:</strong> Reel must be exactly 90 seconds, with you in the whole reel, including all 5 clips in order.</span>
+                  </li>
+                  <li>
+                    <IoCheckmarkCircle className="check-icon" />
+                    <span><strong>Audio Rules:</strong> Standalone songs or BGM only is <strong>NOT allowed</strong>. No AI voices. (Own voiceover required explaining all steps).</span>
                   </li>
                   <li className="rule-alert-item">
-                    <span className="alert-bullet">⚠️</span>
+                    <span className="alert-bullet">❌</span>
                     <span><strong>Fair Play Rule:</strong> Cooking influencers are strictly <strong>NOT eligible</strong>. Accounts with more than <strong>2,000 followers are also NOT eligible</strong>.</span>
                   </li>
-                  <li>
-                    <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>100% Own Content (Strictly No AI):</strong> Your own authentic video or photos must be used. Using AI photos/videos or downloading from YouTube, Pinterest, Google, etc. is strictly prohibited.</span>
-                  </li>
-                  <li>
-                    <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>Reels Audio Rules:</strong> In reels, the cooking person only must explain in voiceover. Standalone songs/BGM only is <strong>NOT allowed</strong>. BGM/song can only be used as background score behind voiceover. <strong>No AI voiceovers allowed</strong>.</span>
-                  </li>
-                  <li>
-                    <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>Photo Entries:</strong> Cooking process and all ingredients must be detailed in the description. SVS product must be placed/captured near the sweet dish.</span>
-                  </li>
-                  <li>
-                    <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>SVS Slogan &amp; Collab:</strong> In photo, mention SVS in caption. In reels, capture SVS product or speak the SVS slogan in voiceover. Collab with <strong>@chithirai.creations</strong> &amp; tag <a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>.</span>
+                  <li className="rule-collab-item">
+                    <span className="alert-bullet">🤝</span>
+                    <span><strong>Collab is a MUST:</strong> COLLAB IS A MUST for every Photo and Reel entry. Collab with BOTH accounts: <strong>@chithirai.creations</strong> and <a href="https://www.instagram.com/svsfoods?mdxt=bzQ1czk1ZmtlaDd3" target="_blank" rel="noopener noreferrer">@svsfoods</a>.</span>
                   </li>
                   <li className="rule-fee-item">
-                    <span className="alert-bullet">🎟️</span>
-                    <span><strong>Entry Fee:</strong> Just <strong>₹249</strong> • <strong>Limited Seats Only!</strong></span>
+                    <span className="alert-bullet">💰</span>
+                    <span><strong>Entry Fee:</strong> ₹249 (Limited seats).</span>
                   </li>
                   <li className="rule-gift-item">
                     <span className="alert-bullet">🎁</span>
-                    <span><strong>Top 50 Reward:</strong> Top 50 participants who get higher marks receive an <strong>SVS Gift Hamper worth ₹300 each (for 50 people)</strong>! Total prizes worth ₹1,00,000!</span>
+                    <span><strong>Special Benefit:</strong> Top 50 high scorers get a <strong>₹300 SVS Festive Gift Hamper Pack!</strong></span>
                   </li>
                 </ul>
               </div>
@@ -486,7 +502,7 @@ export default function Landing() {
                     <div className="criteria-icon">⭐</div>
                     <div className="criteria-text">
                       <h4>UNIQUENESS</h4>
-                      <p>Distinct taste, recipe origin, or authentic heritage method</p>
+                      <p>Distinct taste, recipe origin or authentic heritage method</p>
                     </div>
                   </div>
 
@@ -494,7 +510,7 @@ export default function Landing() {
                     <div className="criteria-icon">💡</div>
                     <div className="criteria-text">
                       <h4>CREATIVITY</h4>
-                      <p>Original touches, creative plating, and engaging presentation</p>
+                      <p>Original touches, creative plating, engaging presentation</p>
                     </div>
                   </div>
 
@@ -502,15 +518,15 @@ export default function Landing() {
                     <div className="criteria-icon">🍽️</div>
                     <div className="criteria-text">
                       <h4>PRESENTATION</h4>
-                      <p>Visual appeal of the festive sweet / palagaram</p>
+                      <p>Visual appeal of the festive sweet or snack</p>
                     </div>
                   </div>
 
                   <div className="criteria-item">
                     <div className="criteria-icon">⚙️</div>
                     <div className="criteria-text">
-                      <h4>CONCEPT &amp; INNOVATION</h4>
-                      <p>Flavor balance and clever modern or traditional execution</p>
+                      <h4>CONCEPT AND INNOVATION</h4>
+                      <p>Flavor balance, clever modern or traditional execution</p>
                     </div>
                   </div>
 
@@ -518,7 +534,7 @@ export default function Landing() {
                     <div className="criteria-icon">👁️</div>
                     <div className="criteria-text">
                       <h4>OVERALL VISUAL APPEAL</h4>
-                      <p>Clarity, neatness, and aesthetic allure of the photo or reel</p>
+                      <p>Clarity, neatness and aesthetic allure of the photo or reel</p>
                     </div>
                   </div>
                 </div>

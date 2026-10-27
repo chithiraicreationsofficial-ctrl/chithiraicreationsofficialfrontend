@@ -136,8 +136,8 @@ export default function EventsPage() {
                   </h2>
 
                   <p className="diwali-live-desc">
-                    Showcase your Diwali sweets, celebrate rich culinary tradition & win exciting prizes
-                    worth <strong>₹1,00,000 (1 Lakh!)</strong> Upload your photo or reel and collab with us!
+                    Showcase your Diwali sweets, celebrate rich culinary tradition &amp; win exciting prizes
+                    worth <strong>₹1,00,000 (1 Lakh!)</strong> Upload your photo or reel and collab with BOTH accounts: <strong>@chithirai.creations</strong> &amp; <strong>@svsfoods</strong>!
                   </p>
 
                   <div className="live-dates-pill">
