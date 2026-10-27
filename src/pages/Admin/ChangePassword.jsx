@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { adminAPI } from "../../services/apiService";
-import "./ManualTicketEntry.css";
+import "./AdminProfile.css";
 
 const AdminProfile = () => {
   const [currentPassword, setCurrentPassword] = useState("");
