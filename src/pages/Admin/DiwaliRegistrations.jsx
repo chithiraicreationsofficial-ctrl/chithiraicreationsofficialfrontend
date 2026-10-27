@@ -15,6 +15,9 @@ import {
   FiUser,
   FiDollarSign,
   FiAward,
+  FiTrash2,
+  FiCalendar,
+  FiAlertTriangle,
 } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa6";
 
@@ -35,12 +38,15 @@ export default function DiwaliRegistrations() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [categoryFilter, setCategoryFilter] = useState("ALL");
+  const [dateFilter, setDateFilter] = useState("");
   const [verifyingId, setVerifyingId] = useState(null);
   const [resendingId, setResendingId] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
 
   // Modal states
   const [screenshotModal, setScreenshotModal] = useState(null); // { url, participant }
   const [detailsModal, setDetailsModal] = useState(null); // participant object
+  const [deleteConfirmModal, setDeleteConfirmModal] = useState(null); // participant object to delete
 
   const adminInfo = getAdminInfo();
 
@@ -52,6 +58,7 @@ export default function DiwaliRegistrations() {
           status: statusFilter,
           category: categoryFilter,
           search: search.trim(),
+          date: dateFilter || undefined,
         }),
         diwaliAPI.getStats(),
       ]);
@@ -64,11 +71,11 @@ export default function DiwaliRegistrations() {
       }
     } catch (err) {
       console.error("Error fetching diwali registrations:", err);
-      toast.error("Failed to load registrations from PostgreSQL database.");
+      toast.error("Failed to load registrations from database.");
     } finally {
       setLoading(false);
     }
-  }, [statusFilter, categoryFilter, search]);
+  }, [statusFilter, categoryFilter, search, dateFilter]);
 
   useEffect(() => {
     fetchRegistrations();
@@ -141,30 +148,66 @@ export default function DiwaliRegistrations() {
     }
   };
 
+  // Handle Delete Registration
+  const confirmDeleteRegistration = async () => {
+    if (!deleteConfirmModal) return;
+    const participant = deleteConfirmModal;
+    try {
+      setDeletingId(participant.id);
+      const res = await diwaliAPI.deleteRegistration(participant.id);
+      if (res.data?.success) {
+        toast.success(
+          `🗑️ Registration for ${participant.name} (${participant.token || participant.registration_id}) deleted successfully.`
+        );
+        setRegistrations((prev) => prev.filter((r) => r.id !== participant.id));
+        setDeleteConfirmModal(null);
+        if (detailsModal?.id === participant.id) {
+          setDetailsModal(null);
+        }
+        if (screenshotModal?.participant?.id === participant.id) {
+          setScreenshotModal(null);
+        }
+        // Refresh stats
+        const statsRes = await diwaliAPI.getStats();
+        if (statsRes.data?.success) setStats(statsRes.data.data);
+      }
+    } catch (err) {
+      console.error("Delete error:", err);
+      toast.error(err.response?.data?.message || "Failed to delete registration.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   const getFullImageUrl = (path) => {
     if (!path) return "";
     if (path.startsWith("http://") || path.startsWith("https://")) return path;
     return `${BACKEND_URL}${path}`;
   };
 
+  const todayStr = new Date().toISOString().split("T")[0];
+
   return (
     <div className="diwali-admin-container">
       {/* Top Banner */}
       <div className="diwali-admin-header">
         <div className="header-text-group">
-          <h2>🪔 Digital Diwali Palagaram Villa 2026</h2>
+          <div className="festive-badge">🪔 Digital Diwali Palagaram Villa 2026</div>
+          <h2>Contest Registrations &amp; Verification</h2>
           <p>
-            Contest Registrations • PostgreSQL Database • Payment Verification &amp; Token Dispatch (DDPVREG01)
+            Official participant entries, payment proof verification, token issuance (DDPVREG01 series), and record management
           </p>
         </div>
-        <button
-          className="btn-refresh"
-          onClick={fetchRegistrations}
-          disabled={loading}
-          title="Refresh Data"
-        >
-          <FiRefreshCw className={loading ? "spin-icon" : ""} /> Refresh
-        </button>
+        <div className="header-actions-group">
+          <button
+            className="btn-refresh"
+            onClick={fetchRegistrations}
+            disabled={loading}
+            title="Refresh Data"
+          >
+            <FiRefreshCw className={loading ? "spin-icon" : ""} /> Refresh
+          </button>
+        </div>
       </div>
 
       {/* Stats Cards Grid */}
@@ -176,7 +219,7 @@ export default function DiwaliRegistrations() {
           <div className="stat-info">
             <span className="stat-label">Total Entries</span>
             <span className="stat-value">{stats.totalRegistrations}</span>
-            <span className="stat-sub">Fee: ₹249 / entry</span>
+            <span className="stat-sub">Entry fee: ₹249</span>
           </div>
         </div>
 
@@ -187,7 +230,7 @@ export default function DiwaliRegistrations() {
           <div className="stat-info">
             <span className="stat-label">Verified &amp; Tokens Sent</span>
             <span className="stat-value">{stats.verifiedRegistrations}</span>
-            <span className="stat-sub">DDPVREG01 series</span>
+            <span className="stat-sub">Official Tokens Issued</span>
           </div>
         </div>
 
@@ -218,6 +261,7 @@ export default function DiwaliRegistrations() {
 
       {/* Filter and Search Controls */}
       <div className="diwali-filter-toolbar">
+        {/* Search */}
         <div className="search-input-wrap">
           <FiSearch className="search-icon" />
           <input
@@ -228,13 +272,15 @@ export default function DiwaliRegistrations() {
             className="filter-search-input"
           />
           {search && (
-            <button className="clear-search-btn" onClick={() => setSearch("")}>
+            <button className="clear-search-btn" onClick={() => setSearch("")} title="Clear search">
               <FiX />
             </button>
           )}
         </div>
 
+        {/* Dropdowns & Date Filter Group */}
         <div className="dropdown-filters-group">
+          {/* Status Filter */}
           <div className="filter-select-wrap">
             <label>Status:</label>
             <select
@@ -248,6 +294,7 @@ export default function DiwaliRegistrations() {
             </select>
           </div>
 
+          {/* Category Filter */}
           <div className="filter-select-wrap">
             <label>Category:</label>
             <select
@@ -260,12 +307,70 @@ export default function DiwaliRegistrations() {
               <option value="Photo Category">Photo Category</option>
             </select>
           </div>
+
+          {/* Date Filter */}
+          <div className="filter-select-wrap filter-date-wrap">
+            <label htmlFor="regDateInput">
+              <FiCalendar className="filter-label-icon" /> Date:
+            </label>
+            <div className="date-input-container">
+              <input
+                type="date"
+                id="regDateInput"
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
+                className="filter-date-input"
+              />
+              {dateFilter && (
+                <button
+                  className="clear-date-btn"
+                  onClick={() => setDateFilter("")}
+                  title="Clear date filter"
+                >
+                  <FiX />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Quick Date Pills */}
+          <div className="quick-date-pills">
+            <button
+              className={`date-pill-btn ${!dateFilter ? "active" : ""}`}
+              onClick={() => setDateFilter("")}
+              title="Show all dates"
+            >
+              All
+            </button>
+            <button
+              className={`date-pill-btn ${dateFilter === todayStr ? "active" : ""}`}
+              onClick={() => setDateFilter(todayStr)}
+              title="Filter by today's date"
+            >
+              Today
+            </button>
+          </div>
         </div>
+      </div>
+
+      {/* Filter Info Bar */}
+      <div className="filter-info-bar">
+        <span className="results-count">
+          Showing <strong>{registrations.length}</strong> registration{registrations.length === 1 ? "" : "s"}
+          {dateFilter && (
+            <span className="active-date-tag">
+              • Filtered by Date: <strong>{dateFilter}</strong>
+              <button onClick={() => setDateFilter("")} className="tag-remove-btn" title="Remove date filter">
+                <FiX />
+              </button>
+            </span>
+          )}
+        </span>
       </div>
 
       {/* Mobile Scroll Cue */}
       <div className="mobile-table-hint">
-        <span>↔ Swipe table horizontally to view full columns &amp; actions</span>
+        <span>↔ Swipe table horizontally to view full details &amp; actions</span>
       </div>
 
       {/* Registrations Table */}
@@ -281,7 +386,7 @@ export default function DiwaliRegistrations() {
               <th>Instagram</th>
               <th>Sweet / Palagaram</th>
               <th>Payment Proof</th>
-              <th>Actions</th>
+              <th className="th-actions">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -290,14 +395,29 @@ export default function DiwaliRegistrations() {
                 <td colSpan="9" className="text-center py-5">
                   <div className="loading-state">
                     <FiRefreshCw className="spin-icon fs-3 mb-2" />
-                    <p>Loading registrations from PostgreSQL...</p>
+                    <p>Loading registrations...</p>
                   </div>
                 </td>
               </tr>
             ) : registrations.length === 0 ? (
               <tr>
                 <td colSpan="9" className="text-center py-5 text-muted">
-                  No registrations found matching your criteria.
+                  <div className="empty-state-wrap">
+                    <p className="mb-2">No registrations found matching your criteria.</p>
+                    {(search || statusFilter !== "ALL" || categoryFilter !== "ALL" || dateFilter) && (
+                      <button
+                        className="btn-clear-all-filters"
+                        onClick={() => {
+                          setSearch("");
+                          setStatusFilter("ALL");
+                          setCategoryFilter("ALL");
+                          setDateFilter("");
+                        }}
+                      >
+                        Reset All Filters
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ) : (
@@ -322,6 +442,15 @@ export default function DiwaliRegistrations() {
                         </div>
                       )}
                       <span className="reg-id-subtext">{item.registration_id}</span>
+                      {item.created_at && (
+                        <span className="reg-date-subtext">
+                          {new Date(item.created_at).toLocaleDateString("en-IN", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          })}
+                        </span>
+                      )}
                     </td>
 
                     {/* Participant */}
@@ -345,7 +474,7 @@ export default function DiwaliRegistrations() {
                     {/* District */}
                     <td className="col-district">
                       <span className="district-pill">{item.district}</span>
-                      <div className="state-name">{item.state}</div>
+                      <div className="state-name">{item.state || "Tamil Nadu"}</div>
                     </td>
 
                     {/* Instagram */}
@@ -387,7 +516,7 @@ export default function DiwaliRegistrations() {
                               participant: item,
                             })
                           }
-                          title="Click to view full screenshot"
+                          title="Click to view payment proof"
                         >
                           <img
                             src={getFullImageUrl(item.payment_screenshot)}
@@ -405,41 +534,54 @@ export default function DiwaliRegistrations() {
 
                     {/* Actions */}
                     <td className="col-actions">
-                      {!isVerified ? (
-                        <button
-                          className="btn-action-verify"
-                          onClick={() => handleVerify(item)}
-                          disabled={verifyingId === item.id}
-                        >
-                          {verifyingId === item.id ? (
-                            <>
-                              <FiRefreshCw className="spin-icon" /> Verifying...
-                            </>
-                          ) : (
-                            <>
-                              <FiCheckCircle /> Verify &amp; Send Token
-                            </>
-                          )}
-                        </button>
-                      ) : (
-                        <div className="verified-actions-wrap">
+                      <div className="table-actions-group">
+                        {!isVerified ? (
+                          <button
+                            className="btn-action-verify"
+                            onClick={() => handleVerify(item)}
+                            disabled={verifyingId === item.id}
+                            title="Verify Payment & Send Token Email"
+                          >
+                            {verifyingId === item.id ? (
+                              <>
+                                <FiRefreshCw className="spin-icon" /> Verifying...
+                              </>
+                            ) : (
+                              <>
+                                <FiCheckCircle /> Verify &amp; Token
+                              </>
+                            )}
+                          </button>
+                        ) : (
                           <button
                             className="btn-action-resend"
                             onClick={() => handleResendToken(item)}
                             disabled={resendingId === item.id}
-                            title="Resend Token Email"
+                            title="Resend Token Email to Participant"
                           >
-                            <FiMail /> {resendingId === item.id ? "Sending..." : "Resend Token"}
+                            <FiMail /> {resendingId === item.id ? "Sending..." : "Resend"}
                           </button>
-                          <button
-                            className="btn-action-details"
-                            onClick={() => setDetailsModal(item)}
-                            title="View Registration Details"
-                          >
-                            <FiEye /> Details
-                          </button>
-                        </div>
-                      )}
+                        )}
+
+                        {/* Details Button */}
+                        <button
+                          className="btn-action-details"
+                          onClick={() => setDetailsModal(item)}
+                          title="View Full Details"
+                        >
+                          <FiEye /> Details
+                        </button>
+
+                        {/* Delete Button */}
+                        <button
+                          className="btn-action-delete"
+                          onClick={() => setDeleteConfirmModal(item)}
+                          disabled={deletingId === item.id}
+                          title="Delete Registration"
+                        >
+                          <FiTrash2 /> Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -448,6 +590,68 @@ export default function DiwaliRegistrations() {
           </tbody>
         </table>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirmModal && (
+        <div className="admin-modal-backdrop" onClick={() => setDeleteConfirmModal(null)}>
+          <div className="admin-modal-dialog delete-confirm-dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="delete-modal-icon-wrap">
+              <FiAlertTriangle className="delete-warning-icon" />
+            </div>
+            <h3 className="delete-modal-title">Delete Registration?</h3>
+            <p className="delete-modal-text">
+              Are you sure you want to permanently delete registration for{" "}
+              <strong>{deleteConfirmModal.name}</strong> (
+              <code>{deleteConfirmModal.token || deleteConfirmModal.registration_id}</code>)?
+            </p>
+            <div className="delete-modal-details-box">
+              <div className="del-row">
+                <span className="del-lbl">Phone:</span>
+                <span className="del-val">{deleteConfirmModal.phone}</span>
+              </div>
+              <div className="del-row">
+                <span className="del-lbl">Email:</span>
+                <span className="del-val">{deleteConfirmModal.email}</span>
+              </div>
+              <div className="del-row">
+                <span className="del-lbl">Dish:</span>
+                <span className="del-val">{deleteConfirmModal.sweet_name} ({deleteConfirmModal.category})</span>
+              </div>
+              <div className="del-row">
+                <span className="del-lbl">Status:</span>
+                <span className="del-val">{deleteConfirmModal.status}</span>
+              </div>
+            </div>
+            <p className="delete-warning-note">
+              ⚠️ This action cannot be undone. Contestant data and uploaded payment proof will be permanently deleted.
+            </p>
+            <div className="delete-modal-actions">
+              <button
+                className="btn-delete-cancel"
+                onClick={() => setDeleteConfirmModal(null)}
+                disabled={deletingId === deleteConfirmModal.id}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn-delete-confirm"
+                onClick={confirmDeleteRegistration}
+                disabled={deletingId === deleteConfirmModal.id}
+              >
+                {deletingId === deleteConfirmModal.id ? (
+                  <>
+                    <FiRefreshCw className="spin-icon" /> Deleting...
+                  </>
+                ) : (
+                  <>
+                    <FiTrash2 /> Permanently Delete
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Screenshot Modal */}
       {screenshotModal && (
@@ -554,7 +758,7 @@ export default function DiwaliRegistrations() {
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">District &amp; State</span>
-                  <span className="detail-val">{detailsModal.district}, {detailsModal.state}</span>
+                  <span className="detail-val">{detailsModal.district}, {detailsModal.state || "Tamil Nadu"}</span>
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Instagram Profile</span>
@@ -569,7 +773,7 @@ export default function DiwaliRegistrations() {
                   <span className="detail-val">{detailsModal.category}</span>
                 </div>
                 <div className="detail-item full-width">
-                  <span className="detail-label">Ingredients &amp; Brief Process</span>
+                  <span className="detail-label">Ingredients &amp; Cooking Process</span>
                   <span className="detail-val text-pre">
                     {detailsModal.ingredients || "None specified"}
                   </span>
@@ -590,6 +794,16 @@ export default function DiwaliRegistrations() {
             </div>
 
             <div className="admin-modal-footer">
+              <button
+                className="btn-modal-delete-danger"
+                onClick={() => {
+                  const target = detailsModal;
+                  setDetailsModal(null);
+                  setDeleteConfirmModal(target);
+                }}
+              >
+                <FiTrash2 /> Delete Registration
+              </button>
               <button
                 className="btn-modal-secondary"
                 onClick={() => setDetailsModal(null)}

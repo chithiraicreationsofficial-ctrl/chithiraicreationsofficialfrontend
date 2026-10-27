@@ -3,8 +3,8 @@
 .admin-profile {
   max-width: 820px;
   margin: 0 auto;
-  color: #1f2937 !important;
-  font-family: 'Poppins', sans-serif !important;
+  color: #0f172a !important;
+  font-family: var(--admin-font) !important;
 }
 
 .profile-header {
