@@ -152,6 +152,10 @@ export const diwaliAPI = {
   verifyParticipant: (id, data = {}) => api.post(`/diwali/verify/${id}`, data),
   resendToken: (id) => api.post(`/diwali/resend-token/${id}`),
   deleteRegistration: (id) => api.delete(`/diwali/registration/${id}`),
+  adminRegister: (formData) =>
+    api.post("/diwali/admin-register", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    }),
 };
 
 // Helper function to get admin info

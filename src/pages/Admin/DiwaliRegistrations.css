@@ -1298,6 +1298,231 @@
 }
 
 /* ========================================================
+   ADMIN DIRECT REGISTRATION MODAL & FORM
+   ======================================================== */
+.btn-add-registration {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #ffffff;
+  border: none;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 9px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.28);
+  transition: all 0.2s ease;
+}
+
+.btn-add-registration:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+}
+
+.admin-register-dialog {
+  max-width: 740px;
+}
+
+.admin-register-form {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.admin-form-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.admin-form-alert.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-field label .req {
+  color: #ef4444;
+}
+
+.form-field label .field-note {
+  font-size: 0.7rem;
+  color: #6366f1;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.form-field label .optional-tag {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  background: #ffffff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+/* File Upload Area */
+.file-drop-area {
+  position: relative;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.file-drop-area:hover {
+  border-color: #6366f1;
+  background: #eef2ff;
+}
+
+.file-hidden-input {
+  display: none !important;
+}
+
+.file-drop-label {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  color: #475569 !important;
+  font-size: 0.84rem !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+}
+
+.upload-icon {
+  font-size: 1.8rem;
+  color: #6366f1;
+}
+
+.file-drop-label small {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.file-preview-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.file-preview-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #e2e8f0;
+}
+
+.file-preview-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-preview-info span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0f172a;
+  word-break: break-all;
+}
+
+.file-preview-info small {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.btn-remove-preview {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-remove-preview:hover {
+  background: #fca5a5;
+  color: #991b1b;
+}
+
+/* ========================================================
    RESPONSIVENESS
    ======================================================== */
 @media (max-width: 1024px) {

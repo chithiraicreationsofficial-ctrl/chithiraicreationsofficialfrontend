@@ -18,10 +18,38 @@ import {
   FiTrash2,
   FiCalendar,
   FiAlertTriangle,
+  FiUserPlus,
+  FiUploadCloud,
+  FiImage,
 } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa6";
 
 const BACKEND_URL = "http://localhost:8000";
+
+// All 38 Districts of Tamil Nadu
+const TN_DISTRICTS = [
+  "Madurai", "Ariyalur", "Chengalpattu", "Chennai", "Coimbatore", "Cuddalore",
+  "Dharmapuri", "Dindigul", "Erode", "Kallakurichi", "Kanchipuram", "Kanyakumari",
+  "Karur", "Krishnagiri", "Mayiladuthurai", "Nagapattinam", "Namakkal", "Nilgiris",
+  "Perambalur", "Pudukkottai", "Ramanathapuram", "Ranipet", "Salem", "Sivaganga",
+  "Tenkasi", "Thanjavur", "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli",
+  "Tirupathur", "Tiruppur", "Tiruvallur", "Tiruvannamalai", "Tiruvarur", "Vellore",
+  "Viluppuram", "Virudhunagar"
+];
+
+const initialAdminFormData = {
+  name: "",
+  age: "",
+  gender: "Female",
+  state: "Tamil Nadu",
+  district: "Madurai",
+  instagramProfile: "",
+  phone: "",
+  email: "",
+  sweetName: "",
+  category: "Reel Category",
+  ingredients: "",
+};
 
 export default function DiwaliRegistrations() {
   const [registrations, setRegistrations] = useState([]);
@@ -43,10 +71,18 @@ export default function DiwaliRegistrations() {
   const [resendingId, setResendingId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
 
-  // Modal states
+  // Modals
   const [screenshotModal, setScreenshotModal] = useState(null); // { url, participant }
   const [detailsModal, setDetailsModal] = useState(null); // participant object
   const [deleteConfirmModal, setDeleteConfirmModal] = useState(null); // participant object to delete
+
+  // Admin Direct Registration Modal States
+  const [showAdminRegisterModal, setShowAdminRegisterModal] = useState(false);
+  const [adminFormData, setAdminFormData] = useState(initialAdminFormData);
+  const [adminFormScreenshot, setAdminFormScreenshot] = useState(null);
+  const [adminFormPreview, setAdminFormPreview] = useState(null);
+  const [submittingAdminForm, setSubmittingAdminForm] = useState(false);
+  const [adminFormError, setAdminFormError] = useState("");
 
   const adminInfo = getAdminInfo();
 
@@ -83,8 +119,10 @@ export default function DiwaliRegistrations() {
 
   // Handle Verify Participant & Send Token
   const handleVerify = async (participant) => {
+    const isReel = (participant.category || "").toLowerCase().includes("reel");
+    const tokenType = isReel ? "REFR (Reel Series)" : "REFP (Photo Series)";
     const confirmVerify = window.confirm(
-      `Verify payment proof for ${participant.name}? This will assign a sequential token (e.g. DDPVREG01) and email it to ${participant.email}.`
+      `Verify payment proof for ${participant.name}? This will assign a sequential token (${tokenType}) and email it to ${participant.email}.`
     );
     if (!confirmVerify) return;
 
@@ -114,12 +152,10 @@ export default function DiwaliRegistrations() {
           )
         );
 
-        // Close screenshot modal if open for this participant
         if (screenshotModal?.participant?.id === participant.id) {
           setScreenshotModal(null);
         }
 
-        // Refresh stats
         const statsRes = await diwaliAPI.getStats();
         if (statsRes.data?.success) setStats(statsRes.data.data);
       }
@@ -167,7 +203,6 @@ export default function DiwaliRegistrations() {
         if (screenshotModal?.participant?.id === participant.id) {
           setScreenshotModal(null);
         }
-        // Refresh stats
         const statsRes = await diwaliAPI.getStats();
         if (statsRes.data?.success) setStats(statsRes.data.data);
       }
@@ -176,6 +211,113 @@ export default function DiwaliRegistrations() {
       toast.error(err.response?.data?.message || "Failed to delete registration.");
     } finally {
       setDeletingId(null);
+    }
+  };
+
+  // Handle Admin Direct Registration Form Change
+  const handleAdminFormChange = (e) => {
+    const { name, value } = e.target;
+    setAdminFormData((prev) => ({ ...prev, [name]: value }));
+    setAdminFormError("");
+  };
+
+  const handleAdminScreenshotChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setAdminFormError("Please upload a valid image file (JPG, PNG, WEBP).");
+      return;
+    }
+
+    setAdminFormScreenshot(file);
+    setAdminFormPreview(URL.createObjectURL(file));
+    setAdminFormError("");
+  };
+
+  const handleRemoveAdminScreenshot = () => {
+    setAdminFormScreenshot(null);
+    if (adminFormPreview) {
+      URL.revokeObjectURL(adminFormPreview);
+      setAdminFormPreview(null);
+    }
+  };
+
+  // Handle Admin Direct Registration Submit
+  const handleAdminRegisterSubmit = async (e) => {
+    e.preventDefault();
+    setAdminFormError("");
+
+    if (!adminFormData.name.trim()) {
+      setAdminFormError("Please enter participant's full name.");
+      return;
+    }
+    if (!adminFormData.age || Number(adminFormData.age) < 4) {
+      setAdminFormError("Minimum age required to participate is 4 years+.");
+      return;
+    }
+    const cleanPhone = adminFormData.phone.replace(/\D/g, "");
+    if (cleanPhone.length !== 10) {
+      setAdminFormError("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+    const cleanEmail = adminFormData.email.trim().toLowerCase();
+    if (!cleanEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      setAdminFormError("Please enter a valid email address.");
+      return;
+    }
+    if (!adminFormData.instagramProfile.trim()) {
+      setAdminFormError("Please enter participant's Instagram handle / profile.");
+      return;
+    }
+    if (!adminFormData.sweetName.trim()) {
+      setAdminFormError("Please enter the sweet or palagaram dish name.");
+      return;
+    }
+
+    try {
+      setSubmittingAdminForm(true);
+      const postData = new FormData();
+      postData.append("name", adminFormData.name.trim());
+      postData.append("age", adminFormData.age);
+      postData.append("gender", adminFormData.gender);
+      postData.append("state", adminFormData.state || "Tamil Nadu");
+      postData.append("district", adminFormData.district);
+      postData.append("instagramProfile", adminFormData.instagramProfile.trim());
+      postData.append("phone", cleanPhone);
+      postData.append("email", cleanEmail);
+      postData.append("sweetName", adminFormData.sweetName.trim());
+      postData.append("category", adminFormData.category);
+      postData.append("ingredients", adminFormData.ingredients ? adminFormData.ingredients.trim() : "");
+      postData.append("adminName", adminInfo.name || "Chithirai Creations Admin");
+
+      if (adminFormScreenshot) {
+        postData.append("paymentScreenshot", adminFormScreenshot);
+      }
+
+      const res = await diwaliAPI.adminRegister(postData);
+
+      if (res.data?.success) {
+        toast.success(
+          `🎉 Registered & Verified! Token ${res.data.token} generated & emailed directly to ${cleanEmail}.`
+        );
+        setShowAdminRegisterModal(false);
+        setAdminFormData(initialAdminFormData);
+        setAdminFormScreenshot(null);
+        if (adminFormPreview) {
+          URL.revokeObjectURL(adminFormPreview);
+          setAdminFormPreview(null);
+        }
+        // Refresh registrations and stats
+        fetchRegistrations();
+      }
+    } catch (err) {
+      console.error("Admin registration error:", err);
+      setAdminFormError(
+        err.response?.data?.message || "Failed to submit registration. Please check fields."
+      );
+    } finally {
+      setSubmittingAdminForm(false);
     }
   };
 
@@ -195,10 +337,23 @@ export default function DiwaliRegistrations() {
           <div className="festive-badge">🪔 Digital Diwali Palagaram Villa 2026</div>
           <h2>Contest Registrations &amp; Verification</h2>
           <p>
-            Official participant entries, payment proof verification, token issuance (DDPVREG01 series), and record management
+            Official participant entries, payment proof verification, token issuance (REFR / REFP series), and live participant roster
           </p>
         </div>
         <div className="header-actions-group">
+          <button
+            className="btn-add-registration"
+            onClick={() => {
+              setAdminFormData(initialAdminFormData);
+              setAdminFormScreenshot(null);
+              setAdminFormPreview(null);
+              setAdminFormError("");
+              setShowAdminRegisterModal(true);
+            }}
+            title="Register Participant Directly"
+          >
+            <FiUserPlus /> + New Registration
+          </button>
           <button
             className="btn-refresh"
             onClick={fetchRegistrations}
@@ -230,7 +385,7 @@ export default function DiwaliRegistrations() {
           <div className="stat-info">
             <span className="stat-label">Verified &amp; Tokens Sent</span>
             <span className="stat-value">{stats.verifiedRegistrations}</span>
-            <span className="stat-sub">Official Tokens Issued</span>
+            <span className="stat-sub">REFR (Reels) &bull; REFP (Photos)</span>
           </div>
         </div>
 
@@ -253,7 +408,7 @@ export default function DiwaliRegistrations() {
             <span className="stat-label">Total Fees Recorded</span>
             <span className="stat-value">₹{stats.totalFeeCollected.toLocaleString("en-IN")}</span>
             <span className="stat-sub">
-              {stats.reelCategoryCount} Reels • {stats.photoCategoryCount} Photos
+              {stats.reelCategoryCount} Reels &bull; {stats.photoCategoryCount} Photos
             </span>
           </div>
         </div>
@@ -303,8 +458,8 @@ export default function DiwaliRegistrations() {
               className="filter-select"
             >
               <option value="ALL">All Categories</option>
-              <option value="Reel Category">Reel Category</option>
-              <option value="Photo Category">Photo Category</option>
+              <option value="Reel Category">Reel Category (REFR)</option>
+              <option value="Photo Category">Photo Category (REFP)</option>
             </select>
           </div>
 
@@ -359,7 +514,7 @@ export default function DiwaliRegistrations() {
           Showing <strong>{registrations.length}</strong> registration{registrations.length === 1 ? "" : "s"}
           {dateFilter && (
             <span className="active-date-tag">
-              • Filtered by Date: <strong>{dateFilter}</strong>
+              &bull; Filtered by Date: <strong>{dateFilter}</strong>
               <button onClick={() => setDateFilter("")} className="tag-remove-btn" title="Remove date filter">
                 <FiX />
               </button>
@@ -427,7 +582,7 @@ export default function DiwaliRegistrations() {
                   <tr key={item.id} className={isVerified ? "row-verified" : "row-pending"}>
                     <td className="col-index">{index + 1}</td>
 
-                    {/* Token & Status */}
+                    {/* Token & Status (Clean: Token + Date, No Registration ID) */}
                     <td className="col-status">
                       {isVerified ? (
                         <div className="token-verified-badge">
@@ -441,7 +596,6 @@ export default function DiwaliRegistrations() {
                           <span className="status-label">PENDING</span>
                         </div>
                       )}
-                      <span className="reg-id-subtext">{item.registration_id}</span>
                       {item.created_at && (
                         <span className="reg-date-subtext">
                           {new Date(item.created_at).toLocaleDateString("en-IN", {
@@ -457,7 +611,7 @@ export default function DiwaliRegistrations() {
                     <td className="col-participant">
                       <div className="participant-name">{item.name}</div>
                       <div className="participant-meta">
-                        {item.gender} • {item.age} yrs
+                        {item.gender} &bull; {item.age} yrs
                       </div>
                     </td>
 
@@ -591,6 +745,262 @@ export default function DiwaliRegistrations() {
         </table>
       </div>
 
+      {/* ========================================================
+          ADMIN DIRECT REGISTRATION MODAL
+          (Direct entry by admin: automatically VERIFIED, token generated,
+          and email dispatched immediately without separate verification)
+          ======================================================== */}
+      {showAdminRegisterModal && (
+        <div className="admin-modal-backdrop" onClick={() => setShowAdminRegisterModal(false)}>
+          <div className="admin-modal-dialog admin-register-dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="admin-modal-header">
+              <div className="modal-title-wrap">
+                <h4>+ New Contest Registration</h4>
+                <p>
+                  Direct admin entry &bull; Automatically marked <strong>VERIFIED</strong> &bull; Token (REFR01/REFP01) emailed immediately
+                </p>
+              </div>
+              <button
+                className="btn-modal-close"
+                onClick={() => setShowAdminRegisterModal(false)}
+                disabled={submittingAdminForm}
+              >
+                <FiX />
+              </button>
+            </div>
+
+            <form onSubmit={handleAdminRegisterSubmit} className="admin-register-form">
+              <div className="admin-modal-body">
+                {adminFormError && (
+                  <div className="admin-form-alert error">
+                    <FiAlertTriangle /> {adminFormError}
+                  </div>
+                )}
+
+                <div className="admin-form-grid">
+                  {/* Participant Name */}
+                  <div className="form-field">
+                    <label>
+                      Participant Full Name <span className="req">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={adminFormData.name}
+                      onChange={handleAdminFormChange}
+                      placeholder="e.g. Priyadharshini"
+                      required
+                    />
+                  </div>
+
+                  {/* Age */}
+                  <div className="form-field">
+                    <label>
+                      Age (Years) <span className="req">*</span>
+                    </label>
+                    <input
+                      type="number"
+                      name="age"
+                      min="4"
+                      max="100"
+                      value={adminFormData.age}
+                      onChange={handleAdminFormChange}
+                      placeholder="e.g. 24"
+                      required
+                    />
+                  </div>
+
+                  {/* Gender */}
+                  <div className="form-field">
+                    <label>Gender <span className="req">*</span></label>
+                    <select
+                      name="gender"
+                      value={adminFormData.gender}
+                      onChange={handleAdminFormChange}
+                      required
+                    >
+                      <option value="Female">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+
+                  {/* Contest Category */}
+                  <div className="form-field">
+                    <label>Contest Category <span className="req">*</span></label>
+                    <select
+                      name="category"
+                      value={adminFormData.category}
+                      onChange={handleAdminFormChange}
+                      required
+                    >
+                      <option value="Reel Category">Reel Category (Tokens: REFR01, REFR02...)</option>
+                      <option value="Photo Category">Photo Category (Tokens: REFP01, REFP02...)</option>
+                    </select>
+                  </div>
+
+                  {/* WhatsApp Mobile */}
+                  <div className="form-field">
+                    <label>
+                      WhatsApp Mobile Number <span className="req">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={adminFormData.phone}
+                      onChange={handleAdminFormChange}
+                      placeholder="10-digit mobile number"
+                      maxLength={10}
+                      required
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="form-field">
+                    <label>
+                      Email Address <span className="req">*</span>
+                      <small className="field-note">(Token sent here directly)</small>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={adminFormData.email}
+                      onChange={handleAdminFormChange}
+                      placeholder="e.g. participant@gmail.com"
+                      required
+                    />
+                  </div>
+
+                  {/* District */}
+                  <div className="form-field">
+                    <label>District (Tamil Nadu) <span className="req">*</span></label>
+                    <select
+                      name="district"
+                      value={adminFormData.district}
+                      onChange={handleAdminFormChange}
+                      required
+                    >
+                      {TN_DISTRICTS.map((dist) => (
+                        <option key={dist} value={dist}>
+                          {dist}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Instagram Profile */}
+                  <div className="form-field">
+                    <label>
+                      Instagram Profile <span className="req">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="instagramProfile"
+                      value={adminFormData.instagramProfile}
+                      onChange={handleAdminFormChange}
+                      placeholder="e.g. @chef_priya or profile link"
+                      required
+                    />
+                  </div>
+
+                  {/* Sweet / Palagaram Name */}
+                  <div className="form-field full-width">
+                    <label>
+                      Diwali Sweet / Palagaram Name <span className="req">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="sweetName"
+                      value={adminFormData.sweetName}
+                      onChange={handleAdminFormChange}
+                      placeholder="e.g. Special Ghee Mysore Pak / Ribbon Pakoda"
+                      required
+                    />
+                  </div>
+
+                  {/* Ingredients & Brief Procedure */}
+                  <div className="form-field full-width">
+                    <label>Ingredients &amp; Brief Procedure</label>
+                    <textarea
+                      name="ingredients"
+                      rows="3"
+                      value={adminFormData.ingredients}
+                      onChange={handleAdminFormChange}
+                      placeholder="List key ingredients and brief cooking process..."
+                    />
+                  </div>
+
+                  {/* Payment Screenshot (Optional for Admin Direct Entry) */}
+                  <div className="form-field full-width">
+                    <label>
+                      Payment Screenshot Proof <span className="optional-tag">(Optional for Admin Entry)</span>
+                    </label>
+                    {!adminFormPreview ? (
+                      <div className="file-drop-area">
+                        <input
+                          type="file"
+                          id="adminPaymentProofInput"
+                          accept="image/*"
+                          onChange={handleAdminScreenshotChange}
+                          className="file-hidden-input"
+                        />
+                        <label htmlFor="adminPaymentProofInput" className="file-drop-label">
+                          <FiUploadCloud className="upload-icon" />
+                          <span>Click to upload payment screenshot (JPG, PNG, WEBP)</span>
+                          <small>Up to 10MB</small>
+                        </label>
+                      </div>
+                    ) : (
+                      <div className="file-preview-strip">
+                        <img src={adminFormPreview} alt="Screenshot Preview" className="file-preview-thumb" />
+                        <div className="file-preview-info">
+                          <span>{adminFormScreenshot?.name || "Payment Screenshot"}</span>
+                          <small>{(adminFormScreenshot?.size / 1024).toFixed(1)} KB</small>
+                        </div>
+                        <button
+                          type="button"
+                          className="btn-remove-preview"
+                          onClick={handleRemoveAdminScreenshot}
+                          title="Remove file"
+                        >
+                          <FiX />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <div className="admin-modal-footer">
+                <button
+                  type="button"
+                  className="btn-modal-secondary"
+                  onClick={() => setShowAdminRegisterModal(false)}
+                  disabled={submittingAdminForm}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn-modal-primary"
+                  disabled={submittingAdminForm}
+                >
+                  {submittingAdminForm ? (
+                    <>
+                      <FiRefreshCw className="spin-icon" /> Registering &amp; Sending Token...
+                    </>
+                  ) : (
+                    <>
+                      <FiCheckCircle /> Register &amp; Send Token Immediately
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Delete Confirmation Modal */}
       {deleteConfirmModal && (
         <div className="admin-modal-backdrop" onClick={() => setDeleteConfirmModal(null)}>
@@ -661,7 +1071,7 @@ export default function DiwaliRegistrations() {
               <div className="modal-title-wrap">
                 <h4>Payment Screenshot Verification</h4>
                 <p>
-                  Participant: <strong>{screenshotModal.participant.name}</strong> • Phone:{" "}
+                  Participant: <strong>{screenshotModal.participant.name}</strong> &bull; Phone:{" "}
                   <strong>{screenshotModal.participant.phone}</strong>
                 </p>
               </div>
@@ -680,9 +1090,9 @@ export default function DiwaliRegistrations() {
               </div>
               <div className="modal-quick-meta mt-3">
                 <span>Entry Fee: <strong>₹249</strong></span>
-                <span>•</span>
+                <span>&bull;</span>
                 <span>UPI ID: <strong>7010240042@upi</strong></span>
-                <span>•</span>
+                <span>&bull;</span>
                 <a
                   href={screenshotModal.url}
                   target="_blank"
@@ -729,7 +1139,7 @@ export default function DiwaliRegistrations() {
               <div className="modal-title-wrap">
                 <h4>Registration Details: {detailsModal.name}</h4>
                 <p>
-                  Token: <strong>{detailsModal.token || "Not Assigned"}</strong> • Status:{" "}
+                  Token: <strong>{detailsModal.token || "Not Assigned"}</strong> &bull; Status:{" "}
                   <strong>{detailsModal.status}</strong>
                 </p>
               </div>
@@ -746,7 +1156,7 @@ export default function DiwaliRegistrations() {
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Age &amp; Gender</span>
-                  <span className="detail-val">{detailsModal.age} years • {detailsModal.gender}</span>
+                  <span className="detail-val">{detailsModal.age} years &bull; {detailsModal.gender}</span>
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">WhatsApp Mobile</span>
