@@ -13,6 +13,7 @@ const AdminLayout = () => {
 
   const menuItems = [
     { path: "/admin/dashboard", label: "Dashboard", icon: "📊" },
+    { path: "/admin/diwali-registrations", label: "Diwali Registrations", icon: "🪔" },
     { path: "/admin/tickets", label: "All Tickets", icon: "🎫" },
     { path: "/admin/manual-entry", label: "Manual Entry", icon: "✍️" },
     { path: "/admin/verification", label: "Verify Tickets", icon: "🔍" },

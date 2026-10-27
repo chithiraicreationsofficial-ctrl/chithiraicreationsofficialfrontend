@@ -9,8 +9,15 @@ import {
   FaShieldHalved,
   FaCalendarDays,
   FaArrowRotateRight,
+  FaUpload,
+  FaCopy,
+  FaCheck,
+  FaTrash,
+  FaFileInvoiceDollar,
 } from "react-icons/fa6";
-import { IoSparkles, IoWarningOutline, IoClose } from "react-icons/io5";
+import { IoSparkles, IoWarningOutline, IoClose, IoCheckmarkCircle } from "react-icons/io5";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
 
 // All 38 Districts of Tamil Nadu
 const TN_DISTRICTS = [
@@ -69,6 +76,10 @@ export default function EventRegistrationForm({ onClose }) {
     ingredients: "",
   });
 
+  const [paymentScreenshot, setPaymentScreenshot] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [copiedUpi, setCopiedUpi] = useState(false);
+
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(null);
@@ -78,6 +89,40 @@ export default function EventRegistrationForm({ onClose }) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrorMsg("");
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setErrorMsg("Please upload a valid image file (JPG, PNG, WEBP).");
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMsg("File size exceeds 10MB limit. Please upload a smaller image.");
+      return;
+    }
+
+    setPaymentScreenshot(file);
+    setPreviewUrl(URL.createObjectURL(file));
+    setErrorMsg("");
+  };
+
+  const handleRemoveScreenshot = () => {
+    setPaymentScreenshot(null);
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+      setPreviewUrl(null);
+    }
+  };
+
+  const handleCopyUPI = (upiId) => {
+    navigator.clipboard.writeText(upiId);
+    setCopiedUpi(true);
+    toast.info(`UPI ID copied: ${upiId}`);
+    setTimeout(() => setCopiedUpi(false), 2500);
   };
 
   const allConditionsAccepted = termsAccepted;
@@ -117,6 +162,11 @@ export default function EventRegistrationForm({ onClose }) {
       return;
     }
 
+    if (!paymentScreenshot) {
+      setErrorMsg("Please upload your payment screenshot (proof of ₹249 entry fee payment).");
+      return;
+    }
+
     if (!allConditionsAccepted) {
       setErrorMsg("Please read and accept all contest rules and conditions to proceed.");
       return;
@@ -125,47 +175,38 @@ export default function EventRegistrationForm({ onClose }) {
     setIsLoading(true);
 
     try {
-      // Send to backend API
-      const res = await axios.post("http://localhost:8000/api/diwali/register", {
-        ...formData,
-        phone: cleanPhone,
-        email: formData.email.trim().toLowerCase(),
-        conditionsAccepted: true,
+      const data = new FormData();
+      data.append("name", formData.name.trim());
+      data.append("age", formData.age);
+      data.append("gender", formData.gender);
+      data.append("state", formData.state || "Tamil Nadu");
+      data.append("district", formData.district);
+      data.append("instagramProfile", formData.instagramProfile.trim());
+      data.append("phone", cleanPhone);
+      data.append("email", formData.email.trim().toLowerCase());
+      data.append("sweetName", formData.sweetName.trim());
+      data.append("category", formData.category);
+      data.append("ingredients", formData.ingredients.trim());
+      data.append("conditionsAccepted", "true");
+      data.append("paymentScreenshot", paymentScreenshot);
+
+      const res = await axios.post(`${API_BASE_URL}/diwali/register`, data, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       if (res.data && res.data.success) {
         setRegistrationSuccess(res.data.data);
-        toast.success("Registration Successful! Welcome to Palagaram Villa 2026!");
+        toast.success("Registration submitted! Admin will verify and email your token.");
       } else {
-        // Fallback local registration ID if backend returned alternative
-        const fallbackReg = {
-          registrationId: "DDPV-" + Date.now().toString(36).toUpperCase(),
-          name: formData.name,
-          sweetName: formData.sweetName,
-          category: formData.category,
-          district: formData.district,
-        };
-        setRegistrationSuccess(fallbackReg);
-        toast.success("Registration Successful!");
+        throw new Error(res.data?.message || "Registration failed.");
       }
     } catch (err) {
-      console.warn("Backend registration fallback to local storage:", err);
-      // Fallback gracefully so user is never blocked
-      const localId = "DDPV-" + Math.floor(Math.random() * 8999 + 1000);
-      const regData = {
-        registrationId: localId,
-        name: formData.name,
-        sweetName: formData.sweetName,
-        category: formData.category,
-        district: formData.district,
-      };
-
-      const existing = JSON.parse(localStorage.getItem("diwali_entries") || "[]");
-      existing.push({ ...formData, registrationId: localId, date: new Date().toISOString() });
-      localStorage.setItem("diwali_entries", JSON.stringify(existing));
-
-      setRegistrationSuccess(regData);
-      toast.success("Registration Successful! Entry saved.");
+      const serverMessage =
+        err.response?.data?.message ||
+        err.message ||
+        "Registration failed. Please check your information and try again.";
+      setErrorMsg(serverMessage);
+      toast.error(serverMessage);
     } finally {
       setIsLoading(false);
     }
@@ -186,7 +227,9 @@ export default function EventRegistrationForm({ onClose }) {
       category: "Reel Category",
       ingredients: "",
     });
+    handleRemoveScreenshot();
     setTermsAccepted(false);
+    setErrorMsg("");
   };
 
   const formCardMarkup = (
@@ -196,27 +239,41 @@ export default function EventRegistrationForm({ onClose }) {
           <div className="success-icon-trophy">
             <FaTrophy />
           </div>
-          <h3 className="success-heading">Registration Confirmed!</h3>
+          <div className="success-status-badge pending-badge">
+            ⏳ Verification Pending
+          </div>
+          <h3 className="success-heading">Registration Submitted!</h3>
           <p className="success-sub">
-            Congratulations <strong>{registrationSuccess.name}</strong>, your entry for{" "}
-            <strong>{registrationSuccess.sweetName}</strong> ({registrationSuccess.category}) from{" "}
-            <strong>{registrationSuccess.district}, Tamil Nadu</strong> is registered!
+            Thank you <strong>{registrationSuccess.name}</strong>! Your registration for{" "}
+            <strong>{registrationSuccess.sweet_name || registrationSuccess.sweetName}</strong> ({registrationSuccess.category}) from{" "}
+            <strong>{registrationSuccess.district}, Tamil Nadu</strong> has been submitted with your payment proof.
           </p>
 
           <div className="registration-id-card">
-            <span className="reg-id-label">CONTEST REGISTRATION ID</span>
-            <span className="reg-id-number">{registrationSuccess.registrationId}</span>
+            <span className="reg-id-label">TEMPORARY REGISTRATION ID</span>
+            <span className="reg-id-number">{registrationSuccess.registration_id || registrationSuccess.registrationId}</span>
+          </div>
+
+          <div className="verification-token-notice mt-3 p-3">
+            <div className="notice-icon-title">
+              <IoCheckmarkCircle className="text-warning fs-5" />
+              <strong>Official Token Will Be Emailed:</strong>
+            </div>
+            <p className="mb-0 mt-1">
+              Our admin will review your payment screenshot. Once approved, your <strong>Official Verification Token (e.g. DDPVREG01)</strong> will be emailed directly to:
+              <br />
+              <span className="user-email-highlight">{registrationSuccess.email || formData.email}</span>
+            </p>
           </div>
 
           <div className="next-steps-guide mt-4">
             <h4>What to do next?</h4>
             <ol className="text-start">
-              <li>Prepare your sweet / palagaram with love & tradition.</li>
-              <li>Record a video or click photos *(Mobile phone only)*.</li>
-              <li>
-                Post as a Reel or Photo on Instagram, mention the ingredients used, and <strong>collab with @chithirai.creations</strong>!
-              </li>
-              <li>Stay tuned to our official Instagram page for winner announcements & prize awards!</li>
+              <li>Prepare your sweet / palagaram with love &amp; tradition.</li>
+              <li>Record a video (90 sec) or click 5 photos *(Mobile phone only)* in the specified order.</li>
+              <li>Post as a Reel or Photo on Instagram, mention ingredients used &amp; SVS product/slogan.</li>
+              <li><strong>Collab with BOTH @chithirai.creations and @svsfoods!</strong></li>
+              <li>Check your email inbox for your official token code (e.g. DDPVREG01).</li>
             </ol>
           </div>
 
@@ -227,10 +284,10 @@ export default function EventRegistrationForm({ onClose }) {
               rel="noopener noreferrer"
               className="btn-insta-collab"
             >
-              <FaInstagram /> Open Instagram & Follow
+              <FaInstagram /> Open Instagram &amp; Follow @chithirai.creations
             </a>
             <button onClick={handleReset} className="btn-register-another">
-              <FaArrowRotateRight /> Register Another Entry
+              <FaArrowRotateRight /> Register Another Participant
             </button>
             {onClose && (
               <button onClick={onClose} className="btn-close-modal-done">
@@ -462,6 +519,102 @@ export default function EventRegistrationForm({ onClose }) {
                 placeholder="List the key ingredients and brief preparation method..."
                 className="form-control-custom textarea-custom"
               ></textarea>
+            </div>
+
+            {/* Row 7: Entry Fee Payment & Screenshot Upload (Full Width) */}
+            <div className="col-12">
+              <div className="payment-upload-card">
+                <div className="payment-card-header">
+                  <div className="payment-title-wrap">
+                    <FaFileInvoiceDollar className="payment-gold-icon" />
+                    <div>
+                      <h4 className="payment-main-title">Contest Entry Fee: ₹249 (Limited Seats)</h4>
+                      <p className="payment-sub-text">Pay ₹249 via any UPI app &amp; upload proof below</p>
+                    </div>
+                  </div>
+                  <span className="payment-badge-mandatory">Mandatory Step</span>
+                </div>
+
+                <div className="payment-card-body">
+                  <div className="upi-info-container">
+                    <div className="upi-step-label">
+                      <strong>Step 1:</strong> Pay ₹249 to the official UPI ID via GPay / PhonePe / Paytm / BHIM:
+                    </div>
+                    <div className="upi-box-interactive">
+                      <div className="upi-details-left">
+                        <span className="upi-label-small">UPI ID</span>
+                        <code className="upi-id-highlight">7010240042@upi</code>
+                        <span className="upi-payee-note">Payee: Chithirai Creations</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleCopyUPI("7010240042@upi")}
+                        className={`btn-upi-copy ${copiedUpi ? "copied" : ""}`}
+                      >
+                        {copiedUpi ? (
+                          <>
+                            <FaCheck /> Copied!
+                          </>
+                        ) : (
+                          <>
+                            <FaCopy /> Copy UPI ID
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="screenshot-upload-container mt-3">
+                    <label className="screenshot-label">
+                      <strong>Step 2:</strong> Upload Payment Screenshot / Transaction Proof <span className="req-star">*</span>
+                    </label>
+
+                    {!previewUrl ? (
+                      <label htmlFor="reg-payment-screenshot" className="upload-dropzone-box">
+                        <input
+                          type="file"
+                          id="reg-payment-screenshot"
+                          accept="image/jpeg,image/png,image/webp,image/jpg"
+                          onChange={handleFileChange}
+                          className="d-none"
+                        />
+                        <div className="dropzone-content">
+                          <div className="dropzone-icon-circle">
+                            <FaUpload />
+                          </div>
+                          <span className="dropzone-prompt">
+                            <strong>Click or tap to upload payment screenshot</strong>
+                          </span>
+                          <span className="dropzone-hints">Supports JPG, PNG, WEBP (Max 10MB)</span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="screenshot-preview-wrapper">
+                        <div className="preview-img-box">
+                          <img src={previewUrl} alt="Payment Proof Preview" className="uploaded-proof-img" />
+                        </div>
+                        <div className="preview-info-box">
+                          <div className="preview-header-line">
+                            <IoCheckmarkCircle className="check-proof-icon" />
+                            <strong>Payment Proof Selected</strong>
+                          </div>
+                          <span className="preview-filename">{paymentScreenshot?.name}</span>
+                          <span className="preview-filesize">
+                            {(paymentScreenshot?.size / (1024 * 1024)).toFixed(2)} MB • Ready for submission
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleRemoveScreenshot}
+                            className="btn-remove-proof"
+                          >
+                            <FaTrash /> Remove &amp; Choose Another
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

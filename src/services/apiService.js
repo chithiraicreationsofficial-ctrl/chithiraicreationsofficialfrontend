@@ -145,6 +145,14 @@ export const adminAPI = {
 
 };
 
+// Diwali Contest API
+export const diwaliAPI = {
+  getRegistrations: (params) => api.get("/diwali/registrations", { params }),
+  getStats: () => api.get("/diwali/stats"),
+  verifyParticipant: (id, data = {}) => api.post(`/diwali/verify/${id}`, data),
+  resendToken: (id) => api.post(`/diwali/resend-token/${id}`),
+};
+
 // Helper function to get admin info
 export const getAdminInfo = () => {
   try {
