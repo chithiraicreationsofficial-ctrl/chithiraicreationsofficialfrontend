@@ -267,7 +267,9 @@ export default function Landing() {
               <div className="step-num-bubble">01</div>
               <div className="step-icon-wrap">👨‍🍳</div>
               <h3>1. Make Your Dish</h3>
-              <p>Make <strong>ONE unique Diwali sweet or snack</strong> yourself.</p>
+              <p className="step-lead-desc">
+                Make <strong>ONE unique Diwali sweet or snack</strong> yourself with authentic festive flavor and love.
+              </p>
             </div>
 
             <div className="step-connector-arrow">➔</div>
@@ -277,11 +279,15 @@ export default function Landing() {
               <div className="step-num-bubble">02</div>
               <div className="step-icon-wrap">📱</div>
               <h3>2. Reel &amp; 5 Photos</h3>
-              <p>
-                Record a <strong>Reel (90 sec, you in it)</strong> and click <strong>5 Photos</strong>, all taken by you on a mobile, in this order:
+              <p className="step-lead-desc">
+                Record a <strong>Reel (90 sec, you in it)</strong> &amp; click <strong>5 Photos</strong> on mobile in this order:
               </p>
-              <div className="step-order-badge-chain">
-                <span>Ingredients</span> ➔ <span>Making</span> ➔ <span>SVS Product in Use</span> ➔ <span>Dish</span> ➔ <span>Final Dish with You</span>
+              <div className="photo-order-grid">
+                <div className="order-grid-item"><span className="order-idx">1</span> Ingredients</div>
+                <div className="order-grid-item"><span className="order-idx">2</span> Making</div>
+                <div className="order-grid-item"><span className="order-idx">3</span> SVS in Use</div>
+                <div className="order-grid-item"><span className="order-idx">4</span> Dish</div>
+                <div className="order-grid-item span-full"><span className="order-idx">5</span> Final Dish with You</div>
               </div>
             </div>
 
@@ -292,11 +298,14 @@ export default function Landing() {
               <div className="step-num-bubble">03</div>
               <div className="step-icon-wrap">📝</div>
               <h3>3. Upload &amp; List Out</h3>
-              <p>
-                • <strong>Photo:</strong> Write all ingredients and the cooking procedure in the description.
-                <br />
-                • <strong>Reel:</strong> Explain all ingredients and the full procedure in the video, in your own voice, at every step.
-              </p>
+              <div className="step-bullets-list">
+                <div className="step-bullet-item">
+                  <strong>📸 Photo:</strong> Write all ingredients &amp; cooking procedure in description.
+                </div>
+                <div className="step-bullet-item">
+                  <strong>🎥 Reel:</strong> Explain all ingredients &amp; full procedure in your own voice.
+                </div>
+              </div>
             </div>
 
             <div className="step-connector-arrow">➔</div>
@@ -305,16 +314,17 @@ export default function Landing() {
             <div className="step-process-card svs-step-card" data-aos="fade-up" data-aos-delay="400">
               <div className="step-num-bubble">04</div>
               <div className="step-icon-wrap">🤝</div>
-              <h3>4. SVS Product &amp; Collab</h3>
-              <p>
-                <strong>MAIN POINT: SVS product</strong> (Choose any ONE option):
-                <br />
-                • <strong>Option 1:</strong> Use the SVS product in your photo or video.
-                <br />
-                • <strong>Option 2:</strong> Mention the SVS slogan in the description (Photo) or speak it in the video (Reel).
-              </p>
-              <div className="collab-must-note">
-                🤝 <strong>COLLAB IS A MUST</strong> with BOTH accounts: <strong>@chithirai.creations</strong> &amp; <strong>@svsfoods</strong>
+              <h3>4. SVS &amp; Collab</h3>
+              <div className="step-bullets-list">
+                <div className="step-bullet-item">
+                  <strong>Option 1:</strong> Use SVS product in photo or video.
+                </div>
+                <div className="step-bullet-item">
+                  <strong>Option 2:</strong> SVS slogan in description or spoken in reel.
+                </div>
+              </div>
+              <div className="collab-must-badge">
+                🤝 <strong>Collab with:</strong> @chithirai.creations &amp; @svsfoods
               </div>
             </div>
           </div>
@@ -352,7 +362,6 @@ export default function Landing() {
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
                       <h4>Winner</h4>
-                      <p>Grand Cash Prize + Prestigious Gold Trophy</p>
                     </div>
                   </div>
 
@@ -360,7 +369,6 @@ export default function Landing() {
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
                       <h4>First Runner-up</h4>
-                      <p>Cash Prize + Runner-Up Silver Trophy</p>
                     </div>
                   </div>
 
@@ -368,7 +376,6 @@ export default function Landing() {
                     <div className="rank-badge">🥉 3rd</div>
                     <div className="rank-details">
                       <h4>Second Runner-up</h4>
-                      <p>Cash Prize + Bronze Trophy &amp; Certificate</p>
                     </div>
                   </div>
                 </div>
@@ -388,7 +395,6 @@ export default function Landing() {
                     <div className="rank-badge">🥇 1st</div>
                     <div className="rank-details">
                       <h4>Winner</h4>
-                      <p>Grand Cash Prize + Prestigious Gold Trophy</p>
                     </div>
                   </div>
 
@@ -396,7 +402,6 @@ export default function Landing() {
                     <div className="rank-badge">🥈 2nd</div>
                     <div className="rank-details">
                       <h4>First Runner-up</h4>
-                      <p>Cash Prize + Runner-Up Silver Trophy</p>
                     </div>
                   </div>
 
@@ -404,7 +409,6 @@ export default function Landing() {
                     <div className="rank-badge">🥉 3rd</div>
                     <div className="rank-details">
                       <h4>Second Runner-up</h4>
-                      <p>Cash Prize + Bronze Trophy &amp; Certificate</p>
                     </div>
                   </div>
                 </div>
