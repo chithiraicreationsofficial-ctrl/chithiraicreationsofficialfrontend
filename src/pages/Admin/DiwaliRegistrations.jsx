@@ -263,6 +263,11 @@ export default function DiwaliRegistrations() {
         </div>
       </div>
 
+      {/* Mobile Scroll Cue */}
+      <div className="mobile-table-hint">
+        <span>↔ Swipe table horizontally to view full columns &amp; actions</span>
+      </div>
+
       {/* Registrations Table */}
       <div className="table-responsive-wrapper">
         <table className="diwali-registrations-table">

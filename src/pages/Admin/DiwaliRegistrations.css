@@ -1,48 +1,71 @@
 /* DiwaliRegistrations.css */
 
 .diwali-admin-container {
-  padding: 24px;
-  color: #333333;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: #1f2937;
+  font-family: 'Poppins', sans-serif !important;
 }
 
+/* ========================================================
+   TOP HEADER BANNER
+   ======================================================== */
 .diwali-admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 14px;
+  width: 100%;
+}
+
+.header-text-group {
+  flex: 1;
+  min-width: 260px;
 }
 
 .header-text-group h2 {
-  font-size: 1.6rem;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
   font-weight: 800;
-  color: #1a0826;
-  margin-bottom: 4px;
+  color: #111827;
+  margin: 0 0 4px 0;
+  line-height: 1.25;
 }
 
 .header-text-group p {
-  color: #666666;
-  font-size: 0.92rem;
+  color: #6b7280;
+  font-size: clamp(0.78rem, 1.4vw, 0.9rem);
   margin: 0;
+  line-height: 1.4;
 }
 
 .btn-refresh {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #f3f4f6;
+  background: #ffffff;
   border: 1px solid #d1d5db;
   color: #374151;
   font-weight: 600;
+  font-size: 0.88rem;
   padding: 8px 16px;
   border-radius: 8px;
   cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 }
 
-.btn-refresh:hover {
-  background: #e5e7eb;
+.btn-refresh:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.btn-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .spin-icon {
@@ -63,36 +86,38 @@
    ======================================================== */
 .diwali-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .stat-card {
   background: #ffffff;
   border-radius: 12px;
-  padding: 18px;
+  padding: 16px 18px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  gap: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   border: 1px solid #e5e7eb;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-width: 0;
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .stat-icon-wrap {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   flex-shrink: 0;
 }
 
@@ -119,31 +144,36 @@
 .stat-info {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .stat-label {
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stat-value {
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   font-weight: 800;
   color: #111827;
   line-height: 1.2;
 }
 
 .stat-sub {
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   color: #9ca3af;
-  margin-top: 2px;
+  margin-top: 1px;
+  white-space: nowrap;
 }
 
 /* ========================================================
-   TOOLBAR & FILTERS
+   FILTER TOOLBAR
    ======================================================== */
 .diwali-filter-toolbar {
   background: #ffffff;
@@ -152,17 +182,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  gap: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   border: 1px solid #e5e7eb;
   flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search-input-wrap {
   position: relative;
-  flex: 1;
-  min-width: 260px;
+  flex: 1 1 280px;
+  min-width: 220px;
 }
 
 .search-icon {
@@ -171,21 +203,25 @@
   top: 50%;
   transform: translateY(-50%);
   color: #9ca3af;
+  pointer-events: none;
 }
 
 .filter-search-input {
   width: 100%;
-  padding: 8px 36px 8px 36px;
+  padding: 9px 34px 9px 34px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   outline: none;
-  transition: border-color 0.2s ease;
+  background: #fafafa;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .filter-search-input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .clear-search-btn {
@@ -197,65 +233,106 @@
   border: none;
   color: #9ca3af;
   cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search-btn:hover {
+  color: #111827;
 }
 
 .dropdown-filters-group {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .filter-select-wrap {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.88rem;
+  gap: 6px;
+  font-size: 0.84rem;
   color: #4b5563;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .filter-select {
-  padding: 7px 12px;
+  padding: 8px 12px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   background: #ffffff;
   outline: none;
   cursor: pointer;
+  color: #1f2937;
+  font-weight: 500;
+  transition: border-color 0.2s ease;
+}
+
+.filter-select:focus {
+  border-color: #3b82f6;
+}
+
+/* Mobile Scroll Cue */
+.mobile-table-hint {
+  display: none;
+  padding: 6px 12px;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 0.76rem;
+  color: #2563eb;
+  font-weight: 500;
+  text-align: center;
 }
 
 /* ========================================================
-   TABLE STYLING
+   TABLE STYLING (RESPONSIVE HORIZONTAL SCROLL)
    ======================================================== */
 .table-responsive-wrapper {
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   border: 1px solid #e5e7eb;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .diwali-registrations-table {
   width: 100%;
+  min-width: 960px;
   border-collapse: collapse;
   text-align: left;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
 }
 
 .diwali-registrations-table thead th {
   background: #f9fafb;
   color: #4b5563;
   font-weight: 700;
-  padding: 14px 16px;
-  border-bottom: 2px solid #e5e7eb;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
   white-space: nowrap;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .diwali-registrations-table tbody td {
-  padding: 14px 16px;
+  padding: 12px 14px;
   border-bottom: 1px solid #f3f4f6;
   vertical-align: middle;
+}
+
+.diwali-registrations-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .diwali-registrations-table tbody tr:hover {
@@ -265,7 +342,8 @@
 .col-index {
   color: #9ca3af;
   font-weight: 600;
-  width: 40px;
+  width: 35px;
+  text-align: center;
 }
 
 /* Status & Token Badges */
@@ -276,14 +354,15 @@
   background: #ecfdf5;
   color: #065f46;
   border: 1px solid #a7f3d0;
-  padding: 4px 10px;
+  padding: 4px 8px;
   border-radius: 6px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .token-code {
   font-family: monospace;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #047857;
 }
 
@@ -294,36 +373,42 @@
   background: #fffbeb;
   color: #92400e;
   border: 1px solid #fde68a;
-  padding: 4px 10px;
+  padding: 4px 8px;
   border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.82rem;
+  font-weight: 700;
+  font-size: 0.78rem;
+  white-space: nowrap;
 }
 
 .reg-id-subtext {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: #9ca3af;
-  margin-top: 4px;
+  margin-top: 3px;
+  font-family: monospace;
 }
 
-/* Participant */
+/* Participant Column */
 .participant-name {
   font-weight: 700;
   color: #111827;
+  font-size: 0.88rem;
 }
 
 .participant-meta {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: #6b7280;
+  margin-top: 1px;
 }
 
-/* Contact */
+/* Contact Column */
 .contact-phone a,
 .contact-email a {
   color: #374151;
   text-decoration: none;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .contact-phone a:hover,
@@ -332,51 +417,54 @@
   text-decoration: underline;
 }
 
-/* District */
+/* District Column */
 .district-pill {
   display: inline-block;
   background: #f3f4f6;
   color: #1f2937;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: 4px;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
 }
 
 .state-name {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: #9ca3af;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
-/* Instagram */
+/* Instagram Column */
 .insta-link {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   color: #db2777;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
 }
 
 .insta-link:hover {
   text-decoration: underline;
 }
 
-/* Sweet & Category */
+/* Sweet & Category Column */
 .sweet-name-text {
   font-weight: 600;
   color: #111827;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
+  font-size: 0.84rem;
 }
 
 .category-pill {
   display: inline-block;
-  font-size: 0.75rem;
-  padding: 2px 8px;
+  font-size: 0.72rem;
+  padding: 1px 6px;
   border-radius: 4px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .pill-reel {
@@ -392,13 +480,14 @@
 /* Screenshot Thumbnail */
 .screenshot-thumb-wrap {
   position: relative;
-  width: 58px;
-  height: 58px;
-  border-radius: 6px;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid #d1d5db;
   cursor: pointer;
   background: #000;
+  margin: 0 auto;
 }
 
 .screenshot-thumb {
@@ -411,13 +500,13 @@
 .thumb-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.6);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  font-size: 0.72rem;
+  gap: 2px;
+  font-size: 0.7rem;
   font-weight: 600;
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -432,14 +521,14 @@
 }
 
 .no-screenshot-badge {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #ef4444;
   background: #fee2e2;
-  padding: 3px 6px;
+  padding: 2px 6px;
   border-radius: 4px;
 }
 
-/* Actions */
+/* Action Buttons */
 .btn-action-verify {
   display: inline-flex;
   align-items: center;
@@ -448,12 +537,12 @@
   color: #ffffff;
   border: none;
   font-weight: 700;
-  font-size: 0.82rem;
-  padding: 8px 14px;
+  font-size: 0.8rem;
+  padding: 7px 13px;
   border-radius: 6px;
   cursor: pointer;
   white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
   transition: all 0.2s ease;
 }
 
@@ -470,7 +559,8 @@
 .verified-actions-wrap {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .btn-action-resend {
@@ -480,11 +570,12 @@
   background: #f3f4f6;
   border: 1px solid #d1d5db;
   color: #374151;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 6px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-action-resend:hover:not(:disabled) {
@@ -498,11 +589,12 @@
   background: #eff6ff;
   border: 1px solid #bfdbfe;
   color: #1d4ed8;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-radius: 6px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-action-details:hover {
@@ -521,14 +613,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 14px;
 }
 
 .admin-modal-dialog {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 14px;
   width: 100%;
-  max-width: 640px;
+  max-width: 580px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
@@ -540,20 +632,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 14px 18px;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .modal-title-wrap h4 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
 }
 
 .modal-title-wrap p {
-  margin: 3px 0 0 0;
-  font-size: 0.85rem;
+  margin: 2px 0 0 0;
+  font-size: 0.8rem;
   color: #6b7280;
 }
 
@@ -564,6 +656,8 @@
   color: #9ca3af;
   cursor: pointer;
   padding: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .btn-modal-close:hover {
@@ -571,32 +665,33 @@
 }
 
 .admin-modal-body {
-  padding: 20px;
+  padding: 18px;
   flex: 1;
 }
 
 .modal-image-preview-box {
-  max-height: 480px;
+  max-height: 420px;
   overflow: auto;
   background: #111827;
   border-radius: 8px;
   padding: 8px;
+  text-align: center;
 }
 
 .modal-screenshot-full {
   max-width: 100%;
-  max-height: 460px;
+  max-height: 400px;
   object-fit: contain;
   border-radius: 6px;
 }
 
 .modal-quick-meta {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: #4b5563;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -616,11 +711,11 @@
 .admin-modal-footer {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  padding: 14px 20px;
+  gap: 10px;
+  padding: 12px 18px;
   border-top: 1px solid #e5e7eb;
   background: #f9fafb;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 14px 14px;
 }
 
 .btn-modal-secondary {
@@ -628,9 +723,10 @@
   border: 1px solid #d1d5db;
   color: #374151;
   font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 8px;
+  padding: 7px 16px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 0.85rem;
 }
 
 .btn-modal-primary {
@@ -641,9 +737,10 @@
   border: none;
   color: #ffffff;
   font-weight: 700;
-  padding: 8px 20px;
-  border-radius: 8px;
+  padding: 7px 18px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 0.85rem;
 }
 
 .btn-modal-primary:hover:not(:disabled) {
@@ -654,7 +751,7 @@
 .details-list-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 12px;
 }
 
 .detail-item {
@@ -667,7 +764,7 @@
 }
 
 .detail-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #6b7280;
   text-transform: uppercase;
@@ -675,7 +772,7 @@
 }
 
 .detail-val {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: #111827;
   margin-top: 2px;
@@ -686,14 +783,73 @@
   background: #f3f4f6;
   padding: 8px 12px;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 400;
   max-height: 120px;
   overflow-y: auto;
 }
 
+/* ========================================================
+   RESPONSIVE QUERIES FOR DIWALI REGISTRATIONS PAGE
+   ======================================================== */
+@media (max-width: 1200px) {
+  .diwali-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 991px) {
+  .mobile-table-hint {
+    display: block;
+  }
+}
+
 @media (max-width: 768px) {
+  .diwali-filter-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input-wrap {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .dropdown-filters-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .filter-select-wrap {
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
   .details-list-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .diwali-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 14px 16px;
+  }
+
+  .dropdown-filters-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-select-wrap {
+    width: 100%;
+    justify-content: space-between;
   }
 }
