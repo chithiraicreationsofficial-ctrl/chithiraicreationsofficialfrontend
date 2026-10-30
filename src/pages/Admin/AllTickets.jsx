@@ -139,7 +139,7 @@ const AllTickets = () => {
     const downloadPDF = async (ticket) => {
         // Generate QR as base64
         const qrDataUrl = await QRCode.toDataURL(
-          `https://www.chithiraicreations.com/readyamamaey?ticketId=${ticket.ticketId}`
+          `https://www.chithiraicreations.in/readyamamaey?ticketId=${ticket.ticketId}`
         );
       
         // Create hidden HTML

@@ -17,7 +17,11 @@ import {
 } from "react-icons/fa6";
 import { IoSparkles, IoWarningOutline, IoClose, IoCheckmarkCircle } from "react-icons/io5";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.PROD
+    ? "https://api.chithiraicreations.in/api"
+    : "http://localhost:8000/api");
 
 // All 38 Districts of Tamil Nadu
 const TN_DISTRICTS = [

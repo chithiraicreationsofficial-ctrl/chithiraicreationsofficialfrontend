@@ -24,7 +24,11 @@ import {
 } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa6";
 
-const BACKEND_URL = "http://localhost:8000";
+const BACKEND_URL =
+  import.meta.env.VITE_BACKEND_URL ||
+  (import.meta.env.PROD
+    ? "https://api.chithiraicreations.in"
+    : "http://localhost:8000");
 
 // All 38 Districts of Tamil Nadu
 const TN_DISTRICTS = [
