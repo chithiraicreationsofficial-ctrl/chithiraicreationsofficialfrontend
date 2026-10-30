@@ -141,7 +141,7 @@ export default function EventsPage() {
                   </p>
 
                   <div className="live-dates-pill">
-                    <span>📅 Start: <strong>28 Oct 2026</strong></span>
+                    <span>📅 Start: <strong>31 Oct 2026</strong></span>
                     <span>⏰ Last Date: <strong>09 Nov 2026</strong></span>
                     <span>🏆 Prizes: <strong>₹1,00,000</strong></span>
                   </div>

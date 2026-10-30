@@ -136,7 +136,7 @@ export default function Landing() {
               <IoCalendarOutline className="meta-icon" />
               <div className="meta-content">
                 <span className="meta-lbl">START DATE</span>
-                <span className="meta-val">28 OCT 2026</span>
+                <span className="meta-val">31 OCT 2026</span>
               </div>
             </div>
 
@@ -459,7 +459,7 @@ export default function Landing() {
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>Contest Dates:</strong> Upload between <strong>28 Oct and 09 Nov 2026</strong>.</span>
+                    <span><strong>Contest Dates:</strong> Upload between <strong>31 Oct and 09 Nov 2026</strong>.</span>
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
