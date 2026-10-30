@@ -30,6 +30,7 @@ const AdminLayout = () => {
   const menuItems = [
     { path: "/admin/dashboard", label: "Dashboard", icon: "📊" },
     { path: "/admin/diwali-registrations", label: "Diwali Registrations", icon: "🪔" },
+    { path: "/admin/inquiries", label: "Inquiry List", icon: "📞" },
     { path: "/admin/profile", label: "My Profile", icon: "👤" },
     ...(adminInfo.role === "super_admin"
       ? [{ path: "/admin/manage-admins", label: "Manage Admins", icon: "👥" }]

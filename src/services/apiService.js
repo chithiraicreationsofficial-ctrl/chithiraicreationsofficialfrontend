@@ -160,6 +160,17 @@ export const diwaliAPI = {
     }),
 };
 
+// Phone Inquiries & Leads API
+export const inquiryAPI = {
+  getAll: (params) => api.get("/inquiries", { params }),
+  getStats: (params) => api.get("/inquiries/stats", { params }),
+  create: (data) => api.post("/inquiries", data),
+  updateStatus: (id, status) => api.patch(`/inquiries/${id}/status`, { status }),
+  update: (id, data) => api.put(`/inquiries/${id}`, data),
+  logCall: (id, data = {}) => api.post(`/inquiries/${id}/log-call`, data),
+  delete: (id) => api.delete(`/inquiries/${id}`),
+};
+
 // Helper function to get admin info
 export const getAdminInfo = () => {
   try {
