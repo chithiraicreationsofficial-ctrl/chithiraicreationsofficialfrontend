@@ -86,12 +86,11 @@ export const paymentAPI = {
     api.post("/payments/failure", { orderId, reason }),
 };
 
-// Admin APIs - UPDATED
+// Admin APIs
 export const adminAPI = {
-  // Old login (legacy - 2FA only)
-  login: (twoFACode) => api.post("/admin/login", { twoFACode }),
-
-  // New login system (email/password + 2FA)
+  // Admin login (email & password - no 2FA needed)
+  login: (email, password) =>
+    api.post("/admin/auth/login", { email, password }),
   loginStep1: (email, password) =>
     api.post("/admin/auth/login-step1", { email, password }),
   loginStep2: (email, twoFACode) =>
