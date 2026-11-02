@@ -78,6 +78,8 @@ export default function DiwaliRegistrations() {
 
   // Modals
   const [screenshotModal, setScreenshotModal] = useState(null); // { url, participant }
+  const [screenshotError, setScreenshotError] = useState(false);
+  const [brokenImages, setBrokenImages] = useState(new Set());
   const [detailsModal, setDetailsModal] = useState(null); // participant object
   const [deleteConfirmModal, setDeleteConfirmModal] = useState(null); // participant object to delete
 
@@ -780,25 +782,41 @@ export default function DiwaliRegistrations() {
                     {/* Payment Proof Screenshot */}
                     <td className="col-screenshot">
                       {item.payment_screenshot ? (
-                        <div
-                          className="screenshot-thumb-wrap"
-                          onClick={() =>
-                            setScreenshotModal({
-                              url: getFullImageUrl(item.payment_screenshot),
-                              participant: item,
-                            })
-                          }
-                          title="Click to view payment proof"
-                        >
-                          <img
-                            src={getFullImageUrl(item.payment_screenshot)}
-                            alt="Payment Proof"
-                            className="screenshot-thumb"
-                          />
-                          <div className="thumb-overlay">
-                            <FiEye /> View
+                        brokenImages.has(item.id) ? (
+                          <button
+                            type="button"
+                            className="btn-broken-screenshot-pill"
+                            onClick={() => openEditModal(item)}
+                            title="Image file expired on serverless storage. Click to re-upload proof."
+                          >
+                            <FiAlertTriangle size={13} />
+                            <span>Re-upload</span>
+                          </button>
+                        ) : (
+                          <div
+                            className="screenshot-thumb-wrap"
+                            onClick={() => {
+                              setScreenshotError(false);
+                              setScreenshotModal({
+                                url: getFullImageUrl(item.payment_screenshot),
+                                participant: item,
+                              });
+                            }}
+                            title="Click to view payment proof"
+                          >
+                            <img
+                              src={getFullImageUrl(item.payment_screenshot)}
+                              alt="Payment Proof"
+                              className="screenshot-thumb"
+                              onError={() =>
+                                setBrokenImages((prev) => new Set(prev).add(item.id))
+                              }
+                            />
+                            <div className="thumb-overlay">
+                              <FiEye /> View
+                            </div>
                           </div>
-                        </div>
+                        )
                       ) : (
                         <span className="no-screenshot-badge">No File</span>
                       )}
@@ -1209,26 +1227,50 @@ export default function DiwaliRegistrations() {
 
             <div className="admin-modal-body text-center">
               <div className="modal-image-preview-box">
-                <img
-                  src={screenshotModal.url}
-                  alt="Payment Screenshot Full"
-                  className="modal-screenshot-full"
-                />
+                {screenshotError ? (
+                  <div className="screenshot-failed-fallback">
+                    <FiAlertTriangle size={36} className="text-amber-500" />
+                    <h5>Payment Proof File Unavailable</h5>
+                    <p>
+                      This image was stored on ephemeral serverless storage and was lost during a Vercel serverless reset.
+                    </p>
+                    <button
+                      type="button"
+                      className="btn-modal-reupload"
+                      onClick={() => {
+                        const target = screenshotModal.participant;
+                        setScreenshotModal(null);
+                        openEditModal(target);
+                      }}
+                    >
+                      <FiUploadCloud /> Re-upload Payment Proof (Edit)
+                    </button>
+                  </div>
+                ) : (
+                  <img
+                    src={screenshotModal.url}
+                    alt="Payment Screenshot Full"
+                    className="modal-screenshot-full"
+                    onError={() => setScreenshotError(true)}
+                  />
+                )}
               </div>
-              <div className="modal-quick-meta mt-3">
-                <span>Entry Fee: <strong>₹249</strong></span>
-                <span>&bull;</span>
-                <span>UPI ID: <strong>7010240042@upi</strong></span>
-                <span>&bull;</span>
-                <a
-                  href={screenshotModal.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="external-img-link"
-                >
-                  <FiExternalLink /> Open Original Image
-                </a>
-              </div>
+              {!screenshotError && (
+                <div className="modal-quick-meta mt-3">
+                  <span>Entry Fee: <strong>₹249</strong></span>
+                  <span>&bull;</span>
+                  <span>UPI ID: <strong>7010240042@upi</strong></span>
+                  <span>&bull;</span>
+                  <a
+                    href={screenshotModal.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="external-img-link"
+                  >
+                    <FiExternalLink /> Open Original Image
+                  </a>
+                </div>
+              )}
             </div>
 
             <div className="admin-modal-footer">
