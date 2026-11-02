@@ -21,6 +21,7 @@ import {
   FiUserPlus,
   FiUploadCloud,
   FiImage,
+  FiEdit2,
 } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa6";
 
@@ -87,6 +88,119 @@ export default function DiwaliRegistrations() {
   const [adminFormPreview, setAdminFormPreview] = useState(null);
   const [submittingAdminForm, setSubmittingAdminForm] = useState(false);
   const [adminFormError, setAdminFormError] = useState("");
+
+  // Edit Participant Modal States (Live Data Editing)
+  const [editModal, setEditModal] = useState(null);
+  const [editForm, setEditForm] = useState({
+    name: "",
+    age: "",
+    gender: "Female",
+    state: "Tamil Nadu",
+    district: "Chennai",
+    phone: "",
+    email: "",
+    instagramProfile: "",
+    sweetName: "",
+    category: "Photo Category",
+    ingredients: "",
+    token: "",
+    status: "VERIFIED",
+    resendEmail: false,
+  });
+  const [editScreenshotFile, setEditScreenshotFile] = useState(null);
+  const [editScreenshotPreview, setEditScreenshotPreview] = useState(null);
+  const [submittingEditForm, setSubmittingEditForm] = useState(false);
+  const [editFormError, setEditFormError] = useState("");
+
+  const openEditModal = (item) => {
+    setEditModal(item);
+    setEditForm({
+      name: item.name || "",
+      age: item.age || "",
+      gender: item.gender || "Female",
+      state: item.state || "Tamil Nadu",
+      district: item.district || "Chennai",
+      phone: item.phone || "",
+      email: item.email || "",
+      instagramProfile: item.instagram_profile || "",
+      sweetName: item.sweet_name || "",
+      category: item.category || "Photo Category",
+      ingredients: item.ingredients || "",
+      token: item.token || "",
+      status: item.status || "PENDING",
+      resendEmail: false,
+    });
+    setEditScreenshotFile(null);
+    setEditScreenshotPreview(null);
+    setEditFormError("");
+  };
+
+  const handleEditScreenshotChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setEditFormError("Only image files (JPG, PNG, WEBP) are allowed.");
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setEditFormError("File size cannot exceed 10MB.");
+      return;
+    }
+
+    setEditScreenshotFile(file);
+    const reader = new FileReader();
+    reader.onload = () => setEditScreenshotPreview(reader.result);
+    reader.readAsDataURL(file);
+    setEditFormError("");
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    if (
+      !editForm.name ||
+      !editForm.phone ||
+      !editForm.email ||
+      !editForm.sweetName ||
+      !editForm.district
+    ) {
+      setEditFormError("Please fill in all mandatory fields (Name, Phone, Email, District, Sweet Name).");
+      return;
+    }
+
+    try {
+      setSubmittingEditForm(true);
+      setEditFormError("");
+
+      let payload;
+      if (editScreenshotFile) {
+        payload = new FormData();
+        Object.entries(editForm).forEach(([key, val]) => {
+          payload.append(key, val);
+        });
+        payload.append("paymentScreenshot", editScreenshotFile);
+      } else {
+        payload = { ...editForm };
+      }
+
+      const res = await diwaliAPI.updateRegistration(editModal.id, payload);
+      if (res.data?.success) {
+        toast.success(res.data.message || `Participant ${editForm.name} updated successfully!`);
+        if (res.data.emailStatus === "sent") {
+          toast.info(`Updated confirmation email sent to ${editForm.email}`);
+        }
+        setEditModal(null);
+        fetchRegistrations();
+      } else {
+        setEditFormError(res.data?.message || "Failed to update participant.");
+      }
+    } catch (err) {
+      console.error("Edit registration error:", err);
+      setEditFormError(err.response?.data?.message || "Failed to update participant. Please try again.");
+    } finally {
+      setSubmittingEditForm(false);
+    }
+  };
 
   const adminInfo = getAdminInfo();
 
@@ -730,6 +844,15 @@ export default function DiwaliRegistrations() {
                           <FiEye /> Details
                         </button>
 
+                        {/* Edit Button (Live Data) */}
+                        <button
+                          className="btn-action-edit"
+                          onClick={() => openEditModal(item)}
+                          title="Edit Participant Details"
+                        >
+                          <FiEdit2 /> Edit
+                        </button>
+
                         {/* Delete Button */}
                         <button
                           className="btn-action-delete"
@@ -1219,12 +1342,309 @@ export default function DiwaliRegistrations() {
                 <FiTrash2 /> Delete Registration
               </button>
               <button
+                className="btn-modal-edit"
+                onClick={() => {
+                  const target = detailsModal;
+                  setDetailsModal(null);
+                  openEditModal(target);
+                }}
+              >
+                <FiEdit2 /> Edit Details
+              </button>
+              <button
                 className="btn-modal-secondary"
                 onClick={() => setDetailsModal(null)}
               >
                 Close
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================================
+          EDIT PARTICIPANT REGISTRATION MODAL (LIVE DATA)
+          ======================================================== */}
+      {editModal && (
+        <div className="admin-modal-backdrop" onClick={() => setEditModal(null)}>
+          <div className="admin-modal-dialog admin-register-dialog" onClick={(e) => e.stopPropagation()}>
+            <div className="admin-modal-header">
+              <div className="modal-title-wrap">
+                <span className="modal-kicker">Live Data Editor</span>
+                <h4>Edit Registration: {editModal.name}</h4>
+                <p>
+                  Token: <strong>{editForm.token || "Not Assigned"}</strong> &bull; Reg ID:{" "}
+                  <code>{editModal.registration_id}</code>
+                </p>
+              </div>
+              <button
+                className="btn-modal-close"
+                onClick={() => setEditModal(null)}
+                aria-label="Close edit modal"
+              >
+                <FiX />
+              </button>
+            </div>
+
+            <form onSubmit={handleEditSubmit} className="admin-register-form">
+              <div className="admin-modal-body">
+                {editFormError && (
+                  <div className="admin-form-alert error">
+                    <FiAlertTriangle /> {editFormError}
+                  </div>
+                )}
+
+                <div className="admin-form-grid">
+                  {/* Full Name */}
+                  <div className="form-field">
+                    <label>
+                      Full Name <span className="req">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={editForm.name}
+                      onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+                      placeholder="e.g. Anupama Balaji"
+                      required
+                    />
+                  </div>
+
+                  {/* Age & Gender */}
+                  <div className="form-field-split">
+                    <div className="form-field">
+                      <label>
+                        Age <span className="req">*</span>
+                      </label>
+                      <input
+                        type="number"
+                        min="4"
+                        max="120"
+                        value={editForm.age}
+                        onChange={(e) => setEditForm({ ...editForm, age: e.target.value })}
+                        required
+                      />
+                    </div>
+                    <div className="form-field">
+                      <label>
+                        Gender <span className="req">*</span>
+                      </label>
+                      <select
+                        value={editForm.gender}
+                        onChange={(e) => setEditForm({ ...editForm, gender: e.target.value })}
+                        required
+                      >
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* WhatsApp Mobile */}
+                  <div className="form-field">
+                    <label>
+                      WhatsApp Mobile <span className="req">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      value={editForm.phone}
+                      onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
+                      placeholder="10-digit mobile number"
+                      required
+                    />
+                  </div>
+
+                  {/* Email Address */}
+                  <div className="form-field">
+                    <label>
+                      Email Address <span className="req">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      value={editForm.email}
+                      onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+                      placeholder="participant@gmail.com"
+                      required
+                    />
+                  </div>
+
+                  {/* District */}
+                  <div className="form-field">
+                    <label>
+                      District <span className="req">*</span>
+                    </label>
+                    <select
+                      value={editForm.district}
+                      onChange={(e) => setEditForm({ ...editForm, district: e.target.value })}
+                      required
+                    >
+                      {TN_DISTRICTS.map((d) => (
+                        <option key={d} value={d}>
+                          {d}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* State */}
+                  <div className="form-field">
+                    <label>State</label>
+                    <input
+                      type="text"
+                      value={editForm.state}
+                      onChange={(e) => setEditForm({ ...editForm, state: e.target.value })}
+                      placeholder="Tamil Nadu"
+                    />
+                  </div>
+
+                  {/* Instagram Profile */}
+                  <div className="form-field">
+                    <label>
+                      Instagram Profile <span className="req">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={editForm.instagramProfile}
+                      onChange={(e) => setEditForm({ ...editForm, instagramProfile: e.target.value })}
+                      placeholder="@username"
+                      required
+                    />
+                  </div>
+
+                  {/* Sweet / Palagaram Name */}
+                  <div className="form-field">
+                    <label>
+                      Sweet / Palagaram Name <span className="req">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={editForm.sweetName}
+                      onChange={(e) => setEditForm({ ...editForm, sweetName: e.target.value })}
+                      placeholder="e.g. Mysore Pak, Laddu, Halwa"
+                      required
+                    />
+                  </div>
+
+                  {/* Contest Category */}
+                  <div className="form-field">
+                    <label>
+                      Contest Category <span className="req">*</span>
+                    </label>
+                    <select
+                      value={editForm.category}
+                      onChange={(e) => setEditForm({ ...editForm, category: e.target.value })}
+                      required
+                    >
+                      <option value="Photo Category">Photo Category (REFP01 format)</option>
+                      <option value="Reel Category">Reels Category (REFR01 format)</option>
+                    </select>
+                  </div>
+
+                  {/* Token Number */}
+                  <div className="form-field">
+                    <label>
+                      Token Number <span className="field-note">(Assigned ID)</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={editForm.token}
+                      onChange={(e) => setEditForm({ ...editForm, token: e.target.value })}
+                      placeholder="e.g. REFP01 or REFR01"
+                    />
+                  </div>
+
+                  {/* Status */}
+                  <div className="form-field">
+                    <label>Registration Status</label>
+                    <select
+                      value={editForm.status}
+                      onChange={(e) => setEditForm({ ...editForm, status: e.target.value })}
+                    >
+                      <option value="VERIFIED">VERIFIED</option>
+                      <option value="PENDING">PENDING</option>
+                    </select>
+                  </div>
+
+                  {/* Payment Screenshot (Optional update) */}
+                  <div className="form-field">
+                    <label>
+                      Payment Proof Screenshot <span className="optional-tag">(Optional replace)</span>
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleEditScreenshotChange}
+                      id="editPaymentScreenshot"
+                      className="screenshot-file-input"
+                    />
+                    <label htmlFor="editPaymentScreenshot" className="screenshot-upload-box">
+                      <FiUploadCloud />
+                      <span>{editScreenshotFile ? editScreenshotFile.name : "Replace payment screenshot"}</span>
+                    </label>
+                    {editScreenshotPreview ? (
+                      <div className="admin-screenshot-preview">
+                        <img src={editScreenshotPreview} alt="New Preview" />
+                      </div>
+                    ) : editModal.payment_screenshot ? (
+                      <div className="current-screenshot-note">
+                        Current: <a href={`${BACKEND_URL}${editModal.payment_screenshot}`} target="_blank" rel="noopener noreferrer">View Screenshot</a>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  {/* Ingredients */}
+                  <div className="form-field full-width">
+                    <label>
+                      Ingredients &amp; Recipe Highlights <span className="optional-tag">(Optional)</span>
+                    </label>
+                    <textarea
+                      rows="2"
+                      value={editForm.ingredients}
+                      onChange={(e) => setEditForm({ ...editForm, ingredients: e.target.value })}
+                      placeholder="e.g. Ghee, Besan, Sugar, Cardamom"
+                    />
+                  </div>
+
+                  {/* Checkbox: Resend updated confirmation email */}
+                  <div className="form-field full-width">
+                    <label className="checkbox-label-custom">
+                      <input
+                        type="checkbox"
+                        checked={editForm.resendEmail}
+                        onChange={(e) => setEditForm({ ...editForm, resendEmail: e.target.checked })}
+                      />
+                      <span>Send updated official confirmation email to participant with revised details</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div className="admin-modal-footer">
+                <button
+                  type="button"
+                  className="btn-modal-secondary"
+                  onClick={() => setEditModal(null)}
+                  disabled={submittingEditForm}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn-modal-primary"
+                  disabled={submittingEditForm}
+                >
+                  {submittingEditForm ? (
+                    <>
+                      <FiRefreshCw className="spin-icon" /> Saving Changes...
+                    </>
+                  ) : (
+                    <>
+                      <FiCheckCircle /> Save Live Changes
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
