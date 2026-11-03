@@ -346,7 +346,7 @@ export default function DiwaliDashboard() {
               <div className="prize-banner-text">
                 <strong>₹1,00,000 Prizes Pool</strong>
                 <p className="mb-0">
-                  Title Sponsor: <strong>SVS Foods</strong> • Top 50 win ₹300 Hampers
+                  Title Sponsor: <strong>SVS Foods</strong> • Top 50 win ₹250 Hampers
                 </p>
               </div>
             </div>

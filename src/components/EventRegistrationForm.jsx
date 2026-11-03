@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "./EventRegistrationForm.css";
 import DiyaIcon from "./DiyaIcon";
+import upiQrImg from "../assets/upi_qr.png";
 import {
   FaInstagram,
   FaTrophy,
@@ -14,6 +15,7 @@ import {
   FaCheck,
   FaTrash,
   FaFileInvoiceDollar,
+  FaQrcode,
 } from "react-icons/fa6";
 import { IoSparkles, IoWarningOutline, IoClose, IoCheckmarkCircle } from "react-icons/io5";
 
@@ -542,29 +544,57 @@ export default function EventRegistrationForm({ onClose }) {
                 <div className="payment-card-body">
                   <div className="upi-info-container">
                     <div className="upi-step-label">
-                      <strong>Step 1:</strong> Pay ₹249 to the official UPI ID via GPay / PhonePe / Paytm / BHIM:
+                      <strong>Step 1:</strong> Pay ₹249 via any UPI App (GPay / PhonePe / Paytm / BHIM) or Scan QR:
                     </div>
-                    <div className="upi-box-interactive">
-                      <div className="upi-details-left">
-                        <span className="upi-label-small">UPI ID</span>
-                        <code className="upi-id-highlight">7010240042@upi</code>
-                        <span className="upi-payee-note">Payee: Chithirai Creations</span>
+
+                    <div className="upi-payment-flex-grid">
+                      <div className="upi-box-interactive">
+                        <div className="upi-details-left">
+                          <span className="upi-label-small">Official UPI ID</span>
+                          <code className="upi-id-highlight">8148586978@hdfc</code>
+                          <span className="upi-payee-note">Payee: Chithirai Creations</span>
+                        </div>
+                        <div className="upi-action-btns">
+                          <button
+                            type="button"
+                            onClick={() => handleCopyUPI("8148586978@hdfc")}
+                            className={`btn-upi-copy ${copiedUpi ? "copied" : ""}`}
+                          >
+                            {copiedUpi ? (
+                              <>
+                                <FaCheck /> Copied!
+                              </>
+                            ) : (
+                              <>
+                                <FaCopy /> Copy UPI ID
+                              </>
+                            )}
+                          </button>
+                          <a
+                            href="upi://pay?pa=8148586978@hdfc&pn=Chithirai%20Creations&am=249&cu=INR&tn=Diwali%20Palagaram%20Entry"
+                            className="btn-upi-app-pay"
+                          >
+                            ⚡ Pay ₹249 via App
+                          </a>
+                        </div>
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => handleCopyUPI("7010240042@upi")}
-                        className={`btn-upi-copy ${copiedUpi ? "copied" : ""}`}
-                      >
-                        {copiedUpi ? (
-                          <>
-                            <FaCheck /> Copied!
-                          </>
-                        ) : (
-                          <>
-                            <FaCopy /> Copy UPI ID
-                          </>
-                        )}
-                      </button>
+
+                      <div className="upi-qr-card">
+                        <div className="qr-card-header">
+                          <FaQrcode className="qr-gold-icon" />
+                          <span>Scan QR Code to Pay</span>
+                        </div>
+                        <div className="qr-image-frame">
+                          <img
+                            src={upiQrImg}
+                            alt="Scan HDFC UPI QR Code to pay ₹249"
+                            className="upi-official-qr-img"
+                          />
+                        </div>
+                        <div className="qr-card-footer">
+                          <span>UPI ID: <strong>8148586978@hdfc</strong></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -662,7 +692,7 @@ export default function EventRegistrationForm({ onClose }) {
                 </li>
                 <li>
                   <span className="point-bullet">📅</span>
-                  <span><strong>Contest Dates &amp; Prizes:</strong> Upload between <strong>31 Oct and 09 Nov 2026</strong>. Entry fee: <strong>₹249 (limited seats)</strong>. Top 50 high scorers get a <strong>₹300 SVS Festive Gift Hamper Pack!</strong> Total prizes worth ₹1,00,000!</span>
+                  <span><strong>Contest Dates &amp; Prizes:</strong> Upload between <strong>31 Oct and 09 Nov 2026</strong>. Entry fee: <strong>₹249 (limited seats)</strong>. Top 50 high scorers get a <strong>₹250 SVS Festive Gift Hamper Pack!</strong> Total prizes worth ₹1,00,000!</span>
                 </li>
               </ul>
 
@@ -705,7 +735,7 @@ export default function EventRegistrationForm({ onClose }) {
               )}
             </button>
             <div className="submit-subtext mt-2">
-              Total Prizes Worth ₹1,00,000 (1 Lakh!) • Entry Fee: Just ₹249 • Top 50 Get ₹300 SVS Hampers • SVS Title Sponsor
+              Total Prizes Worth ₹1,00,000 (1 Lakh!) • Entry Fee: Just ₹249 • Top 50 Get ₹250 SVS Hampers • SVS Title Sponsor
             </div>
           </div>
         </form>
@@ -728,7 +758,7 @@ export default function EventRegistrationForm({ onClose }) {
             Event <span className="gold-shimmer-text">Registration</span>
           </h2>
           <p className="registration-lead-text">
-            Digital Diwali Palagaram Villa • Total Prizes Worth ₹1,00,000 (1 Lakh!) • Entry Just ₹249 • Top 50 High Scorers Win ₹300 SVS Hampers!
+            Digital Diwali Palagaram Villa • Total Prizes Worth ₹1,00,000 (1 Lakh!) • Entry Just ₹249 • Top 50 High Scorers Win ₹250 SVS Hampers!
           </p>
         </div>
         {formCardMarkup}

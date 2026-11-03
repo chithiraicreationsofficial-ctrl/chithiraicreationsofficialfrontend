@@ -160,7 +160,7 @@ export default function Landing() {
               <span className="meta-emoji">🎁</span>
               <div className="meta-content">
                 <span className="meta-lbl">TOP 50 REWARD</span>
-                <span className="meta-val">₹300 SVS HAMPERS</span>
+                <span className="meta-val">₹250 SVS HAMPERS</span>
               </div>
             </div>
           </div>
@@ -344,7 +344,7 @@ export default function Landing() {
               Contest Categories &amp; <span className="gold-shimmer-text">Prizes</span>
             </h2>
             <p className="section-lead-text">
-              Total Prizes Worth ₹1,00,000 (1 Lakh!) + Exclusive ₹300 SVS Gift Hampers for 50 People!
+              Total Prizes Worth ₹1,00,000 (1 Lakh!) + Exclusive ₹250 SVS Gift Hampers for 50 People!
             </p>
           </div>
 
@@ -419,10 +419,10 @@ export default function Landing() {
           {/* Top 50 Participants Benefit Feature Card */}
           <div className="top-50-hamper-banner mt-5" data-aos="zoom-in">
             <div className="hamper-badge">🎁 SPECIAL PARTICIPANT BENEFIT</div>
-            <h3 className="hamper-heading">Top 50 High Scorers Get ₹300 SVS Gift Hamper Packs!</h3>
+            <h3 className="hamper-heading">Top 50 High Scorers Get ₹250 SVS Gift Hamper Packs!</h3>
             <p className="hamper-desc">
               50 participants who get higher marks from our jury will receive an exclusive
-              <strong> SVS Festive Gift Hamper Pack worth ₹300 each (for 50 people)</strong>! Everyone has an extraordinary chance to win!
+              <strong> SVS Festive Gift Hamper Pack worth ₹250 each (for 50 people)</strong>! Everyone has an extraordinary chance to win!
             </p>
             <button
               onClick={() => setShowRegisterModal(true)}
@@ -487,7 +487,7 @@ export default function Landing() {
                   </li>
                   <li className="rule-gift-item">
                     <span className="alert-bullet">🎁</span>
-                    <span><strong>Special Benefit:</strong> Top 50 high scorers get a <strong>₹300 SVS Festive Gift Hamper Pack!</strong></span>
+                    <span><strong>Special Benefit:</strong> Top 50 high scorers get a <strong>₹250 SVS Festive Gift Hamper Pack!</strong></span>
                   </li>
                 </ul>
               </div>

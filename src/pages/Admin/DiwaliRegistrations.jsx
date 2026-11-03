@@ -22,6 +22,10 @@ import {
   FiUploadCloud,
   FiImage,
   FiEdit2,
+  FiChevronLeft,
+  FiChevronRight,
+  FiChevronsLeft,
+  FiChevronsRight,
 } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa6";
 
@@ -75,6 +79,10 @@ export default function DiwaliRegistrations() {
   const [verifyingId, setVerifyingId] = useState(null);
   const [resendingId, setResendingId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+
+  // Pagination State (Accessible: 10, 20, 50, ALL)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
 
   // Modals
   const [screenshotModal, setScreenshotModal] = useState(null); // { url, participant }
@@ -236,6 +244,11 @@ export default function DiwaliRegistrations() {
   useEffect(() => {
     fetchRegistrations();
   }, [fetchRegistrations]);
+
+  // Reset to page 1 whenever filters or search terms change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusFilter, categoryFilter, search, dateFilter]);
 
   // Handle Verify Participant & Send Token
   const handleVerify = async (participant) => {
@@ -448,6 +461,34 @@ export default function DiwaliRegistrations() {
   };
 
   const todayStr = new Date().toISOString().split("T")[0];
+
+  // Pagination calculations (Accessible: 10, 20, 50, ALL per page)
+  const totalItems = registrations.length;
+  const effectivePageSize = pageSize === "ALL" ? (totalItems || 10) : Number(pageSize);
+  const totalPages = pageSize === "ALL" ? 1 : Math.max(1, Math.ceil(totalItems / effectivePageSize));
+  const validatedPage = Math.min(Math.max(currentPage, 1), totalPages);
+
+  const startIndex = pageSize === "ALL" ? 0 : (validatedPage - 1) * effectivePageSize;
+  const endIndex = pageSize === "ALL" ? totalItems : Math.min(startIndex + effectivePageSize, totalItems);
+  const paginatedRegistrations = pageSize === "ALL" ? registrations : registrations.slice(startIndex, endIndex);
+
+  const getPageNumbers = () => {
+    const pages = [];
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (validatedPage > 3) pages.push("...");
+      const start = Math.max(2, validatedPage - 1);
+      const end = Math.min(totalPages - 1, validatedPage + 1);
+      for (let i = start; i <= end; i++) {
+        pages.push(i);
+      }
+      if (validatedPage < totalPages - 2) pages.push("...");
+      pages.push(totalPages);
+    }
+    return pages;
+  };
 
   return (
     <div className="diwali-admin-container">
@@ -696,11 +737,11 @@ export default function DiwaliRegistrations() {
                 </td>
               </tr>
             ) : (
-              registrations.map((item, index) => {
+              paginatedRegistrations.map((item, index) => {
                 const isVerified = item.status === "VERIFIED";
                 return (
                   <tr key={item.id} className={isVerified ? "row-verified" : "row-pending"}>
-                    <td className="col-index">{index + 1}</td>
+                    <td className="col-index">{startIndex + index + 1}</td>
 
                     {/* Token & Status (Clean: Token + Date, No Registration ID) */}
                     <td className="col-status">
@@ -889,6 +930,101 @@ export default function DiwaliRegistrations() {
           </tbody>
         </table>
       </div>
+
+      {/* ========================================================
+          ACCESSIBLE TABLE PAGINATION (10, 20, 50, ALL)
+          ======================================================== */}
+      {registrations.length > 0 && (
+        <div className="table-pagination-bar">
+          <div className="pagination-info-left">
+            <span className="pagination-count-text">
+              Showing <strong>{startIndex + 1}</strong> – <strong>{endIndex}</strong> of <strong>{totalItems}</strong> contestants
+            </span>
+
+            <div className="pagination-page-size-wrap">
+              <span className="page-size-label">Rows per page:</span>
+              <div className="page-size-pill-group">
+                {[10, 20, 50, "ALL"].map((size) => (
+                  <button
+                    key={size}
+                    type="button"
+                    className={`btn-page-size-pill ${pageSize === size ? "active" : ""}`}
+                    onClick={() => {
+                      setPageSize(size);
+                      setCurrentPage(1);
+                    }}
+                  >
+                    {size === "ALL" ? "All" : size}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {pageSize !== "ALL" && totalPages > 1 && (
+            <div className="pagination-controls-right">
+              <button
+                type="button"
+                className="btn-pagination-nav"
+                onClick={() => setCurrentPage(1)}
+                disabled={validatedPage <= 1}
+                title="First Page"
+              >
+                <FiChevronsLeft />
+              </button>
+              <button
+                type="button"
+                className="btn-pagination-nav"
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={validatedPage <= 1}
+                title="Previous Page"
+              >
+                <FiChevronLeft /> Prev
+              </button>
+
+              <div className="pagination-number-buttons">
+                {getPageNumbers().map((pageNum, idx) =>
+                  pageNum === "..." ? (
+                    <span key={`dots-${idx}`} className="pagination-dots">
+                      &hellip;
+                    </span>
+                  ) : (
+                    <button
+                      key={pageNum}
+                      type="button"
+                      className={`btn-pagination-page-no ${
+                        validatedPage === pageNum ? "active" : ""
+                      }`}
+                      onClick={() => setCurrentPage(pageNum)}
+                    >
+                      {pageNum}
+                    </button>
+                  )
+                )}
+              </div>
+
+              <button
+                type="button"
+                className="btn-pagination-nav"
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={validatedPage >= totalPages}
+                title="Next Page"
+              >
+                Next <FiChevronRight />
+              </button>
+              <button
+                type="button"
+                className="btn-pagination-nav"
+                onClick={() => setCurrentPage(totalPages)}
+                disabled={validatedPage >= totalPages}
+                title="Last Page"
+              >
+                <FiChevronsRight />
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ========================================================
           ADMIN DIRECT REGISTRATION MODAL
@@ -1259,7 +1395,7 @@ export default function DiwaliRegistrations() {
                 <div className="modal-quick-meta mt-3">
                   <span>Entry Fee: <strong>₹249</strong></span>
                   <span>&bull;</span>
-                  <span>UPI ID: <strong>7010240042@upi</strong></span>
+                  <span>UPI ID: <strong>8148586978@hdfc</strong></span>
                   <span>&bull;</span>
                   <a
                     href={screenshotModal.url}
