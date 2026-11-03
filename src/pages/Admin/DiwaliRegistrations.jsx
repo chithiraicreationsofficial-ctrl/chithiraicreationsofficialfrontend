@@ -26,8 +26,11 @@ import {
   FiChevronRight,
   FiChevronsLeft,
   FiChevronsRight,
+  FiCopy,
+  FiVideo,
+  FiLink,
 } from "react-icons/fi";
-import { FaInstagram } from "react-icons/fa6";
+import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
 const BACKEND_URL =
   import.meta.env.VITE_BACKEND_URL ||
@@ -58,6 +61,7 @@ const initialAdminFormData = {
   sweetName: "",
   category: "Reel Category",
   ingredients: "",
+  submissionUrl: "",
 };
 
 export default function DiwaliRegistrations() {
@@ -79,6 +83,7 @@ export default function DiwaliRegistrations() {
   const [verifyingId, setVerifyingId] = useState(null);
   const [resendingId, setResendingId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
+  const [copiedMessageId, setCopiedMessageId] = useState(null);
 
   // Pagination State (Accessible: 10, 20, 50, ALL)
   const [currentPage, setCurrentPage] = useState(1);
@@ -115,6 +120,7 @@ export default function DiwaliRegistrations() {
     ingredients: "",
     token: "",
     status: "VERIFIED",
+    submissionUrl: "",
     resendEmail: false,
   });
   const [editScreenshotFile, setEditScreenshotFile] = useState(null);
@@ -138,6 +144,7 @@ export default function DiwaliRegistrations() {
       ingredients: item.ingredients || "",
       token: item.token || "",
       status: item.status || "PENDING",
+      submissionUrl: item.submission_url || "",
       resendEmail: false,
     });
     setEditScreenshotFile(null);
@@ -210,6 +217,140 @@ export default function DiwaliRegistrations() {
     } finally {
       setSubmittingEditForm(false);
     }
+  };
+
+  // Generate category-specific formatted WhatsApp message (Reel / Photo)
+  const generateWhatsAppMessage = (item) => {
+    const isReel = (item.category || "").toLowerCase().includes("reel");
+    const tokenDisplay = item.token || "PENDING";
+    const instagramHandle = (item.instagram_profile || "").startsWith("@")
+      ? item.instagram_profile
+      : `@${item.instagram_profile || ""}`;
+
+    if (isReel) {
+      return (
+`🎉 ${tokenDisplay} — OFFICIALLY VERIFIED
+
+Dear ${item.name},
+
+Congratulations! Your payment and contest registration have been verified and approved by our team. ❤️
+
+🏆 Your Official Contest Token: ${tokenDisplay}
+
+📋 PARTICIPANT DETAILS:
+• Participant Name: ${item.name}
+• Gender & Age: ${item.gender} • ${item.age} Years
+• Mobile Number: ${item.phone}
+• Email Address: ${item.email}
+• District & State: ${item.district}, ${item.state || "Tamil Nadu"}
+• Instagram Profile: ${instagramHandle}
+• Sweet / Palagaram: ${item.sweet_name}
+• Contest Category: 🎬 Reel Category
+
+🎬 Reel Category — Rules & Next Steps
+
+1. Make ONE unique Diwali sweet or snack yourself.
+
+2. Record an exact 90-second Reel on your mobile (you must be in the video), covering all 5 steps in this order:
+Ingredients → Making → SVS Product in Use → Finished Dish → Final Dish With You.
+
+3. Voiceover in Your Own Voice: Explain all ingredients and the full cooking procedure in the video in your own voice at every step.
+(No standalone songs/BGM only. No AI voiceover allowed.)
+
+4. MAIN POINT: SVS Product (Choose ANY ONE option)
+• Option 1: Feature and use the SVS product clearly in your Reel video.
+• Option 2: Speak the official SVS slogan clearly in your video voiceover.
+
+5. Token in Caption: Mention your official Token (${tokenDisplay}) in your Instagram Reel caption.
+
+6. COLLAB IS A MUST: Collaborate with BOTH accounts:
+@chithirai.creations and @svsfoods
+
+7. Upload on Instagram between 31 October and 09 November 2026.
+(100% own content, no cooking influencers / accounts with more than 2,000 followers.)
+
+🏆 Prizes Worth ₹1,00,000 + Top 50 Win ₹250 SVS Hampers!
+
+🪔 All the best, ${item.name}! Create your special Diwali recipe, showcase your talent and win exciting prizes!
+
+Best Wishes,
+CHITHIRAI CREATIONS × SVS FOODS
+Digital Diwali – Palagaram Villa 2026 ❤️`
+      );
+    } else {
+      return (
+`🎉 ${tokenDisplay} — OFFICIALLY VERIFIED
+
+Dear ${item.name},
+
+Congratulations! Your payment and contest registration have been verified and approved by our team. ❤️
+
+🏆 Your Official Contest Token: ${tokenDisplay}
+
+📋 PARTICIPANT DETAILS:
+• Participant Name: ${item.name}
+• Gender & Age: ${item.gender} • ${item.age} Years
+• Mobile Number: ${item.phone}
+• Email Address: ${item.email}
+• District & State: ${item.district}, ${item.state || "Tamil Nadu"}
+• Instagram Profile: ${instagramHandle}
+• Sweet / Palagaram: ${item.sweet_name}
+• Contest Category: 📸 Photo Category
+
+📸 Photo Category — Rules & Next Steps
+
+1. Make ONE unique Diwali sweet or snack yourself.
+
+2. Click 5 original photos on your mobile, all taken by you, in this exact order:
+1️⃣ Ingredients
+2️⃣ Making Process
+3️⃣ SVS Product in Use
+4️⃣ Finished Dish
+5️⃣ Final Dish With You
+
+3. Recipe in Description: Write the complete ingredients list and step-by-step cooking procedure in your Instagram post caption.
+
+4. MAIN POINT: SVS Product (Choose ANY ONE option)
+• Option 1: Include an SVS product clearly in your photos (near the dish or ingredients).
+• Option 2: Mention the official SVS slogan in your Instagram post description.
+
+5. Token in Caption: Mention your official contest token ${tokenDisplay} in your Instagram post caption.
+
+6. COLLAB IS A MUST: Collaborate with BOTH Instagram accounts:
+@chithirai.creations and @svsfoods
+
+7. Upload your entry on Instagram between 31 October and 09 November 2026.
+(100% original photos only. No cooking influencers or accounts with more than 2,000 followers.)
+
+🎁 Top 50 participants also win ₹250 SVS Hampers!
+
+🪔 Get creative, prepare your special Diwali treat and make your entry count!
+
+Best Wishes,
+CHITHIRAI CREATIONS × SVS FOODS
+Digital Diwali – Palagaram Villa 2026 ❤️`
+      );
+    }
+  };
+
+  const handleCopyWhatsAppMessage = async (item) => {
+    try {
+      const msg = generateWhatsAppMessage(item);
+      await navigator.clipboard.writeText(msg);
+      setCopiedMessageId(item.id);
+      setTimeout(() => setCopiedMessageId(null), 2500);
+      toast.success(`📋 WhatsApp message copied for ${item.name} (${item.token || "Contestant"})!`);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+      toast.error("Failed to copy to clipboard.");
+    }
+  };
+
+  const getWhatsAppShareUrl = (item) => {
+    const cleanPhone = (item.phone || "").replace(/\D/g, "");
+    const msg = generateWhatsAppMessage(item);
+    const phoneParam = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+    return `https://wa.me/${phoneParam}?text=${encodeURIComponent(msg)}`;
   };
 
   const adminInfo = getAdminInfo();
@@ -811,13 +952,26 @@ export default function DiwaliRegistrations() {
                     {/* Sweet & Category */}
                     <td className="col-sweet">
                       <div className="sweet-name-text">🍬 {item.sweet_name}</div>
-                      <span
-                        className={`category-pill ${
-                          item.category?.includes("Reel") ? "pill-reel" : "pill-photo"
-                        }`}
-                      >
-                        {item.category}
-                      </span>
+                      <div className="category-and-submission-wrap">
+                        <span
+                          className={`category-pill ${
+                            item.category?.includes("Reel") ? "pill-reel" : "pill-photo"
+                          }`}
+                        >
+                          {item.category}
+                        </span>
+                        {item.submission_url && (
+                          <a
+                            href={item.submission_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="submission-video-link-pill"
+                            title="Open submitted contest video / post"
+                          >
+                            <FiVideo size={11} /> Video
+                          </a>
+                        )}
+                      </div>
                     </td>
 
                     {/* Payment Proof Screenshot */}
@@ -902,6 +1056,34 @@ export default function DiwaliRegistrations() {
                         >
                           <FiEye /> Details
                         </button>
+
+                        {/* Copy WhatsApp Message Button */}
+                        <button
+                          className={`btn-action-copy-msg ${copiedMessageId === item.id ? "copied" : ""}`}
+                          onClick={() => handleCopyWhatsAppMessage(item)}
+                          title={`Copy formatted WhatsApp message for ${item.name} (${item.category})`}
+                        >
+                          {copiedMessageId === item.id ? (
+                            <>
+                              <FiCheckCircle /> Copied!
+                            </>
+                          ) : (
+                            <>
+                              <FiCopy /> Copy Msg
+                            </>
+                          )}
+                        </button>
+
+                        {/* Direct WhatsApp Send Link */}
+                        <a
+                          href={getWhatsAppShareUrl(item)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-action-whatsapp-direct"
+                          title={`Send message to ${item.name} on WhatsApp`}
+                        >
+                          <FaWhatsapp />
+                        </a>
 
                         {/* Edit Button (Live Data) */}
                         <button
@@ -1199,6 +1381,20 @@ export default function DiwaliRegistrations() {
                     />
                   </div>
 
+                  {/* Submission Link (Instagram Reel / Video / Post URL) */}
+                  <div className="form-field full-width">
+                    <label>
+                      Submitted Video / Post Link <span className="optional-tag">(Optional)</span>
+                    </label>
+                    <input
+                      type="url"
+                      name="submissionUrl"
+                      value={adminFormData.submissionUrl}
+                      onChange={handleAdminFormChange}
+                      placeholder="e.g. https://www.instagram.com/reel/C8xxx... or post link"
+                    />
+                  </div>
+
                   {/* Ingredients & Brief Procedure */}
                   <div className="form-field full-width">
                     <label>Ingredients &amp; Brief Procedure</label>
@@ -1487,6 +1683,27 @@ export default function DiwaliRegistrations() {
                   <span className="detail-label">Category</span>
                   <span className="detail-val">{detailsModal.category}</span>
                 </div>
+                {/* Submitted Video / Post Link */}
+                <div className="detail-item full-width">
+                  <span className="detail-label">🎬 Submitted Video / Post Link</span>
+                  <span className="detail-val">
+                    {detailsModal.submission_url ? (
+                      <a
+                        href={detailsModal.submission_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="details-submission-link"
+                        title="Open participant's submitted contest entry"
+                      >
+                        <FiVideo /> {detailsModal.submission_url} <FiExternalLink size={12} />
+                      </a>
+                    ) : (
+                      <span className="text-muted-custom">
+                        No video or post link submitted yet. (Click &quot;Edit Details&quot; below to add one)
+                      </span>
+                    )}
+                  </span>
+                </div>
                 <div className="detail-item full-width">
                   <span className="detail-label">Ingredients &amp; Cooking Process</span>
                   <span className="detail-val text-pre">
@@ -1505,6 +1722,46 @@ export default function DiwaliRegistrations() {
                     {detailsModal.verified_by || "—"} ({detailsModal.verified_at ? new Date(detailsModal.verified_at).toLocaleString("en-IN") : "—"})
                   </span>
                 </div>
+              </div>
+
+              {/* WhatsApp Verification Message Preview Card */}
+              <div className="details-whatsapp-section">
+                <div className="details-whatsapp-header">
+                  <div className="d-wa-title">
+                    <FaWhatsapp className="wa-icon-brand" />
+                    <span>Official WhatsApp Message Preview ({detailsModal.category?.includes("Reel") ? "🎬 Reel Category" : "📸 Photo Category"})</span>
+                  </div>
+                  <div className="d-wa-actions">
+                    <button
+                      type="button"
+                      className={`btn-d-wa-copy ${copiedMessageId === detailsModal.id ? "copied" : ""}`}
+                      onClick={() => handleCopyWhatsAppMessage(detailsModal)}
+                      title="Copy formatted message to clipboard"
+                    >
+                      {copiedMessageId === detailsModal.id ? (
+                        <>
+                          <FiCheckCircle /> Copied to Clipboard!
+                        </>
+                      ) : (
+                        <>
+                          <FiCopy /> Copy Message
+                        </>
+                      )}
+                    </button>
+                    <a
+                      href={getWhatsAppShareUrl(detailsModal)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-d-wa-send"
+                      title="Open WhatsApp chat with prefilled message"
+                    >
+                      <FaWhatsapp /> Send via WhatsApp
+                    </a>
+                  </div>
+                </div>
+                <pre className="details-whatsapp-preview-pre">
+                  {generateWhatsAppMessage(detailsModal)}
+                </pre>
               </div>
             </div>
 
@@ -1768,6 +2025,35 @@ export default function DiwaliRegistrations() {
                         Current: <a href={`${BACKEND_URL}${editModal.payment_screenshot}`} target="_blank" rel="noopener noreferrer">View Screenshot</a>
                       </div>
                     ) : null}
+                  </div>
+
+                  {/* Submitted Video / Post Link */}
+                  <div className="form-field full-width">
+                    <label>
+                      🎬 Submitted Video / Post Link <span className="optional-tag">(Instagram Reel or Post URL)</span>
+                    </label>
+                    <div className="submission-link-input-group">
+                      <input
+                        type="url"
+                        value={editForm.submissionUrl}
+                        onChange={(e) => setEditForm({ ...editForm, submissionUrl: e.target.value })}
+                        placeholder="https://www.instagram.com/reel/C8xxx... or post link"
+                      />
+                      {editForm.submissionUrl && (
+                        <a
+                          href={editForm.submissionUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-preview-link"
+                          title="Open submitted contest link in a new tab"
+                        >
+                          <FiExternalLink /> Open Video
+                        </a>
+                      )}
+                    </div>
+                    <small className="field-hint">
+                      Enter the contestant's submitted Instagram Reel URL or photo post link for verification and judging.
+                    </small>
                   </div>
 
                   {/* Ingredients */}
