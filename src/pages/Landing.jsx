@@ -144,7 +144,15 @@ export default function Landing() {
               <IoTimeOutline className="meta-icon" />
               <div className="meta-content">
                 <span className="meta-lbl">LAST DATE</span>
-                <span className="meta-val">09 NOV 2026</span>
+                <span className="meta-val">15 NOV 2026</span>
+              </div>
+            </div>
+
+            <div className="meta-pill highlight-submission">
+              <span className="meta-emoji">🎬</span>
+              <div className="meta-content">
+                <span className="meta-lbl">SUBMISSION LAST DATE</span>
+                <span className="meta-val">22 NOV 2026</span>
               </div>
             </div>
 
@@ -459,7 +467,7 @@ export default function Landing() {
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>Contest Dates:</strong> Upload between <strong>31 Oct and 09 Nov 2026</strong>.</span>
+                    <span><strong>Contest Dates:</strong> Registration closes on <strong>15 Nov 2026</strong>. Video &amp; Photo submission deadline: <strong>22 Nov 2026</strong> (Starts 31 Oct 2026).</span>
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />

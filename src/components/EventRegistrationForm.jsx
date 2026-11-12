@@ -692,7 +692,7 @@ export default function EventRegistrationForm({ onClose }) {
                 </li>
                 <li>
                   <span className="point-bullet">📅</span>
-                  <span><strong>Contest Dates &amp; Prizes:</strong> Upload between <strong>31 Oct and 09 Nov 2026</strong>. Entry fee: <strong>₹249 (limited seats)</strong>. Top 50 high scorers get a <strong>₹250 SVS Festive Gift Hamper Pack!</strong> Total prizes worth ₹1,00,000!</span>
+                  <span><strong>Contest Dates &amp; Prizes:</strong> Registration Last Date: <strong>15 Nov 2026</strong>. Video &amp; Photo Submission Last Date: <strong>22 Nov 2026</strong> (Starts 31 Oct 2026). Entry fee: <strong>₹249 (limited seats)</strong>. Top 50 high scorers get a <strong>₹250 SVS Festive Gift Hamper Pack!</strong> Total prizes worth ₹1,00,000!</span>
                 </li>
               </ul>
 

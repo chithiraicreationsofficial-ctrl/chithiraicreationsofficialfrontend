@@ -268,7 +268,7 @@ Ingredients → Making → SVS Product in Use → Finished Dish → Final Dish W
 6. COLLAB IS A MUST: Collaborate with BOTH accounts:
 @chithirai.creations and @svsfoods
 
-7. Upload on Instagram between 31 October and 09 November 2026.
+7. Upload on Instagram between 31 October and 22 November 2026.
 (100% own content, no cooking influencers / accounts with more than 2,000 followers.)
 
 🏆 Prizes Worth ₹1,00,000 + Top 50 Win ₹250 SVS Hampers!
@@ -321,7 +321,7 @@ Congratulations! Your payment and contest registration have been verified and ap
 6. COLLAB IS A MUST: Collaborate with BOTH Instagram accounts:
 @chithirai.creations and @svsfoods
 
-7. Upload your entry on Instagram between 31 October and 09 November 2026.
+7. Upload your entry on Instagram between 31 October and 22 November 2026.
 (100% original photos only. No cooking influencers or accounts with more than 2,000 followers.)
 
 🎁 Top 50 participants also win ₹250 SVS Hampers!
