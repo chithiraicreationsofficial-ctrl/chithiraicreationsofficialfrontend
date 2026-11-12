@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { diwaliAPI, getAdminInfo } from "../../services/apiService";
 import { toast } from "react-toastify";
 import "./DiwaliRegistrations.css";
@@ -70,6 +70,7 @@ export default function DiwaliRegistrations() {
     totalRegistrations: 0,
     verifiedRegistrations: 0,
     pendingRegistrations: 0,
+    completedRegistrations: 0,
     reelCategoryCount: 0,
     photoCategoryCount: 0,
     totalFeeCollected: 0,
@@ -79,6 +80,7 @@ export default function DiwaliRegistrations() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [categoryFilter, setCategoryFilter] = useState("ALL");
+  const [processFilter, setProcessFilter] = useState("ALL"); // ALL | COMPLETED | PENDING_VIDEO
   const [dateFilter, setDateFilter] = useState("");
   const [verifyingId, setVerifyingId] = useState(null);
   const [resendingId, setResendingId] = useState(null);
@@ -362,6 +364,7 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
         diwaliAPI.getRegistrations({
           status: statusFilter,
           category: categoryFilter,
+          process: processFilter,
           search: search.trim(),
           date: dateFilter || undefined,
         }),
@@ -380,7 +383,7 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
     } finally {
       setLoading(false);
     }
-  }, [statusFilter, categoryFilter, search, dateFilter]);
+  }, [statusFilter, categoryFilter, processFilter, search, dateFilter]);
 
   useEffect(() => {
     fetchRegistrations();
@@ -389,7 +392,7 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
   // Reset to page 1 whenever filters or search terms change
   useEffect(() => {
     setCurrentPage(1);
-  }, [statusFilter, categoryFilter, search, dateFilter]);
+  }, [statusFilter, categoryFilter, processFilter, search, dateFilter]);
 
   // Handle Verify Participant & Send Token
   const handleVerify = async (participant) => {
@@ -603,15 +606,36 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
 
   const todayStr = new Date().toISOString().split("T")[0];
 
+  // Filter registrations by process (Completed with Video Link vs Pending Video)
+  const filteredRegistrations = useMemo(() => {
+    return registrations.filter((item) => {
+      if (processFilter === "COMPLETED") {
+        return Boolean(item.submission_url && item.submission_url.trim() !== "");
+      }
+      if (processFilter === "PENDING_VIDEO") {
+        return !item.submission_url || item.submission_url.trim() === "";
+      }
+      return true;
+    });
+  }, [registrations, processFilter]);
+
+  // Completed records calculation (count where video link / submission_url is present)
+  const completedCount = useMemo(() => {
+    if (stats.completedRegistrations !== undefined && stats.completedRegistrations !== null) {
+      return Number(stats.completedRegistrations);
+    }
+    return registrations.filter((r) => Boolean(r.submission_url && r.submission_url.trim() !== "")).length;
+  }, [stats.completedRegistrations, registrations]);
+
   // Pagination calculations (Accessible: 10, 20, 50, ALL per page)
-  const totalItems = registrations.length;
+  const totalItems = filteredRegistrations.length;
   const effectivePageSize = pageSize === "ALL" ? (totalItems || 10) : Number(pageSize);
   const totalPages = pageSize === "ALL" ? 1 : Math.max(1, Math.ceil(totalItems / effectivePageSize));
   const validatedPage = Math.min(Math.max(currentPage, 1), totalPages);
 
   const startIndex = pageSize === "ALL" ? 0 : (validatedPage - 1) * effectivePageSize;
   const endIndex = pageSize === "ALL" ? totalItems : Math.min(startIndex + effectivePageSize, totalItems);
-  const paginatedRegistrations = pageSize === "ALL" ? registrations : registrations.slice(startIndex, endIndex);
+  const paginatedRegistrations = pageSize === "ALL" ? filteredRegistrations : filteredRegistrations.slice(startIndex, endIndex);
 
   const getPageNumbers = () => {
     const pages = [];
@@ -669,7 +693,14 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
 
       {/* Stats Cards Grid */}
       <div className="diwali-stats-grid">
-        <div className="stat-card total-card">
+        <div
+          className={`stat-card total-card clickable-card ${statusFilter === "ALL" && processFilter === "ALL" ? "active-card" : ""}`}
+          onClick={() => {
+            setStatusFilter("ALL");
+            setProcessFilter("ALL");
+          }}
+          title="Click to view all registrations"
+        >
           <div className="stat-icon-wrap">
             <FiUser />
           </div>
@@ -680,7 +711,11 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
           </div>
         </div>
 
-        <div className="stat-card verified-card">
+        <div
+          className={`stat-card verified-card clickable-card ${statusFilter === "VERIFIED" ? "active-card" : ""}`}
+          onClick={() => setStatusFilter((prev) => (prev === "VERIFIED" ? "ALL" : "VERIFIED"))}
+          title="Click to filter verified entries"
+        >
           <div className="stat-icon-wrap">
             <FiCheckCircle />
           </div>
@@ -691,7 +726,11 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
           </div>
         </div>
 
-        <div className="stat-card pending-card">
+        <div
+          className={`stat-card pending-card clickable-card ${statusFilter === "PENDING" ? "active-card" : ""}`}
+          onClick={() => setStatusFilter((prev) => (prev === "PENDING" ? "ALL" : "PENDING"))}
+          title="Click to filter pending verification entries"
+        >
           <div className="stat-icon-wrap">
             <FiClock />
           </div>
@@ -699,6 +738,26 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
             <span className="stat-label">Pending Verification</span>
             <span className="stat-value">{stats.pendingRegistrations}</span>
             <span className="stat-sub">Action required</span>
+          </div>
+        </div>
+
+        {/* Completed Records (Calculated from Video Link submissions) */}
+        <div
+          className={`stat-card completed-card clickable-card ${processFilter === "COMPLETED" ? "active-card" : ""}`}
+          onClick={() => setProcessFilter((prev) => (prev === "COMPLETED" ? "ALL" : "COMPLETED"))}
+          title="Click to filter completed process (video link submitted)"
+        >
+          <div className="stat-icon-wrap">
+            <FiVideo />
+          </div>
+          <div className="stat-info">
+            <span className="stat-label">Completed Records</span>
+            <span className="stat-value">{completedCount}</span>
+            <span className="stat-sub">
+              {stats.totalRegistrations > 0
+                ? `${completedCount} of ${stats.totalRegistrations} videos submitted`
+                : "Video links submitted"}
+            </span>
           </div>
         </div>
 
@@ -748,6 +807,20 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
               <option value="ALL">All Status</option>
               <option value="PENDING">Pending (Unverified)</option>
               <option value="VERIFIED">Verified</option>
+            </select>
+          </div>
+
+          {/* Process / Video Submission Filter */}
+          <div className="filter-select-wrap">
+            <label>Process:</label>
+            <select
+              value={processFilter}
+              onChange={(e) => setProcessFilter(e.target.value)}
+              className="filter-select"
+            >
+              <option value="ALL">All Process</option>
+              <option value="COMPLETED">🎬 Completed (Video Link)</option>
+              <option value="PENDING_VIDEO">⏳ Pending Video</option>
             </select>
           </div>
 
@@ -813,7 +886,31 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
       {/* Filter Info Bar */}
       <div className="filter-info-bar">
         <span className="results-count">
-          Showing <strong>{registrations.length}</strong> registration{registrations.length === 1 ? "" : "s"}
+          Showing <strong>{filteredRegistrations.length}</strong> registration{filteredRegistrations.length === 1 ? "" : "s"}
+          {processFilter !== "ALL" && (
+            <span className="active-date-tag active-process-tag">
+              &bull; {processFilter === "COMPLETED" ? "🎬 Completed (Video Link)" : "⏳ Pending Video"}
+              <button onClick={() => setProcessFilter("ALL")} className="tag-remove-btn" title="Remove process filter">
+                <FiX />
+              </button>
+            </span>
+          )}
+          {statusFilter !== "ALL" && (
+            <span className="active-date-tag">
+              &bull; Status: <strong>{statusFilter}</strong>
+              <button onClick={() => setStatusFilter("ALL")} className="tag-remove-btn" title="Remove status filter">
+                <FiX />
+              </button>
+            </span>
+          )}
+          {categoryFilter !== "ALL" && (
+            <span className="active-date-tag">
+              &bull; Category: <strong>{categoryFilter}</strong>
+              <button onClick={() => setCategoryFilter("ALL")} className="tag-remove-btn" title="Remove category filter">
+                <FiX />
+              </button>
+            </span>
+          )}
           {dateFilter && (
             <span className="active-date-tag">
               &bull; Filtered by Date: <strong>{dateFilter}</strong>
@@ -847,7 +944,7 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
             </tr>
           </thead>
           <tbody>
-            {loading && registrations.length === 0 ? (
+            {loading && filteredRegistrations.length === 0 ? (
               <tr>
                 <td colSpan="9" className="text-center py-5">
                   <div className="loading-state">
@@ -856,18 +953,19 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
                   </div>
                 </td>
               </tr>
-            ) : registrations.length === 0 ? (
+            ) : filteredRegistrations.length === 0 ? (
               <tr>
                 <td colSpan="9" className="text-center py-5 text-muted">
                   <div className="empty-state-wrap">
                     <p className="mb-2">No registrations found matching your criteria.</p>
-                    {(search || statusFilter !== "ALL" || categoryFilter !== "ALL" || dateFilter) && (
+                    {(search || statusFilter !== "ALL" || categoryFilter !== "ALL" || processFilter !== "ALL" || dateFilter) && (
                       <button
                         className="btn-clear-all-filters"
                         onClick={() => {
                           setSearch("");
                           setStatusFilter("ALL");
                           setCategoryFilter("ALL");
+                          setProcessFilter("ALL");
                           setDateFilter("");
                         }}
                       >

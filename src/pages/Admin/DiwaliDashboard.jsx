@@ -23,6 +23,7 @@ export default function DiwaliDashboard() {
     totalRegistrations: 0,
     verifiedRegistrations: 0,
     pendingRegistrations: 0,
+    completedRegistrations: 0,
     reelCategoryCount: 0,
     photoCategoryCount: 0,
     totalFeeCollected: 0,
@@ -163,6 +164,17 @@ export default function DiwaliDashboard() {
             <span className="metric-label">Pending Verification</span>
             <span className="metric-value">{stats.pendingRegistrations}</span>
             <span className="metric-note">Awaiting Payment Review</span>
+          </div>
+        </div>
+
+        <div className="metric-box completed-box">
+          <div className="metric-icon-circle completed-circle">
+            <FiVideo />
+          </div>
+          <div className="metric-text-wrap">
+            <span className="metric-label">Completed Records</span>
+            <span className="metric-value">{stats.completedRegistrations || 0}</span>
+            <span className="metric-note">Video Links Uploaded</span>
           </div>
         </div>
       </div>

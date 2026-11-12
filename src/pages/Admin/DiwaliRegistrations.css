@@ -116,7 +116,7 @@
    ======================================================== */
 .diwali-stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
   margin-bottom: 22px;
   width: 100%;
@@ -131,7 +131,7 @@
   gap: 16px;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
   border: 1px solid #e2e8f0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   min-width: 0;
 }
 
@@ -139,6 +139,22 @@
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08);
   border-color: #cbd5e1;
+}
+
+.stat-card.clickable-card {
+  cursor: pointer;
+  user-select: none;
+}
+
+.stat-card.clickable-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -3px rgba(99, 102, 241, 0.12), 0 4px 6px -2px rgba(15, 23, 42, 0.05);
+}
+
+.stat-card.active-card {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.25), 0 10px 15px -3px rgba(124, 58, 237, 0.15);
+  background: #fdfcff;
 }
 
 .stat-icon-wrap {
@@ -165,6 +181,11 @@
 .pending-card .stat-icon-wrap {
   background: #fffbeb;
   color: #d97706;
+}
+
+.completed-card .stat-icon-wrap {
+  background: #f5f3ff;
+  color: #7c3aed;
 }
 
 .revenue-card .stat-icon-wrap {
@@ -1941,17 +1962,31 @@
 /* ========================================================
    RESPONSIVENESS
    ======================================================== */
-@media (max-width: 1024px) {
+.active-process-tag {
+  background: #f5f3ff !important;
+  color: #6d28d9 !important;
+  border: 1px solid #ddd6fe !important;
+}
+
+@media (max-width: 1280px) {
+  .diwali-stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 868px) {
   .diwali-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 580px) {
   .diwali-stats-grid {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 768px) {
   .diwali-filter-toolbar {
     flex-direction: column;
     align-items: stretch;
