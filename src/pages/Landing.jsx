@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "./Header/Header";
 import DiwaliThreeCanvas from "../components/DiwaliThreeCanvas";
 import DiyaIcon from "../components/DiyaIcon";
-import EventRegistrationForm from "../components/EventRegistrationForm";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -40,8 +39,6 @@ import {
 import { MdCelebration, MdOutlineLightbulb, MdShield } from "react-icons/md";
 
 export default function Landing() {
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
-
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -130,6 +127,17 @@ export default function Landing() {
             <MdCelebration className="prize-popper-icon" />
           </div>
 
+          {/* Registration Closed Notice Banner */}
+          <div className="registration-closed-alert-banner" data-aos="zoom-in" data-aos-delay="320">
+            <div className="closed-badge-tag">🔒 REGISTRATION CLOSED</div>
+            <div className="closed-banner-content">
+              <h3>Contest Registrations Are Officially Closed!</h3>
+              <p>
+                New registrations ended on <strong>15 Nov 2026</strong>. All registered participants can submit their contest Videos &amp; Photos until <strong>22 Nov 2026</strong>!
+              </p>
+            </div>
+          </div>
+
           {/* Key Dates, Format & Entry Fee Quick Bar */}
           <div className="hero-quick-meta-grid" data-aos="fade-up" data-aos-delay="350">
             <div className="meta-pill">
@@ -140,18 +148,18 @@ export default function Landing() {
               </div>
             </div>
 
-            <div className="meta-pill highlight-deadline">
+            <div className="meta-pill highlight-deadline closed">
               <IoTimeOutline className="meta-icon" />
               <div className="meta-content">
-                <span className="meta-lbl">LAST DATE</span>
-                <span className="meta-val">15 NOV 2026</span>
+                <span className="meta-lbl">REGISTRATION</span>
+                <span className="meta-val">CLOSED (15 NOV)</span>
               </div>
             </div>
 
-            <div className="meta-pill highlight-submission">
+            <div className="meta-pill highlight-submission active">
               <span className="meta-emoji">🎬</span>
               <div className="meta-content">
-                <span className="meta-lbl">SUBMISSION LAST DATE</span>
+                <span className="meta-lbl">SUBMISSIONS OPEN TILL</span>
                 <span className="meta-val">22 NOV 2026</span>
               </div>
             </div>
@@ -160,7 +168,7 @@ export default function Landing() {
               <span className="meta-emoji">🎟️</span>
               <div className="meta-content">
                 <span className="meta-lbl">ENTRY FEE</span>
-                <span className="meta-val">JUST ₹249 (LIMITED)</span>
+                <span className="meta-val">₹249 (ENTRIES CLOSED)</span>
               </div>
             </div>
 
@@ -175,15 +183,12 @@ export default function Landing() {
 
           {/* Action CTAs */}
           <div className="hero-action-buttons" data-aos="fade-up" data-aos-delay="400">
-            <button
-              onClick={() => setShowRegisterModal(true)}
-              className="btn-diwali-primary"
-            >
-              <FaPenToSquare /> Register (₹249 • Limited Seats)
-            </button>
+            <div className="btn-registration-closed-pill">
+              🔒 Registration Closed (Ended 15 Nov)
+            </div>
 
             <a href="#how-to-participate" className="btn-diwali-secondary">
-              <FaUtensils /> How to Participate
+              <FaUtensils /> How to Participate / Submission Rules
             </a>
 
             <a
@@ -240,12 +245,9 @@ export default function Landing() {
                     Showcase your traditional sweets, upload your reels &amp; photos, and win prizes worth ₹1,00,000 (1 Lakh)!
                   </p>
                 </div>
-                <button
-                  onClick={() => setShowRegisterModal(true)}
-                  className="btn-photo-register"
-                >
-                  <FaPenToSquare /> Register for Contest
-                </button>
+                <div className="photo-reg-closed-badge">
+                  🔒 Registration Closed &bull; Video &amp; Photo Submissions Open till 22 Nov
+                </div>
               </div>
             </div>
           </div>
@@ -432,12 +434,9 @@ export default function Landing() {
               50 participants who get higher marks from our jury will receive an exclusive
               <strong> SVS Festive Gift Hamper Pack worth ₹250 each (for 50 people)</strong>! Everyone has an extraordinary chance to win!
             </p>
-            <button
-              onClick={() => setShowRegisterModal(true)}
-              className="btn-hamper-register"
-            >
-              <FaPenToSquare /> Register Now (Just ₹249 • Limited Seats Only)
-            </button>
+            <div className="hamper-reg-closed-pill">
+              🔒 Registration Closed on 15 Nov &bull; Video &amp; Photo Submissions Open Until 22 Nov 2026
+            </div>
           </div>
         </div>
       </section>
@@ -467,7 +466,7 @@ export default function Landing() {
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>Contest Dates:</strong> Registration closes on <strong>15 Nov 2026</strong>. Video &amp; Photo submission deadline: <strong>22 Nov 2026</strong> (Starts 31 Oct 2026).</span>
+                    <span><strong>Contest Status:</strong> Registration is <strong>OFFICIALLY CLOSED (Ended 15 Nov 2026)</strong>. Video &amp; Photo submission upload deadline: <strong>22 Nov 2026</strong>.</span>
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
@@ -680,23 +679,6 @@ export default function Landing() {
           </div>
         </div>
       </footer>
-
-      {/* ========================================================
-          REGISTRATION MODAL DIALOG (SHOWS ONLY ON BUTTON CLICK)
-         ======================================================== */}
-      {showRegisterModal && (
-        <div
-          className="registration-modal-overlay"
-          onClick={() => setShowRegisterModal(false)}
-        >
-          <div
-            className="registration-modal-dialog"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <EventRegistrationForm onClose={() => setShowRegisterModal(false)} />
-          </div>
-        </div>
-      )}
     </div>
   );
 }

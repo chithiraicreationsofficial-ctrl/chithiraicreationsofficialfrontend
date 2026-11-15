@@ -362,10 +362,123 @@
   background: rgba(45, 12, 28, 0.85);
 }
 
+.meta-pill.highlight-deadline.closed {
+  border-color: #ef4444;
+  background: rgba(55, 10, 25, 0.9);
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.28);
+}
+
+.meta-pill.highlight-deadline.closed .meta-val {
+  color: #fca5a5;
+  font-weight: 800;
+}
+
 .meta-pill.highlight-submission {
   border-color: #a855f7;
   background: rgba(35, 10, 52, 0.85);
   box-shadow: 0 0 16px rgba(168, 85, 247, 0.25);
+}
+
+.meta-pill.highlight-submission.active {
+  border-color: #c084fc;
+  background: linear-gradient(135deg, rgba(58, 12, 85, 0.95) 0%, rgba(35, 10, 52, 0.9) 100%);
+  box-shadow: 0 0 20px rgba(192, 132, 252, 0.35);
+}
+
+.meta-pill.highlight-submission.active .meta-val {
+  color: #f3e8ff;
+  font-weight: 800;
+}
+
+/* ========================================================
+   REGISTRATION CLOSED PROMINENT ALERT BANNER
+   ======================================================== */
+.registration-closed-alert-banner {
+  max-width: 780px;
+  margin: 0 auto 30px auto;
+  background: linear-gradient(135deg, rgba(65, 8, 22, 0.95) 0%, rgba(35, 8, 45, 0.95) 100%);
+  border: 1.5px solid #ef4444;
+  border-radius: 18px;
+  padding: 20px 26px;
+  box-shadow: 0 12px 36px rgba(239, 68, 68, 0.3), 0 0 25px rgba(239, 68, 68, 0.18);
+  backdrop-filter: blur(14px);
+  text-align: center;
+}
+
+.closed-badge-tag {
+  display: inline-block;
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.45);
+}
+
+.closed-banner-content h3 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 6px 0 8px 0;
+  letter-spacing: 0.4px;
+}
+
+.closed-banner-content p {
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.closed-banner-content strong {
+  color: #ffd700;
+}
+
+/* REGISTRATION CLOSED PILL (REPLACING HERO REGISTER BUTTON) */
+.btn-registration-closed-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1.5px solid #ef4444;
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 13px 28px;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.28);
+}
+
+.photo-reg-closed-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(239, 68, 68, 0.22);
+  border: 1.5px solid #ef4444;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 10px 22px;
+  border-radius: 30px;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.28);
+}
+
+.hamper-reg-closed-pill {
+  display: inline-block;
+  margin-top: 14px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1.5px solid #ef4444;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 12px 26px;
+  border-radius: 30px;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.25);
 }
 
 .meta-icon {
