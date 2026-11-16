@@ -133,19 +133,6 @@ export default function ScoreCard() {
     setScoreModalParticipant(null);
   };
 
-  // Quick Preset Grading for whole entry (e.g. 19 each = 95)
-  const applyPresetAll = (markPerCriterion) => {
-    setScoreForm((prev) => ({
-      ...prev,
-      scoreCreativity: markPerCriterion,
-      scoreInnovation: markPerCriterion,
-      scorePresentation: markPerCriterion,
-      scoreClarity: markPerCriterion,
-      scoreOverall: markPerCriterion,
-    }));
-    toast.info(`Applied ${markPerCriterion} marks across all 5 criteria (${markPerCriterion * 5}/100)`);
-  };
-
   // Quick mark set for single criterion
   const setCriterionQuick = (key, val) => {
     setScoreForm((prev) => ({
@@ -163,8 +150,8 @@ export default function ScoreCard() {
     });
   };
 
-  // Save Score (with optional & Next)
-  const handleScoreSubmit = async (e, andNext = false) => {
+  // Save Score
+  const handleScoreSubmit = async (e) => {
     if (e) e.preventDefault();
     if (!scoreModalParticipant) return;
 
@@ -180,19 +167,7 @@ export default function ScoreCard() {
       if (res.data?.success) {
         toast.success(`Score saved for ${scoreModalParticipant.name}!`);
         await fetchScores();
-
-        if (andNext) {
-          const currentIdx = contestants.findIndex((c) => c.id === scoreModalParticipant.id);
-          if (currentIdx !== -1 && currentIdx < contestants.length - 1) {
-            const nextParticipant = contestants[currentIdx + 1];
-            openScoreModal(nextParticipant);
-          } else {
-            toast.info("🎉 You have reached the last contestant on this list!");
-            closeScoreModal();
-          }
-        } else {
-          closeScoreModal();
-        }
+        closeScoreModal();
       } else {
         toast.error(res.data?.message || "Failed to update score.");
       }
@@ -201,23 +176,6 @@ export default function ScoreCard() {
       toast.error(err.response?.data?.message || "Failed to save score.");
     } finally {
       setSavingScore(false);
-    }
-  };
-
-  // Navigate Contestant inside Modal
-  const currentModalIndex = scoreModalParticipant
-    ? contestants.findIndex((c) => c.id === scoreModalParticipant.id)
-    : -1;
-
-  const handleModalPrev = () => {
-    if (currentModalIndex > 0) {
-      openScoreModal(contestants[currentModalIndex - 1]);
-    }
-  };
-
-  const handleModalNext = () => {
-    if (currentModalIndex < contestants.length - 1) {
-      openScoreModal(contestants[currentModalIndex + 1]);
     }
   };
 
@@ -787,75 +745,23 @@ export default function ScoreCard() {
         <div className="score-modal-backdrop" onClick={closeScoreModal}>
           <div className="score-modal-dialog" onClick={(e) => e.stopPropagation()}>
             <div className="score-modal-header">
-              <div className="modal-header-top">
-                <div className="modal-title-wrap">
-                  <span className="modal-kicker">Jury Judging Panel</span>
-                  <h4>Score Contestant: {scoreModalParticipant.name}</h4>
-                  <div className="modal-sub-meta">
-                    <span className="token-pill">{scoreModalParticipant.token || scoreModalParticipant.registration_id}</span>
-                    <span>&bull;</span>
-                    <span className="cat-pill">
-                      {isReelCategory(scoreModalParticipant.category) ? "🎬 Reel Category" : "📸 Photo Category"}
-                    </span>
-                    <span>&bull;</span>
-                    <span className="dish-pill">🍬 {scoreModalParticipant.sweet_name}</span>
-                  </div>
-                </div>
-
-                <div className="modal-header-actions">
-                  <div className="modal-nav-arrows">
-                    <button
-                      type="button"
-                      className="btn-modal-nav-step"
-                      onClick={handleModalPrev}
-                      disabled={currentModalIndex <= 0}
-                      title="Previous contestant"
-                    >
-                      <FiChevronLeft /> Prev
-                    </button>
-                    <span className="modal-index-counter">
-                      {currentModalIndex + 1} / {contestants.length}
-                    </span>
-                    <button
-                      type="button"
-                      className="btn-modal-nav-step"
-                      onClick={handleModalNext}
-                      disabled={currentModalIndex >= contestants.length - 1}
-                      title="Next contestant"
-                    >
-                      Next <FiChevronRight />
-                    </button>
-                  </div>
-
-                  <button className="btn-modal-close" onClick={closeScoreModal}>
-                    <FiX />
-                  </button>
+              <div className="modal-title-wrap">
+                <span className="modal-kicker">Jury Judging Panel</span>
+                <h4>Score Contestant: {scoreModalParticipant.name}</h4>
+                <div className="modal-sub-meta">
+                  <span className="token-pill">{scoreModalParticipant.token || scoreModalParticipant.registration_id}</span>
+                  <span>&bull;</span>
+                  <span className="cat-pill">
+                    {isReelCategory(scoreModalParticipant.category) ? "🎬 Reel Category" : "📸 Photo Category"}
+                  </span>
+                  <span>&bull;</span>
+                  <span className="dish-pill">🍬 {scoreModalParticipant.sweet_name}</span>
                 </div>
               </div>
 
-              {/* Quick Fill All 5 Criteria */}
-              <div className="quick-presets-strip">
-                <span className="presets-strip-title">
-                  <FiZap /> 1-Click Fill All:
-                </span>
-                <div className="presets-strip-buttons">
-                  <button type="button" className="btn-preset-chip" onClick={() => applyPresetAll(19)}>
-                    🌟 95 (19 ea)
-                  </button>
-                  <button type="button" className="btn-preset-chip" onClick={() => applyPresetAll(17)}>
-                    ⭐ 85 (17 ea)
-                  </button>
-                  <button type="button" className="btn-preset-chip" onClick={() => applyPresetAll(15)}>
-                    ✨ 75 (15 ea)
-                  </button>
-                  <button type="button" className="btn-preset-chip" onClick={() => applyPresetAll(13)}>
-                    👍 65 (13 ea)
-                  </button>
-                  <button type="button" className="btn-preset-chip" onClick={() => applyPresetAll(10)}>
-                    🟡 50 (10 ea)
-                  </button>
-                </div>
-              </div>
+              <button className="btn-modal-close" onClick={closeScoreModal} title="Close">
+                <FiX />
+              </button>
             </div>
 
             <form onSubmit={handleScoreSubmit} className="score-modal-form">
@@ -1023,17 +929,6 @@ export default function ScoreCard() {
                     </>
                   )}
                 </button>
-                {currentModalIndex < contestants.length - 1 && (
-                  <button
-                    type="button"
-                    className="btn-modal-save-next"
-                    onClick={(e) => handleScoreSubmit(e, true)}
-                    disabled={savingScore}
-                    title="Save current score and open next contestant immediately"
-                  >
-                    Save &amp; Grade Next <FiArrowRight />
-                  </button>
-                )}
               </div>
             </form>
           </div>
