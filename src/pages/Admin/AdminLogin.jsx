@@ -34,7 +34,11 @@ const AdminLogin = () => {
           if (admin) {
             localStorage.setItem("adminInfo", JSON.stringify(admin));
           }
-          navigate("/admin/dashboard");
+          if (admin?.role === "chef" || admin?.email?.toLowerCase().includes("chef")) {
+            navigate("/admin/score-card");
+          } else {
+            navigate("/admin/dashboard");
+          }
         } else {
           setError("Login failed: Authentication token missing.");
         }
@@ -72,13 +76,14 @@ const AdminLogin = () => {
 
         <form onSubmit={handleLogin} className="admin-login-form">
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">Email / Username</label>
             <input
-              type="email"
+              type="text"
+              inputMode="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@chithiraicreations.in"
+              placeholder="e.g. chef@chitricreations"
               className={error ? "error" : ""}
               disabled={isLoading}
               required

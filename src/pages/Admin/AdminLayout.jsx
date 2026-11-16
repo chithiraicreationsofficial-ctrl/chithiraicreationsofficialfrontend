@@ -12,6 +12,7 @@ const AdminLayout = () => {
   const location = useLocation();
 
   const adminInfo = JSON.parse(localStorage.getItem("adminInfo") || "{}");
+  const isChef = adminInfo.role === "chef" || adminInfo.email?.toLowerCase().includes("chef");
 
   // Keep window resize listener for responsive sidebar behavior
   useEffect(() => {
@@ -26,20 +27,31 @@ const AdminLayout = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [sidebarOpen]);
 
-  // Clean menu: Hidden the other 3 tickets items (All Tickets, Manual Entry, Verify Tickets)
-  const menuItems = [
-    { path: "/admin/dashboard", label: "Dashboard", icon: "📊" },
-    { path: "/admin/diwali-registrations", label: "Diwali Registrations", icon: "🪔" },
-    { path: "/admin/score-card", label: "Score Card", icon: "🏆" },
-    { path: "/admin/inquiries", label: "Inquiry List", icon: "📞" },
-    { path: "/admin/profile", label: "My Profile", icon: "👤" },
-    ...(adminInfo.role === "super_admin"
-      ? [{ path: "/admin/manage-admins", label: "Manage Admins", icon: "👥" }]
-      : []),
-    ...(adminInfo.role === "super_admin"
-      ? [{ path: "/admin/sponsorships", label: "Manage Sponsors", icon: "👥" }]
-      : []),
-  ];
+  // Route protection for Chef: Chef can only access Score Card
+  useEffect(() => {
+    if (isChef && location.pathname !== "/admin/score-card") {
+      navigate("/admin/score-card", { replace: true });
+    }
+  }, [isChef, location.pathname, navigate]);
+
+  // Menu items: Chef only sees Score Card; Admins see standard management tabs
+  const menuItems = isChef
+    ? [
+        { path: "/admin/score-card", label: "Score Card", icon: "🏆" },
+      ]
+    : [
+        { path: "/admin/dashboard", label: "Dashboard", icon: "📊" },
+        { path: "/admin/diwali-registrations", label: "Diwali Registrations", icon: "🪔" },
+        { path: "/admin/score-card", label: "Score Card", icon: "🏆" },
+        { path: "/admin/inquiries", label: "Inquiry List", icon: "📞" },
+        { path: "/admin/profile", label: "My Profile", icon: "👤" },
+        ...(adminInfo.role === "super_admin"
+          ? [{ path: "/admin/manage-admins", label: "Manage Admins", icon: "👥" }]
+          : []),
+        ...(adminInfo.role === "super_admin"
+          ? [{ path: "/admin/sponsorships", label: "Manage Sponsors", icon: "👥" }]
+          : []),
+      ];
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
@@ -82,7 +94,7 @@ const AdminLayout = () => {
             alt="Logo"
             className="sidebar-logo"
           />
-          <h3>Admin Panel</h3>
+          <h3>{isChef ? "Jury Panel" : "Admin Panel"}</h3>
           <button
             className="sidebar-toggle"
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -94,14 +106,14 @@ const AdminLayout = () => {
 
         <div className="admin-info-sidebar">
           <div className="admin-avatar-sidebar">
-            {adminInfo.name?.charAt(0).toUpperCase() || "A"}
+            {isChef ? "👨‍🍳" : adminInfo.name?.charAt(0).toUpperCase() || "A"}
           </div>
           {sidebarOpen && (
             <div className="admin-details-sidebar">
-              <h4>{adminInfo.name || "Admin"}</h4>
+              <h4>{adminInfo.name || (isChef ? "Chef Jury" : "Admin")}</h4>
               <p className="admin-email-sidebar">{adminInfo.email || ""}</p>
               <span className={`role-badge-sidebar role-${adminInfo.role || "admin"}`}>
-                {adminInfo.role?.replace("_", " ") || "Admin"}
+                {isChef ? "Official Chef" : adminInfo.role?.replace("_", " ") || "Admin"}
               </span>
             </div>
           )}

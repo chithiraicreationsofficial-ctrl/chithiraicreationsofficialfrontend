@@ -1254,6 +1254,389 @@
 }
 
 /* ========================================================
+   CHEF WELCOME BANNER & JURY HELPER
+   ======================================================== */
+.scorecard-admin-container .chef-welcome-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  border: 1px solid #fed7aa;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(234, 88, 12, 0.08);
+}
+
+.scorecard-admin-container .chef-welcome-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.scorecard-admin-container .chef-welcome-text h4 {
+  margin: 0 0 4px 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #9a3412;
+}
+
+.scorecard-admin-container .chef-welcome-text p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #c2410c;
+  line-height: 1.4;
+}
+
+/* ========================================================
+   TABLE PAGINATION BAR (10, 20, 50, ALL)
+   ======================================================== */
+.scorecard-admin-container .table-pagination-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 14px 20px;
+}
+
+.scorecard-admin-container .pagination-info-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.scorecard-admin-container .pagination-count-text {
+  font-size: 0.84rem;
+  color: #64748b;
+}
+
+.scorecard-admin-container .pagination-count-text strong {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.scorecard-admin-container .pagination-page-size-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scorecard-admin-container .page-size-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.scorecard-admin-container .page-size-pill-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f8fafc;
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.scorecard-admin-container .btn-page-size-pill {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scorecard-admin-container .btn-page-size-pill:hover {
+  color: #0f172a;
+}
+
+.scorecard-admin-container .btn-page-size-pill.active {
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.scorecard-admin-container .pagination-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scorecard-admin-container .btn-pagination-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scorecard-admin-container .btn-pagination-nav:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.scorecard-admin-container .btn-pagination-nav:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.scorecard-admin-container .pagination-number-buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.scorecard-admin-container .btn-pagination-page-no {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  border-radius: 7px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.scorecard-admin-container .btn-pagination-page-no:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.scorecard-admin-container .btn-pagination-page-no.active {
+  background: #ee5a24;
+  color: #ffffff;
+  border-color: #ee5a24;
+  font-weight: 700;
+}
+
+.scorecard-admin-container .pagination-dots {
+  padding: 0 4px;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+/* ========================================================
+   MODAL CONTROLLER & FAST GRADING ENHANCEMENTS
+   ======================================================== */
+.modal-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 16px;
+}
+
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-nav-arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 3px 6px;
+  border-radius: 8px;
+}
+
+.btn-modal-nav-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.15s ease;
+}
+
+.btn-modal-nav-step:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.btn-modal-nav-step:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.modal-index-counter {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #ea580c;
+  padding: 0 4px;
+}
+
+/* 1-Click Quick Presets Strip */
+.quick-presets-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.presets-strip-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #ea580c;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.presets-strip-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-preset-chip {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-preset-chip:hover {
+  background: #fff7ed;
+  border-color: #fdba74;
+  color: #c2410c;
+  transform: translateY(-1px);
+}
+
+/* Stepper Buttons (-1 / +1) */
+.btn-crit-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.btn-crit-step:hover {
+  background: #ee5a24;
+  color: #ffffff;
+  border-color: #ee5a24;
+}
+
+/* Criteria Quick Mark Pills */
+.criteria-quick-pills {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.quick-pill-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-right: 2px;
+}
+
+.btn-quick-mark {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-quick-mark:hover {
+  border-color: #ee5a24;
+  color: #ee5a24;
+  background: #fff7ed;
+}
+
+.btn-quick-mark.active {
+  background: #ee5a24;
+  color: #ffffff;
+  border-color: #ee5a24;
+}
+
+/* Save & Next Contestant Button */
+.btn-modal-save-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25);
+}
+
+.btn-modal-save-next:hover:not(:disabled) {
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
+}
+
+.btn-modal-save-next:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ========================================================
    PDF PRINTABLE STYLES (CLEAN WHITE A4 LANDSCAPE)
    ======================================================== */
 .pdf-document {
