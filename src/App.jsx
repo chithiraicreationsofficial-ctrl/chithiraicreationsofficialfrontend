@@ -19,6 +19,7 @@ import Manualverify from "./pages/Admin/Manualverify";
 import DiwaliRegistrations from "./pages/Admin/DiwaliRegistrations";
 import DiwaliDashboard from "./pages/Admin/DiwaliDashboard";
 import InquiryList from "./pages/Admin/InquiryList";
+import ScoreCard from "./pages/Admin/ScoreCard";
 import { ToastContainer } from "react-toastify";
 import { Toaster } from "react-hot-toast";
 import { Navigate } from "react-router-dom";
@@ -46,6 +47,7 @@ function App() {
           >
             {/* <Route path="dashboard" element={<Dashboard />} /> */}
             <Route path="diwali-registrations" element={<DiwaliRegistrations />} />
+            <Route path="score-card" element={<ScoreCard />} />
             <Route path="inquiries" element={<InquiryList />} />
             <Route path="tickets" element={<AllTickets />} />
             <Route path="verification" element={<TicketVerification />} />

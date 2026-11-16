@@ -166,6 +166,9 @@ export const diwaliAPI = {
     api.post("/diwali/admin-register", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     }),
+  getScores: (params) => api.get("/diwali/scores", { params }),
+  updateScore: (id, data) => api.put(`/diwali/score/${id}`, data),
+  resetScore: (id) => api.delete(`/diwali/score/${id}`),
 };
 
 // Phone Inquiries & Leads API
