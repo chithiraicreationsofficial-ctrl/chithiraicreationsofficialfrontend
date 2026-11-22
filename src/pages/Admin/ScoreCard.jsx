@@ -100,7 +100,7 @@ export default function ScoreCard() {
       });
 
       if (res.data?.success) {
-        setContestants(res.data.data || []);
+        setContestants((res.data.data || []).filter((c) => !c.not_participated));
         setStats(res.data.stats || {});
       }
     } catch (err) {

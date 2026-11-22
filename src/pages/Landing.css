@@ -420,6 +420,65 @@
   box-shadow: 0 12px 32px rgba(255, 215, 0, 0.6);
 }
 
+.btn-diwali-closed {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #b45309 0%, #ea580c 50%, #dc2626 100%);
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 14px 28px;
+  border-radius: 50px;
+  border: 1px solid rgba(254, 215, 170, 0.4);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+  letter-spacing: 0.02em;
+}
+
+.btn-photo-register-closed,
+.btn-hamper-register-closed {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #dc2626 0%, #b45309 100%);
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  border-radius: 50px;
+  border: 1px solid rgba(254, 202, 202, 0.4);
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35);
+  letter-spacing: 0.02em;
+}
+
+.contest-closed-announcement-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: linear-gradient(90deg, rgba(220, 38, 38, 0.95) 0%, rgba(180, 83, 9, 0.95) 50%, rgba(220, 38, 38, 0.95) 100%);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255, 237, 213, 0.4);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+  text-align: center;
+}
+
+.contest-closed-announcement-bar .closed-highlight {
+  background: #fef08a;
+  color: #78350f;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
 .btn-diwali-instagram {
   display: inline-flex;
   align-items: center;

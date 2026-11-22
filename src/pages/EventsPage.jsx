@@ -118,7 +118,7 @@ export default function EventsPage() {
           <div className="container">
             <div className="diwali-live-card" data-aos="zoom-in">
               <div className="live-badge-glow">
-                <span className="live-dot"></span> LIVE FESTIVAL CONTEST • DIWALI 2026
+                <span className="live-dot ended"></span> CONTEST SUBMISSIONS CLOSED • PRIZE DISTRIBUTION SOON
               </div>
 
               <div className="diwali-live-grid">
@@ -142,14 +142,14 @@ export default function EventsPage() {
 
                   <div className="live-dates-pill">
                     <span>📅 Start: <strong>31 Oct 2026</strong></span>
-                    <span>⏰ Last Date: <strong>15 Nov 2026</strong></span>
-                    <span>🎬 Submission Last Date: <strong>22 Nov 2026</strong></span>
-                    <span>🏆 Prizes: <strong>₹1,00,000</strong></span>
+                    <span>🔒 Registration: <strong>Closed (15 Nov)</strong></span>
+                    <span>🎬 Submissions: <strong>Closed (22 Nov)</strong></span>
+                    <span>🏆 Status: <strong>Prize Distribution Soon!</strong></span>
                   </div>
 
                   <div className="live-card-actions">
                     <Link to="/" className="btn-explore-diwali">
-                      <DiyaIcon size={20} /> Explore Diwali Contest & Rules
+                      <DiyaIcon size={20} /> View Contest Details &amp; Prize Announcements
                     </Link>
                   </div>
                 </div>

@@ -169,6 +169,8 @@ export const diwaliAPI = {
   getScores: (params) => api.get("/diwali/scores", { params }),
   updateScore: (id, data) => api.put(`/diwali/score/${id}`, data),
   resetScore: (id) => api.delete(`/diwali/score/${id}`),
+  toggleNotParticipated: (id, notParticipated) =>
+    api.put(`/diwali/registration/${id}/not-participated`, { notParticipated }),
 };
 
 // Phone Inquiries & Leads API

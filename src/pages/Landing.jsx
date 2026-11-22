@@ -21,6 +21,7 @@ import {
   IoSparkles,
   IoCheckmarkCircle,
   IoClose,
+  IoLockClosedOutline,
 } from "react-icons/io5";
 import {
   FaTrophy,
@@ -107,6 +108,13 @@ export default function Landing() {
             </div>
           </div>
 
+          {/* Contest Status Announcement Bar */}
+          <div className="contest-closed-announcement-bar" data-aos="fade-down">
+            <span className="closed-sparkle">🔒</span>
+            <strong>CONTEST SUBMISSIONS CLOSED</strong> — Registrations &amp; video/photo submissions ended on 22 Nov 2026.
+            <span className="closed-highlight">🏆 PRIZE DISTRIBUTION SOON!</span>
+          </div>
+
           {/* Main Contest Heading (Clean Poppins Font) */}
           <div className="diwali-titles-block" data-aos="fade-up" data-aos-delay="200">
             <h1 className="diwali-main-heading">
@@ -143,8 +151,8 @@ export default function Landing() {
             <div className="meta-pill highlight-deadline">
               <IoTimeOutline className="meta-icon" />
               <div className="meta-content">
-                <span className="meta-lbl">LAST DATE</span>
-                <span className="meta-val">15 NOV 2026</span>
+                <span className="meta-lbl">REGISTRATION</span>
+                <span className="meta-val">CLOSED (15 NOV)</span>
               </div>
             </div>
 
@@ -152,15 +160,15 @@ export default function Landing() {
               <span className="meta-emoji">🎬</span>
               <div className="meta-content">
                 <span className="meta-lbl">SUBMISSION LAST DATE</span>
-                <span className="meta-val">22 NOV 2026</span>
+                <span className="meta-val">CLOSED (22 NOV)</span>
               </div>
             </div>
 
             <div className="meta-pill highlight-entry-fee">
-              <span className="meta-emoji">🎟️</span>
+              <span className="meta-emoji">🏆</span>
               <div className="meta-content">
-                <span className="meta-lbl">ENTRY FEE</span>
-                <span className="meta-val">JUST ₹249 (LIMITED)</span>
+                <span className="meta-lbl">CONTEST STATUS</span>
+                <span className="meta-val">PRIZE DISTRIBUTION SOON</span>
               </div>
             </div>
 
@@ -175,12 +183,9 @@ export default function Landing() {
 
           {/* Action CTAs */}
           <div className="hero-action-buttons" data-aos="fade-up" data-aos-delay="400">
-            <button
-              onClick={() => setShowRegisterModal(true)}
-              className="btn-diwali-primary"
-            >
-              <FaPenToSquare /> Register (₹249 • Limited Seats)
-            </button>
+            <div className="btn-diwali-closed">
+              <IoLockClosedOutline /> Registration Closed • Prize Distribution Soon!
+            </div>
 
             <a href="#how-to-participate" className="btn-diwali-secondary">
               <FaUtensils /> How to Participate
@@ -240,12 +245,9 @@ export default function Landing() {
                     Showcase your traditional sweets, upload your reels &amp; photos, and win prizes worth ₹1,00,000 (1 Lakh)!
                   </p>
                 </div>
-                <button
-                  onClick={() => setShowRegisterModal(true)}
-                  className="btn-photo-register"
-                >
-                  <FaPenToSquare /> Register for Contest
-                </button>
+                <div className="btn-photo-register-closed">
+                  🏆 Contest Closed • Prize Distribution Soon
+                </div>
               </div>
             </div>
           </div>
@@ -432,12 +434,9 @@ export default function Landing() {
               50 participants who get higher marks from our jury will receive an exclusive
               <strong> SVS Festive Gift Hamper Pack worth ₹250 each (for 50 people)</strong>! Everyone has an extraordinary chance to win!
             </p>
-            <button
-              onClick={() => setShowRegisterModal(true)}
-              className="btn-hamper-register"
-            >
-              <FaPenToSquare /> Register Now (Just ₹249 • Limited Seats Only)
-            </button>
+            <div className="btn-hamper-register-closed">
+              🎁 Submissions Closed • Winner &amp; Prize Distribution Soon!
+            </div>
           </div>
         </div>
       </section>
@@ -467,7 +466,7 @@ export default function Landing() {
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />
-                    <span><strong>Contest Dates:</strong> Registration closes on <strong>15 Nov 2026</strong>. Video &amp; Photo submission deadline: <strong>22 Nov 2026</strong> (Starts 31 Oct 2026).</span>
+                    <span><strong>Contest Dates:</strong> Registration closed on <strong>15 Nov 2026</strong>. Video &amp; Photo submissions closed on <strong>22 Nov 2026</strong>. Jury grading in progress — <strong>Prize Distribution Announcing Soon!</strong></span>
                   </li>
                   <li>
                     <IoCheckmarkCircle className="check-icon" />

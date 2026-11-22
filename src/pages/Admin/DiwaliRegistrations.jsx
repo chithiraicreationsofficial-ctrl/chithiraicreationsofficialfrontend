@@ -29,6 +29,7 @@ import {
   FiCopy,
   FiVideo,
   FiLink,
+  FiSlash,
 } from "react-icons/fi";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
@@ -71,6 +72,7 @@ export default function DiwaliRegistrations() {
     verifiedRegistrations: 0,
     pendingRegistrations: 0,
     completedRegistrations: 0,
+    notParticipatedCount: 0,
     reelCategoryCount: 0,
     photoCategoryCount: 0,
     totalFeeCollected: 0,
@@ -80,12 +82,13 @@ export default function DiwaliRegistrations() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [categoryFilter, setCategoryFilter] = useState("ALL");
-  const [processFilter, setProcessFilter] = useState("ALL"); // ALL | COMPLETED | PENDING_VIDEO
+  const [processFilter, setProcessFilter] = useState("ALL"); // ALL | COMPLETED | PENDING_VIDEO | NOT_PARTICIPATED
   const [dateFilter, setDateFilter] = useState("");
   const [verifyingId, setVerifyingId] = useState(null);
   const [resendingId, setResendingId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
   const [copiedMessageId, setCopiedMessageId] = useState(null);
+  const [togglingParticipationId, setTogglingParticipationId] = useState(null);
 
   // Pagination State (Accessible: 10, 20, 50, ALL)
   const [currentPage, setCurrentPage] = useState(1);
@@ -491,6 +494,48 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
     }
   };
 
+  // Handle Toggle Not Participated / Did Not Upload
+  const handleToggleNotParticipated = async (participant) => {
+    const isCurrentlyNotPart = Boolean(participant.not_participated);
+    const actionDesc = isCurrentlyNotPart
+      ? `Restore ${participant.name} (${participant.token || participant.registration_id}) back to active participating list?`
+      : `Mark ${participant.name} (${participant.token || participant.registration_id}) as Did Not Upload / Not Participated?\n\nThis will exclude them from the Chef/Jury Scorecard and count them under 'Did Not Upload'.`;
+
+    if (!window.confirm(actionDesc)) return;
+
+    try {
+      setTogglingParticipationId(participant.id);
+      const res = await diwaliAPI.toggleNotParticipated(participant.id, !isCurrentlyNotPart);
+      if (res.data?.success) {
+        const nextVal =
+          res.data.notParticipated !== undefined
+            ? res.data.notParticipated
+            : !isCurrentlyNotPart;
+        toast.success(
+          nextVal
+            ? `🚫 Marked ${participant.name} as Not Uploaded / Did Not Participate`
+            : `✅ Restored ${participant.name} to active contestants`
+        );
+
+        setRegistrations((prev) =>
+          prev.map((r) =>
+            r.id === participant.id ? { ...r, not_participated: nextVal } : r
+          )
+        );
+
+        const statsRes = await diwaliAPI.getStats();
+        if (statsRes.data?.success) setStats(statsRes.data.data);
+      }
+    } catch (err) {
+      console.error("Toggle participation error:", err);
+      toast.error(
+        err.response?.data?.message || "Failed to update participation status."
+      );
+    } finally {
+      setTogglingParticipationId(null);
+    }
+  };
+
   // Handle Admin Direct Registration Form Change
   const handleAdminFormChange = (e) => {
     const { name, value } = e.target;
@@ -606,25 +651,33 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
 
   const todayStr = new Date().toISOString().split("T")[0];
 
-  // Filter registrations by process (Completed with Video Link vs Pending Video)
+  // Filter registrations by process (Completed with Video Link vs Pending Video vs Not Participated)
   const filteredRegistrations = useMemo(() => {
     return registrations.filter((item) => {
       if (processFilter === "COMPLETED") {
-        return Boolean(item.submission_url && item.submission_url.trim() !== "");
+        return Boolean(item.submission_url && item.submission_url.trim() !== "") && !item.not_participated;
       }
       if (processFilter === "PENDING_VIDEO") {
-        return !item.submission_url || item.submission_url.trim() === "";
+        return (!item.submission_url || item.submission_url.trim() === "") && !item.not_participated;
+      }
+      if (processFilter === "NOT_PARTICIPATED") {
+        return Boolean(item.not_participated);
+      }
+      if (processFilter === "ACTIVE") {
+        return !item.not_participated;
       }
       return true;
     });
   }, [registrations, processFilter]);
 
-  // Completed records calculation (count where video link / submission_url is present)
+  // Completed records calculation (count where video link / submission_url is present and participated)
   const completedCount = useMemo(() => {
     if (stats.completedRegistrations !== undefined && stats.completedRegistrations !== null) {
       return Number(stats.completedRegistrations);
     }
-    return registrations.filter((r) => Boolean(r.submission_url && r.submission_url.trim() !== "")).length;
+    return registrations.filter(
+      (r) => Boolean(r.submission_url && r.submission_url.trim() !== "") && !r.not_participated
+    ).length;
   }, [stats.completedRegistrations, registrations]);
 
   // Pagination calculations (Accessible: 10, 20, 50, ALL per page)
@@ -761,6 +814,22 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
           </div>
         </div>
 
+        {/* Not Uploaded / Did Not Participate Records */}
+        <div
+          className={`stat-card not-participated-card clickable-card ${processFilter === "NOT_PARTICIPATED" ? "active-card" : ""}`}
+          onClick={() => setProcessFilter((prev) => (prev === "NOT_PARTICIPATED" ? "ALL" : "NOT_PARTICIPATED"))}
+          title="Click to filter contestants who did not upload video/photo"
+        >
+          <div className="stat-icon-wrap">
+            <FiSlash />
+          </div>
+          <div className="stat-info">
+            <span className="stat-label">Not Uploaded / Part.</span>
+            <span className="stat-value">{stats.notParticipatedCount || 0}</span>
+            <span className="stat-sub">Excluded from Scorecard</span>
+          </div>
+        </div>
+
         <div className="stat-card revenue-card">
           <div className="stat-icon-wrap">
             <FiDollarSign />
@@ -819,8 +888,10 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
               className="filter-select"
             >
               <option value="ALL">All Process</option>
+              <option value="ACTIVE">⭐ Active Participating</option>
               <option value="COMPLETED">🎬 Completed (Video Link)</option>
               <option value="PENDING_VIDEO">⏳ Pending Video</option>
+              <option value="NOT_PARTICIPATED">🚫 Not Uploaded / Not Participated</option>
             </select>
           </div>
 
@@ -889,7 +960,14 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
           Showing <strong>{filteredRegistrations.length}</strong> registration{filteredRegistrations.length === 1 ? "" : "s"}
           {processFilter !== "ALL" && (
             <span className="active-date-tag active-process-tag">
-              &bull; {processFilter === "COMPLETED" ? "🎬 Completed (Video Link)" : "⏳ Pending Video"}
+              &bull;{" "}
+              {processFilter === "COMPLETED"
+                ? "🎬 Completed (Video Link)"
+                : processFilter === "NOT_PARTICIPATED"
+                ? "🚫 Not Uploaded / Not Participated"
+                : processFilter === "ACTIVE"
+                ? "⭐ Active Participating"
+                : "⏳ Pending Video"}
               <button onClick={() => setProcessFilter("ALL")} className="tag-remove-btn" title="Remove process filter">
                 <FiX />
               </button>
@@ -978,8 +1056,14 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
             ) : (
               paginatedRegistrations.map((item, index) => {
                 const isVerified = item.status === "VERIFIED";
+                const isNotPart = Boolean(item.not_participated);
                 return (
-                  <tr key={item.id} className={isVerified ? "row-verified" : "row-pending"}>
+                  <tr
+                    key={item.id}
+                    className={`${isVerified ? "row-verified" : "row-pending"} ${
+                      isNotPart ? "row-not-participated" : ""
+                    }`}
+                  >
                     <td className="col-index">{startIndex + index + 1}</td>
 
                     {/* Token & Status (Clean: Token + Date, No Registration ID) */}
@@ -1013,6 +1097,11 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
                       <div className="participant-meta">
                         {item.gender} &bull; {item.age} yrs
                       </div>
+                      {isNotPart && (
+                        <span className="badge-not-participated" title="Marked as Did Not Upload / Not Participated">
+                          <FiSlash size={11} /> Not Uploaded
+                        </span>
+                      )}
                     </td>
 
                     {/* Contact */}
@@ -1058,7 +1147,11 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
                         >
                           {item.category}
                         </span>
-                        {item.submission_url && (
+                        {isNotPart ? (
+                          <span className="submission-badge-not-part">
+                            🚫 Not Uploaded
+                          </span>
+                        ) : item.submission_url ? (
                           <a
                             href={item.submission_url}
                             target="_blank"
@@ -1068,7 +1161,7 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
                           >
                             <FiVideo size={11} /> Video
                           </a>
-                        )}
+                        ) : null}
                       </div>
                     </td>
 
@@ -1190,6 +1283,20 @@ Digital Diwali – Palagaram Villa 2026 ❤️`
                           title="Edit Participant Details"
                         >
                           <FiEdit2 /> Edit
+                        </button>
+
+                        {/* Toggle Not Uploaded / Not Participated Button */}
+                        <button
+                          className={`btn-action-not-participated ${item.not_participated ? "is-not-participated" : ""}`}
+                          onClick={() => handleToggleNotParticipated(item)}
+                          disabled={togglingParticipationId === item.id}
+                          title={
+                            item.not_participated
+                              ? "Marked as Did Not Upload. Click to restore to active contest list."
+                              : "Mark as Did Not Upload / Not Participated (excludes from Scorecard)"
+                          }
+                        >
+                          <FiSlash /> {togglingParticipationId === item.id ? "Updating..." : item.not_participated ? "Not Uploaded ✕" : "Not Uploaded"}
                         </button>
 
                         {/* Delete Button */}

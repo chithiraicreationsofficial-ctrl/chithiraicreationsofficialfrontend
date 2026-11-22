@@ -135,6 +135,11 @@ export default function EventRegistrationForm({ onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMsg(
+      "Contest registration is officially closed! Video & photo submissions ended on 22 Nov 2026. Prize distribution will be announced soon!"
+    );
+    toast.info("Contest registration is closed. Prize distribution announcing soon!");
+    return;
     setErrorMsg("");
 
     if (!formData.name.trim()) {
@@ -323,6 +328,23 @@ export default function EventRegistrationForm({ onClose }) {
                 <IoClose size={22} />
               </button>
             )}
+          </div>
+
+          <div
+            className="registration-closed-hero-notice p-3 mb-4 rounded-3 text-center"
+            style={{
+              background: "linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(180, 83, 9, 0.25) 100%)",
+              border: "1px solid rgba(239, 68, 68, 0.5)",
+              color: "#fef2f2",
+            }}
+          >
+            <h4 style={{ color: "#fca5a5", fontWeight: 800, fontSize: "1.05rem", marginBottom: "6px" }}>
+              🔒 Contest Registration &amp; Submissions Closed
+            </h4>
+            <p style={{ margin: 0, fontSize: "0.88rem", color: "#fef2f2" }}>
+              Registrations ended on 15 Nov and video/photo submissions closed on 22 Nov 2026.
+              Our jury is finalizing scores — <strong>Prize Distribution will be announced soon!</strong> ❤️
+            </p>
           </div>
 
           {errorMsg && (
@@ -721,18 +743,11 @@ export default function EventRegistrationForm({ onClose }) {
           <div className="text-center mt-4">
             <button
               type="submit"
-              disabled={isLoading}
-              className={`btn-submit-registration ${
-                allConditionsAccepted ? "btn-active" : "btn-disabled-state"
-              }`}
+              disabled={true}
+              className="btn-submit-registration btn-disabled-state"
+              style={{ opacity: 0.65, cursor: "not-allowed" }}
             >
-              {isLoading ? (
-                <span>Submitting Entry...</span>
-              ) : (
-                <>
-                  <FaTrophy /> Submit Registration (₹249 • Limited Seats)
-                </>
-              )}
+              🔒 Registration Closed • Prize Distribution Soon
             </button>
             <div className="submit-subtext mt-2">
               Total Prizes Worth ₹1,00,000 (1 Lakh!) • Entry Fee: Just ₹249 • Top 50 Get ₹250 SVS Hampers • SVS Title Sponsor

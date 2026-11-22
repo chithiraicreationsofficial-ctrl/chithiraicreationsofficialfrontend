@@ -116,8 +116,8 @@
    ======================================================== */
 .diwali-stats-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
   margin-bottom: 22px;
   width: 100%;
 }
@@ -186,6 +186,17 @@
 .completed-card .stat-icon-wrap {
   background: #f5f3ff;
   color: #7c3aed;
+}
+
+.not-participated-card .stat-icon-wrap {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.not-participated-card.active-card {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.25), 0 10px 15px -3px rgba(239, 68, 68, 0.15);
+  background: #fffafa;
 }
 
 .revenue-card .stat-icon-wrap {
@@ -935,6 +946,83 @@
   border-color: #fde047;
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(161, 98, 7, 0.15);
+}
+
+/* ========================================================
+   NOT PARTICIPATED / DID NOT UPLOAD ACTION BUTTON & BADGES
+   ======================================================== */
+.btn-action-not-participated {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  padding: 6px 11px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-action-not-participated:hover:not(:disabled) {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.12);
+}
+
+.btn-action-not-participated.is-not-participated {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #f87171;
+  font-weight: 800;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.15);
+}
+
+.btn-action-not-participated.is-not-participated:hover:not(:disabled) {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #6ee7b7;
+}
+
+.row-not-participated {
+  background-color: #fffbfb !important;
+}
+
+.row-not-participated:hover {
+  background-color: #fee2e2 !important;
+}
+
+.badge-not-participated {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 4px;
+  width: fit-content;
+}
+
+.submission-badge-not-part {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
 }
 
 /* ========================================================
