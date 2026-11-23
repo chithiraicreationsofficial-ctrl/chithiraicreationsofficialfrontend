@@ -133,6 +133,39 @@ export default function ScoreCard() {
     setScoreModalParticipant(null);
   };
 
+  // Contestant navigation within modal
+  const currentModalIndex = scoreModalParticipant
+    ? contestants.findIndex((c) => c.id === scoreModalParticipant.id)
+    : -1;
+  const hasPrevParticipant = currentModalIndex > 0;
+  const hasNextParticipant =
+    currentModalIndex >= 0 && currentModalIndex < contestants.length - 1;
+
+  const handlePrevParticipant = () => {
+    if (hasPrevParticipant) {
+      openScoreModal(contestants[currentModalIndex - 1]);
+    }
+  };
+
+  const handleNextParticipant = () => {
+    if (hasNextParticipant) {
+      openScoreModal(contestants[currentModalIndex + 1]);
+    }
+  };
+
+  // 1-Click Fill All 5 criteria with equal marks
+  const handleFillAll = (eachVal) => {
+    const val = Math.min(20, Math.max(0, parseFloat(eachVal) || 0));
+    setScoreForm((prev) => ({
+      ...prev,
+      scoreCreativity: val,
+      scoreInnovation: val,
+      scorePresentation: val,
+      scoreClarity: val,
+      scoreOverall: val,
+    }));
+  };
+
   // Quick mark set for single criterion
   const setCriterionQuick = (key, val) => {
     setScoreForm((prev) => ({
@@ -150,9 +183,9 @@ export default function ScoreCard() {
     });
   };
 
-  // Save Score
-  const handleScoreSubmit = async (e) => {
-    if (e) e.preventDefault();
+  // Save Score (with optional advance to next contestant)
+  const handleScoreSubmit = async (e, shouldGoNext = false) => {
+    if (e && e.preventDefault) e.preventDefault();
     if (!scoreModalParticipant) return;
 
     try {
@@ -167,7 +200,11 @@ export default function ScoreCard() {
       if (res.data?.success) {
         toast.success(`Score saved for ${scoreModalParticipant.name}!`);
         await fetchScores();
-        closeScoreModal();
+        if (shouldGoNext && hasNextParticipant) {
+          openScoreModal(contestants[currentModalIndex + 1]);
+        } else {
+          closeScoreModal();
+        }
       } else {
         toast.error(res.data?.message || "Failed to update score.");
       }
@@ -656,6 +693,162 @@ export default function ScoreCard() {
           </tbody>
         </table>
 
+        {/* ========================================================
+            RESPONSIVE MOBILE CONTESTANT CARDS (TOUCH-OPTIMIZED FOR PHONES)
+            ======================================================== */}
+        <div className="scorecard-mobile-cards-list">
+          {loading ? (
+            <div className="mobile-loading-box">
+              <FiRefreshCw className="spin-icon" size={28} />
+              <p>Loading contestants and scores...</p>
+            </div>
+          ) : contestants.length === 0 ? (
+            <div className="mobile-empty-box">
+              <FiAward size={36} />
+              <p>No contestants found matching criteria</p>
+            </div>
+          ) : (
+            paginatedContestants.map((item, idx) => {
+              const total = parseFloat(item.total_score) || 0;
+              const isScored = total > 0 || !!item.scored_at;
+              const isReel = isReelCategory(item.category);
+              const rankNum = item.category_rank || idx + 1;
+
+              return (
+                <div
+                  key={item.id}
+                  className={`mobile-contestant-card ${isScored ? "card-graded" : "card-pending"}`}
+                >
+                  {/* Top Bar: Rank, Token, Category & Total Score Pill */}
+                  <div className="mobile-card-top-bar">
+                    <div className="mobile-card-identity">
+                      {isScored ? (
+                        <span className={`mobile-rank-badge rank-${rankNum <= 3 ? rankNum : "num"}`}>
+                          {rankNum === 1 ? "🥇 1" : rankNum === 2 ? "🥈 2" : rankNum === 3 ? "🥉 3" : `#${rankNum}`}
+                        </span>
+                      ) : (
+                        <span className="mobile-rank-badge unranked">—</span>
+                      )}
+                      <span className="mobile-token-code">{item.token || item.registration_id}</span>
+                      <span className={`cat-badge ${isReel ? "badge-reel" : "badge-photo"}`}>
+                        {isReel ? "🎬 Reel" : "📸 Photo"}
+                      </span>
+                    </div>
+
+                    <div className="mobile-total-pill-wrap">
+                      {isScored ? (
+                        <span className="mobile-total-pill scored">
+                          <strong>{total}</strong>/100
+                        </span>
+                      ) : (
+                        <span className="mobile-total-pill pending">
+                          ⏳ Pending
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Participant Info */}
+                  <div className="mobile-card-body">
+                    <div className="mobile-participant-name">{item.name}</div>
+                    <div className="mobile-participant-sub">
+                      <span>{item.gender} &bull; {item.age} yrs</span>
+                      <span>&bull;</span>
+                      <span className="mobile-district">{item.district}</span>
+                    </div>
+
+                    <div className="mobile-meta-chips">
+                      <span className="mobile-dish-chip">🍬 {item.sweet_name}</span>
+                      {item.instagram_profile && (
+                        <a
+                          href={
+                            item.instagram_profile.startsWith("http")
+                              ? item.instagram_profile
+                              : `https://instagram.com/${item.instagram_profile.replace("@", "")}`
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mobile-ig-chip"
+                        >
+                          <FaInstagram /> {item.instagram_profile}
+                        </a>
+                      )}
+                    </div>
+
+                    {item.submission_url ? (
+                      <a
+                        href={item.submission_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mobile-view-entry-btn"
+                      >
+                        {isReel ? <FiVideo /> : <FiImage />} View Instagram Entry <FiExternalLink size={12} />
+                      </a>
+                    ) : (
+                      <div className="mobile-no-link-tag">⏳ No submission link uploaded</div>
+                    )}
+
+                    {/* 5 Criteria Marks Mini-Grid */}
+                    <div className="mobile-criteria-summary-grid">
+                      <div className="crit-summary-item">
+                        <span className="crit-summary-lbl">Creativity</span>
+                        <strong className={parseFloat(item.score_creativity) > 0 ? "active" : ""}>
+                          {parseFloat(item.score_creativity) || 0}
+                        </strong>
+                      </div>
+                      <div className="crit-summary-item">
+                        <span className="crit-summary-lbl">Innovation</span>
+                        <strong className={parseFloat(item.score_innovation) > 0 ? "active" : ""}>
+                          {parseFloat(item.score_innovation) || 0}
+                        </strong>
+                      </div>
+                      <div className="crit-summary-item">
+                        <span className="crit-summary-lbl">Presentation</span>
+                        <strong className={parseFloat(item.score_presentation) > 0 ? "active" : ""}>
+                          {parseFloat(item.score_presentation) || 0}
+                        </strong>
+                      </div>
+                      <div className="crit-summary-item">
+                        <span className="crit-summary-lbl">Explanation</span>
+                        <strong className={parseFloat(item.score_clarity) > 0 ? "active" : ""}>
+                          {parseFloat(item.score_clarity) || 0}
+                        </strong>
+                      </div>
+                      <div className="crit-summary-item">
+                        <span className="crit-summary-lbl">Overall</span>
+                        <strong className={parseFloat(item.score_overall) > 0 ? "active" : ""}>
+                          {parseFloat(item.score_overall) || 0}
+                        </strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card Action Buttons */}
+                  <div className="mobile-card-actions">
+                    <button
+                      type="button"
+                      className="btn-mobile-grade"
+                      onClick={() => openScoreModal(item)}
+                    >
+                      <FiEdit3 /> {isScored ? "Edit Score" : "Grade Contestant"}
+                    </button>
+                    {isScored && (
+                      <button
+                        type="button"
+                        className="btn-mobile-reset"
+                        onClick={() => handleResetScore(item)}
+                        title="Reset score"
+                      >
+                        <FiTrash2 />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })
+          )}
+        </div>
+
         {/* Accessible Pagination Bar (10, 20, 50, ALL) */}
         {contestants.length > 0 && (
           <div className="table-pagination-bar">
@@ -745,23 +938,99 @@ export default function ScoreCard() {
         <div className="score-modal-backdrop" onClick={closeScoreModal}>
           <div className="score-modal-dialog" onClick={(e) => e.stopPropagation()}>
             <div className="score-modal-header">
-              <div className="modal-title-wrap">
-                <span className="modal-kicker">Jury Judging Panel</span>
-                <h4>Score Contestant: {scoreModalParticipant.name}</h4>
-                <div className="modal-sub-meta">
-                  <span className="token-pill">{scoreModalParticipant.token || scoreModalParticipant.registration_id}</span>
-                  <span>&bull;</span>
-                  <span className="cat-pill">
-                    {isReelCategory(scoreModalParticipant.category) ? "🎬 Reel Category" : "📸 Photo Category"}
-                  </span>
-                  <span>&bull;</span>
-                  <span className="dish-pill">🍬 {scoreModalParticipant.sweet_name}</span>
+              <div className="modal-header-top-row">
+                <div className="modal-title-wrap">
+                  <span className="modal-kicker">Jury Judging Panel</span>
+                  <h4>Score Contestant: {scoreModalParticipant.name}</h4>
+                  <div className="modal-sub-meta">
+                    <span className="token-pill">{scoreModalParticipant.token || scoreModalParticipant.registration_id}</span>
+                    <span>&bull;</span>
+                    <span className="cat-pill">
+                      {isReelCategory(scoreModalParticipant.category) ? "🎬 Reel Category" : "📸 Photo Category"}
+                    </span>
+                    <span>&bull;</span>
+                    <span className="dish-pill">🍬 {scoreModalParticipant.sweet_name}</span>
+                  </div>
                 </div>
+
+                {/* Contestant Nav Stepper (Prev / Next) */}
+                <div className="modal-nav-stepper">
+                  <button
+                    type="button"
+                    className="btn-modal-nav"
+                    onClick={handlePrevParticipant}
+                    disabled={!hasPrevParticipant || savingScore}
+                    title="Previous Contestant"
+                  >
+                    <FiChevronLeft /> Prev
+                  </button>
+                  <span className="modal-nav-counter">
+                    <strong>{currentModalIndex + 1}</strong> / {contestants.length}
+                  </span>
+                  <button
+                    type="button"
+                    className="btn-modal-nav"
+                    onClick={handleNextParticipant}
+                    disabled={!hasNextParticipant || savingScore}
+                    title="Next Contestant"
+                  >
+                    Next <FiChevronRight />
+                  </button>
+                </div>
+
+                <button className="btn-modal-close" onClick={closeScoreModal} title="Close">
+                  <FiX />
+                </button>
               </div>
 
-              <button className="btn-modal-close" onClick={closeScoreModal} title="Close">
-                <FiX />
-              </button>
+              {/* 1-Click Fill All Presets Bar */}
+              <div className="modal-quick-presets-bar">
+                <span className="presets-label">
+                  <FiZap className="zap-icon text-amber-500" /> 1-Click Fill All:
+                </span>
+                <div className="presets-buttons-wrap">
+                  <button
+                    type="button"
+                    className="btn-preset-fill preset-gold"
+                    onClick={() => handleFillAll(19)}
+                    title="Fill 19 across all 5 criteria (Total: 95)"
+                  >
+                    🌟 95 (19 ea)
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-preset-fill preset-silver"
+                    onClick={() => handleFillAll(17)}
+                    title="Fill 17 across all 5 criteria (Total: 85)"
+                  >
+                    ⭐ 85 (17 ea)
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-preset-fill preset-bronze"
+                    onClick={() => handleFillAll(15)}
+                    title="Fill 15 across all 5 criteria (Total: 75)"
+                  >
+                    ✨ 75 (15 ea)
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-preset-fill preset-pass"
+                    onClick={() => handleFillAll(13)}
+                    title="Fill 13 across all 5 criteria (Total: 65)"
+                  >
+                    👍 65 (13 ea)
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-preset-fill preset-base"
+                    onClick={() => handleFillAll(10)}
+                    title="Fill 10 across all 5 criteria (Total: 50)"
+                  >
+                    🟡 50 (10 ea)
+                  </button>
+                </div>
+              </div>
             </div>
 
             <form onSubmit={handleScoreSubmit} className="score-modal-form">
@@ -914,21 +1183,34 @@ export default function ScoreCard() {
                 >
                   Cancel
                 </button>
-                <button
-                  type="submit"
-                  className="btn-modal-primary"
-                  disabled={savingScore}
-                >
-                  {savingScore ? (
-                    <>
-                      <FiRefreshCw className="spin-icon" /> Saving...
-                    </>
-                  ) : (
-                    <>
-                      <FiCheckCircle /> Save Score ({liveTotalScore}/100)
-                    </>
+                <div className="modal-footer-save-group">
+                  <button
+                    type="submit"
+                    className="btn-modal-primary"
+                    disabled={savingScore}
+                  >
+                    {savingScore ? (
+                      <>
+                        <FiRefreshCw className="spin-icon" /> Saving...
+                      </>
+                    ) : (
+                      <>
+                        <FiCheckCircle /> Save Score ({liveTotalScore}/100)
+                      </>
+                    )}
+                  </button>
+                  {hasNextParticipant && (
+                    <button
+                      type="button"
+                      className="btn-modal-save-next"
+                      onClick={(e) => handleScoreSubmit(e, true)}
+                      disabled={savingScore}
+                      title="Save this score and advance directly to the next contestant"
+                    >
+                      Save &amp; Next ➔
+                    </button>
                   )}
-                </button>
+                </div>
               </div>
             </form>
           </div>

@@ -845,14 +845,21 @@
 }
 
 .score-modal-header {
-  padding: 16px 22px;
+  padding: 16px 20px;
   background: #f8fafc;
   border-bottom: 1px solid #e2e8f0;
   display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.modal-header-top-row {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
   gap: 12px;
+  width: 100%;
 }
 
 .modal-title-wrap {
@@ -912,6 +919,152 @@
   font-weight: 600;
   padding: 2px 7px;
   border-radius: 5px;
+}
+
+/* Contestant Nav Stepper (Prev / Next in Modal Header) */
+.modal-nav-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  padding: 3px 6px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  flex-shrink: 0;
+}
+
+.btn-modal-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: #334155;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-modal-nav:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #ee5a24;
+}
+
+.btn-modal-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.modal-nav-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 0 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.modal-nav-counter .current-idx {
+  color: #ee5a24;
+  font-weight: 800;
+}
+
+.modal-nav-counter .nav-divider {
+  color: #cbd5e1;
+}
+
+.modal-nav-counter .total-count {
+  color: #475569;
+}
+
+/* 1-Click Fill All Presets Bar */
+.modal-quick-presets-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+  padding: 8px 12px;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.presets-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #b45309;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.presets-label .zap-icon {
+  font-size: 0.92rem;
+  color: #f59e0b;
+}
+
+.presets-buttons-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-preset-fill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-preset-fill:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.96);
+}
+
+.btn-preset-fill.preset-gold {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+.btn-preset-fill.preset-silver {
+  background: #f1f5f9;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.btn-preset-fill.preset-bronze {
+  background: #ffedd5;
+  color: #9a3412;
+  border-color: #fed7aa;
+}
+
+.btn-preset-fill.preset-pass {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.btn-preset-fill.preset-base {
+  background: #f8fafc;
+  color: #64748b;
+  border-color: #e2e8f0;
 }
 
 .btn-modal-close {
@@ -1246,6 +1399,14 @@
   justify-content: flex-end;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
+}
+
+.modal-footer-save-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .btn-modal-secondary {
@@ -1284,6 +1445,34 @@
 .btn-modal-primary:hover:not(:disabled) {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(238, 90, 36, 0.45);
+}
+
+.btn-modal-save-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+  white-space: nowrap;
+}
+
+.btn-modal-save-next:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #047857 0%, #059669 100%);
+  box-shadow: 0 6px 18px rgba(5, 150, 105, 0.45);
+}
+
+.btn-modal-save-next:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .btn-modal-primary:disabled,
@@ -1659,4 +1848,631 @@
   font-weight: 700 !important;
   color: #475569 !important;
   text-transform: uppercase !important;
+}
+
+/* ========================================================
+   RESPONSIVE MOBILE CONTESTANT CARDS VIEW
+   (Clean native mobile app UX for smartphones & tablets)
+   ======================================================== */
+.scorecard-mobile-cards-list {
+  display: none; /* Hidden on desktop; shown on <= 768px */
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 12px;
+  background-color: #f8fafc;
+}
+
+.mobile-loading-box,
+.mobile-empty-box {
+  padding: 38px 16px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-contestant-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-contestant-card.card-graded {
+  border-left: 5px solid #ee5a24;
+}
+
+.mobile-contestant-card.card-pending {
+  border-left: 5px solid #cbd5e1;
+}
+
+.mobile-card-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+.mobile-card-identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mobile-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 7px;
+  font-weight: 800;
+  font-size: 0.78rem;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.mobile-rank-badge.rank-1 {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fcd34d;
+}
+
+.mobile-rank-badge.rank-2 {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.mobile-rank-badge.rank-3 {
+  background: #ffedd5;
+  color: #c2410c;
+  border: 1px solid #fdba74;
+}
+
+.mobile-rank-badge.unranked {
+  color: #cbd5e1;
+}
+
+.mobile-token-code {
+  font-weight: 800;
+  font-size: 0.88rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #0f172a;
+  letter-spacing: 0.03em;
+}
+
+.mobile-total-pill-wrap {
+  flex-shrink: 0;
+}
+
+.mobile-total-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.mobile-total-pill.scored {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+}
+
+.mobile-total-pill.scored strong {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #c2410c;
+}
+
+.mobile-total-pill.pending {
+  background: #f8fafc;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  font-size: 0.78rem;
+}
+
+.mobile-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-participant-name {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.mobile-participant-sub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #64748b;
+  flex-wrap: wrap;
+}
+
+.mobile-district {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.mobile-meta-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.mobile-dish-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fed7aa;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.mobile-ig-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: #fdf2f8;
+  color: #be185d;
+  border: 1px solid #fbcfe8;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mobile-view-entry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #eff6ff;
+  color: #0284c7;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  width: fit-content;
+  transition: all 0.15s ease;
+}
+
+.mobile-view-entry-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.mobile-no-link-tag {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+/* 5 Criteria Summary Grid on Mobile Card */
+.mobile-criteria-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 6px;
+  margin-top: 4px;
+}
+
+.crit-summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.crit-summary-lbl {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.crit-summary-item strong {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #94a3b8;
+}
+
+.crit-summary-item strong.active {
+  color: #ea580c;
+}
+
+/* Card Action Buttons */
+.mobile-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.btn-mobile-grade {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #ee5a24 0%, #ff6b6b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(238, 90, 36, 0.25);
+  min-height: 42px;
+}
+
+.btn-mobile-grade:active {
+  transform: scale(0.98);
+}
+
+.btn-mobile-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: #ffffff;
+  border: 1px solid #fee2e2;
+  color: #ef4444;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ========================================================
+   FULL RESPONSIVE MEDIA QUERIES (TABLETS & SMARTPHONES)
+   ======================================================== */
+@media (max-width: 768px) {
+  /* Container padding */
+  .scorecard-admin-container {
+    padding: 14px 12px;
+  }
+
+  /* Header banner */
+  .scorecard-admin-container .scorecard-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .scorecard-admin-container .header-text-group {
+    min-width: 100%;
+  }
+
+  .scorecard-admin-container .header-actions-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .scorecard-admin-container .btn-download-pdf,
+  .scorecard-admin-container .btn-print-view,
+  .scorecard-admin-container .btn-refresh {
+    justify-content: center;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  /* Stats grid */
+  .scorecard-admin-container .scorecard-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .scorecard-admin-container .stat-card {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .scorecard-admin-container .stat-icon-wrap {
+    width: 40px;
+    height: 40px;
+    font-size: 1.15rem;
+  }
+
+  .scorecard-admin-container .stat-value {
+    font-size: 1.35rem;
+  }
+
+  /* Chef welcome banner */
+  .scorecard-admin-container .chef-welcome-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  /* Toolbar & Filters */
+  .scorecard-admin-container .scorecard-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .scorecard-admin-container .category-filter-tabs {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scorecard-admin-container .cat-tab-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .scorecard-admin-container .secondary-filters-wrap {
+    width: 100%;
+    min-width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .scorecard-admin-container .search-input-box {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .scorecard-admin-container .filter-select {
+    width: 100%;
+  }
+
+  /* HIDE WIDE DESKTOP TABLE ON MOBILE */
+  .scorecard-admin-container .scorecard-table-wrapper table {
+    display: none !important;
+  }
+
+  .scorecard-admin-container .scorecard-table-wrapper {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* SHOW MOBILE CONTESTANT CARDS LIST */
+  .scorecard-mobile-cards-list {
+    display: flex !important;
+    padding: 0;
+  }
+
+  /* Pagination Bar */
+  .scorecard-admin-container .table-pagination-bar {
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 12px;
+    gap: 12px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    margin-top: 12px;
+  }
+
+  .scorecard-admin-container .pagination-info-left {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .scorecard-admin-container .pagination-controls-right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* SCORING MODAL MOBILE OPTIMIZATION */
+  .score-modal-backdrop {
+    padding: 8px;
+    align-items: flex-end; /* Mobile bottom sheet style or full screen */
+  }
+
+  .score-modal-dialog {
+    max-width: 100%;
+    width: 100%;
+    max-height: 94vh;
+    height: 94vh;
+    border-radius: 16px 16px 0 0;
+  }
+
+  .score-modal-header {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .modal-header-top-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .modal-title-wrap {
+    order: 1;
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
+  .score-modal-header h4 {
+    font-size: 1.05rem;
+    white-space: normal;
+  }
+
+  .modal-nav-stepper {
+    order: 2;
+  }
+
+  .btn-modal-close {
+    order: 3;
+  }
+
+  .modal-quick-presets-bar {
+    padding: 8px 10px;
+    gap: 6px;
+  }
+
+  .presets-buttons-wrap {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .btn-preset-fill {
+    font-size: 0.74rem;
+    padding: 4px 8px;
+    flex-shrink: 0;
+  }
+
+  .score-modal-body {
+    padding: 14px 14px;
+  }
+
+  .criteria-input-card {
+    padding: 12px 12px;
+  }
+
+  .crit-title-group h5 {
+    font-size: 0.84rem;
+  }
+
+  .crit-title-group p {
+    font-size: 0.72rem;
+  }
+
+  /* Touch-friendly sliders on mobile */
+  .crit-range-slider {
+    height: 10px;
+  }
+
+  .btn-crit-step {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .criteria-quick-pills {
+    gap: 4px;
+  }
+
+  .btn-quick-mark {
+    padding: 4px 8px;
+    font-size: 0.74rem;
+    min-width: 28px;
+  }
+
+  /* Modal Footer */
+  .score-modal-footer {
+    padding: 12px 14px;
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .btn-modal-secondary {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .modal-footer-save-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .btn-modal-primary,
+  .btn-modal-save-next {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scorecard-admin-container {
+    padding: 10px 8px;
+  }
+
+  .scorecard-admin-container .scorecard-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scorecard-admin-container .header-actions-group {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-contestant-card {
+    padding: 12px;
+  }
+
+  .mobile-participant-name {
+    font-size: 0.96rem;
+  }
+
+  .crit-summary-item strong {
+    font-size: 0.82rem;
+  }
+
+  .score-modal-dialog {
+    max-height: 96vh;
+    height: 96vh;
+    border-radius: 14px 14px 0 0;
+  }
 }
